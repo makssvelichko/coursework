@@ -1,0 +1,59 @@
+.conteiner{
+    background-color: black;
+}
+
+.start_line{
+    display: flex;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    column-gap: 120px;
+    align-items: center;
+    justify-content: center;
+    max-height: 600px;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.start_photo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 320px;
+    max-height: auto;
+}
+
+.textblock li{
+    margin-bottom: 10px;
+}
+
+.li_one{
+    font-size: 18px;
+    font-weight: 100;
+}
+
+.li_two{
+    font-size: 35px;
+    font-weight: 900;
+    max-width: 480px;
+}
+
+.li_p{
+    color: #000;
+}
+
+
+a.btn_a{
+    color: #000;
+    background-color: #F0F712;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 50px;
+    padding-right: 50px;
+    border-radius: 6px;
+    transition: filter 0.2s ease;
+}
+
+a.btn_a:active{
+    filter: brightness(70%);
+}
