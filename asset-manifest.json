@@ -1,19 +1,20 @@
 {
   "files": {
-    "main.css": "/coursework/static/css/main.49b9e201.css",
-    "main.js": "/coursework/static/js/main.becb2172.js",
+    "main.css": "/coursework/static/css/main.e9b024ab.css",
+    "main.js": "/coursework/static/js/main.8ea2ad20.js",
     "static/media/Section0.png": "/coursework/static/media/Section0.0da663e28b8992570931.png",
+    "static/media/Rectangle 32.png": "/coursework/static/media/Rectangle 32.18af7631e1d97275917a.png",
     "static/media/workouts-library-jpg.png": "/coursework/static/media/workouts-library-36a4ef01f5bc38a1bf26ab7d6d246bc85fc7e0f4cb6b59c2eba30d24d6924e2f.jpg.1a96057a5253eebaceff.png",
     "static/media/Link1.1.png": "/coursework/static/media/Link1.1.3b71cc89c69532973f82.png",
     "static/media/Link1.2.png": "/coursework/static/media/Link1.2.31cb3155dcfeba6781e1.png",
     "static/media/Link1.3.png": "/coursework/static/media/Link1.3.1e477f3fc1d03f6e569e.png",
     "static/media/logo.png": "/coursework/static/media/logo.f47a5e94e189602e1137.png",
     "index.html": "/coursework/index.html",
-    "main.49b9e201.css.map": "/coursework/static/css/main.49b9e201.css.map",
-    "main.becb2172.js.map": "/coursework/static/js/main.becb2172.js.map"
+    "main.e9b024ab.css.map": "/coursework/static/css/main.e9b024ab.css.map",
+    "main.8ea2ad20.js.map": "/coursework/static/js/main.8ea2ad20.js.map"
   },
   "entrypoints": [
-    "static/css/main.49b9e201.css",
-    "static/js/main.becb2172.js"
+    "static/css/main.e9b024ab.css",
+    "static/js/main.8ea2ad20.js"
   ]
 }
