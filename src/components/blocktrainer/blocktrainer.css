@@ -1,0 +1,122 @@
+.conteiner{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.blocktrainer{
+    background-color: black;
+    max-height: 555;
+    color: #fff;
+}
+
+.list_trainer{
+    margin-top: 35% ;
+    text-align: left;
+}
+
+.list_trainer ul{
+    color: #fff;
+    text-align: left;
+}
+
+.list_trainer ul li{
+    line-height: 2;
+}
+
+.artem{
+    font-size: 18px;
+    font-weight: 800;
+    padding: 10px;
+}
+
+.ul1 {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+    column-gap: 120px;
+}
+
+.social_network{
+    display: flex;
+    row-gap: 80px;
+    align-items: center;
+    text-align: center;
+}
+
+.block_trainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.middle_trainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.middle_trainer_text {
+    padding: 15px;
+    font-size: 18px;
+    font-weight: 200;
+}
+
+.social_network li {
+    margin-right: 20px;
+    margin-bottom: 40px;
+}
+
+.social_network{
+    text-align: center;
+    margin-left: 25px;
+}
+
+.photo_trainer_block{
+    max-width: 400px;
+    height: auto;
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+.photo_trainer{
+    border-radius: 12px;
+}
+
+
+.bold_text_trainer{
+    padding-top: 20px;
+    font-size: 26px;
+    font-weight: 900;
+}
+
+.inst{
+    max-width: 50px;
+}
+
+.telega{
+    max-width: 55px;
+    padding-left: 5px;
+}
+
+.youtube{
+    padding-top: 4px;
+    max-width: 70px;
+}
+
+.social_network li {
+    transition: transform 0.3s ease, filter 0.2s ease;
+}
+
+.social_network li:hover {
+    transform: scale(1.1);
+}
+
+.social_network li:active {
+    filter: brightness(70%);
+}

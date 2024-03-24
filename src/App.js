@@ -1,3 +1,4 @@
+import Blocktrainer from './components/blocktrainer/blocktrainer.jsx';
 import Header from './components/header/header.jsx';
 import Mainprograms from './components/mainprograms/mainprograms.jsx';
 import Promo from './components/promo/promo.jsx';
@@ -10,6 +11,7 @@ function App() {
       <Promo/>
       <Start/>
       <Mainprograms/>
+      <Blocktrainer/>
 
     </div>
   );
