@@ -1,21 +1,21 @@
-import Blockplans from './components/blockplans/blockplans.jsx';
-import Blocktrainer from './components/blocktrainer/blocktrainer.jsx';
 import Footer from './components/footer/footer.jsx';
-import Header from './components/header/header.jsx';
-import Mainprograms from './components/mainprograms/mainprograms.jsx';
-import Promo from './components/promo/promo.jsx';
-import Start from './components/startblock/start.jsx';
+import Home from './pages/Home.jsx';
+import Login from './pages/Login.jsx';
+
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
     <div className="App">
-      <Header/>
-      <Promo/>
-      <Start/>
-      <Mainprograms/>
-      <Blocktrainer/>
-      <Blockplans/>
-      <Footer/>
+      <Router>
+
+        <Routes>
+          <Route path='/' element={ <Home/> } />
+          <Route path='/login' element={<Login/>} />
+        </Routes>
+
+        <Footer/>
+      </Router>
 
     </div>
   );
