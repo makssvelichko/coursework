@@ -1,3 +1,4 @@
+import Footer from '../components/footer/footer';
 import HeaderLogin from '../components/header_login/header_login';
 import './../styles/login.css'
 
@@ -8,6 +9,7 @@ const Login = () => {
         <div className='login'>
             Login
         </div>
+        <Footer/>
         </>
      );
 }

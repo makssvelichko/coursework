@@ -23,6 +23,7 @@ import plans4 from './../img/photo/Section (1).png'
 import React from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import Footer from '../components/footer/footer'
 
 
 const responsive = {
@@ -234,7 +235,8 @@ const Home = () => {
         </div>
         </div>
         </section>
-        
+
+        <Footer/>
         </>
     );
 }
