@@ -44,12 +44,12 @@ html{
 
 }
 
-.header_nav a{
+.header_nav AnchorLink{
     color: #d3d3d3;
     transition: filter 0.2s ease;
 }
 
-a.header_btn{
+AnchorLink.header_btn {
     padding: 10px;
     border-radius: 8px;
     background-color: #F0F712;
@@ -57,11 +57,11 @@ a.header_btn{
     transition: filter 0.2s ease;
 }
 
-a.header_btn:active{
+AnchorLink.header_btn:active{
     filter: brightness(70%);
 }
 
-.header_nav a:active{
+.header_nav AnchorLink:active{
     filter: brightness(70%);
 }
 

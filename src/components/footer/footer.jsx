@@ -3,6 +3,8 @@ import logocard from './../../img/logo/mc_symbol.svg.png'
 import logo from './../../img/logo/logo.png'
 import logo_inst_footer from './../../img/logo/Link → instagram.png.png'
 import logo_telega_footer from './../../img/logo/Link → telegram-footer.svg.png'
+import AnchorLink from '../AnchorLink'
+import { NavLink } from 'react-router-dom'
 
 function Footer(){
     return(
@@ -11,12 +13,12 @@ function Footer(){
             <div className="footer_row1">
                 <nav className='footer_nav'>
                     <ul className="main-links">
-                        <li><a href="#!">ПРОГРАМИ</a></li>
-                        <li><a href="#!">ТРЕНЕР</a></li>
-                        <li><a href="#!">ПЛАНИ ПІДПИСОК</a></li>
+                        <li><AnchorLink id="programs">ПРОГРАМИ</AnchorLink></li>
+                        <li><AnchorLink id="trainer">ТРЕНЕР</AnchorLink></li>
+                        <li><AnchorLink id="plans">ПЛАНИ ПІДПИСОК</AnchorLink></li>
                     </ul>
                     <ul className="extra-link">
-                        <li><a className='btn_footer' href="#!">ОСОБИСТИЙ КАБІНЕТ</a></li>
+                        <li><NavLink to='/login' className='btn_footer'>ОСОБИСТИЙ КАБІНЕТ</NavLink></li>
                     </ul>
                 </nav>
             </div>

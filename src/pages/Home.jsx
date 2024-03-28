@@ -25,6 +25,8 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import Footer from '../components/footer/footer'
 
+import AnchorLink from '../components/AnchorLink';
+
 
 const responsive = {
     superLargeDesktop: {
@@ -75,7 +77,7 @@ const Home = () => {
                     <li className='li_one'>Різні рівні підготовки</li>
                     <li className='li_two'>Тренування будь-де та відео уроки для тебе</li>
                     <li className='li_p'>.</li>
-                    <li className='btn_start'><a href="#!" className='btn_a'>Почати</a></li>
+                    <li className='btn_start'><AnchorLink id="#!" className='btn_a'>Почати</AnchorLink></li>
                 </ul>
             </div>
             </div>
@@ -91,7 +93,7 @@ const Home = () => {
                 <div className='programs_card'>
                     <ul>
                         <li>
-                            <a href="#!">
+                            <AnchorLink id="#!">
                                 <div className='image-text-wrapper'>
                                     <img className='programs_card1' src={pprograms1} alt="card1" />
                                     <div className='image-text'>
@@ -102,9 +104,9 @@ const Home = () => {
                                         </div>
                                     </div>
                                 </div>
-                            </a>
+                            </AnchorLink>
                         </li>
-                        <li><a href="#!">
+                        <li><AnchorLink id="#!">
                         <div className='image-text-wrapper'>
                                     <img className='programs_card1' src={pprograms2} alt="card2" />
                                     <div className='image-text'>
@@ -115,9 +117,9 @@ const Home = () => {
                                         </div>
                                     </div>
                                 </div>
-                            </a>
+                            </AnchorLink>
                         </li>
-                        <li><a href="#!">
+                        <li><AnchorLink id="#!">
                         <div className='image-text-wrapper'>
                                     <img className='programs_card1' src={pprograms3} alt="card3" />
                                     <div className='image-text'>
@@ -128,12 +130,12 @@ const Home = () => {
                                         </div>
                                     </div>
                                 </div>
-                            </a>
+                            </AnchorLink>
                         </li>
                     </ul>
                 </div>
                 <div className='programs_btn'>
-                    <a href="#!">Всі програми</a>
+                    <AnchorLink id="#!">Всі програми</AnchorLink>
                 </div>
             </div>
         </div>
@@ -203,7 +205,7 @@ const Home = () => {
                         <div className='image-text-plans'>
                             <p className='image-text-plans1'>1 МІСЯЦЬ</p>
                             <p className='image-text-plans2'>640 <mark className='grn'>грн</mark></p>
-                            <p className='image-text-plans3'><a className='start_plan' href="#!">Почати</a></p>
+                            <p className='image-text-plans3'><AnchorLink className='start_plan' id="#!">Почати</AnchorLink></p>
                         </div>
                 </div>
                 <div className='image-text-wrapper-plans'>
@@ -211,7 +213,7 @@ const Home = () => {
                         <div className='image-text-plans'>
                             <p className='image-text-plans1'>3 МІСЯЦІВ</p>
                             <p className='image-text-plans2'>1632 <mark className='grn'>грн</mark></p>
-                            <p className='image-text-plans3'><a className='start_plan' href="#!">Почати</a></p>
+                            <p className='image-text-plans3'><AnchorLink className='start_plan' id="#!">Почати</AnchorLink></p>
                         </div>
                 </div>
                 <div className='image-text-wrapper-plans'>
@@ -219,7 +221,7 @@ const Home = () => {
                         <div className='image-text-plans'>
                             <p className='image-text-plans1'>6 МІСЯЦІВ</p>
                             <p className='image-text-plans2'>2496 <mark className='grn'>грн</mark></p>
-                            <p className='image-text-plans3'><a className='start_plan' href="#!">Почати</a></p>
+                            <p className='image-text-plans3'><AnchorLink className='start_plan' id="#!">Почати</AnchorLink></p>
                         </div>
                 </div>
                 <div className='image-text-wrapper-plans'>
@@ -227,7 +229,7 @@ const Home = () => {
                         <div className='image-text-plans'>
                             <p className='image-text-plans1'>12 МІСЯЦІВ</p>
                             <p className='image-text-plans2'>3840 <mark className='grn'>грн</mark></p>
-                            <p className='image-text-plans3'><a className='start_plan' href="#!">Почати</a></p>
+                            <p className='image-text-plans3'><AnchorLink className='start_plan' id="#!">Почати</AnchorLink></p>
                         </div>
                 </div>
             </Carousel>
