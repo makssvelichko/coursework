@@ -4,10 +4,16 @@ const cors = require("cors");
 const sequelize = require("./db");
 const models = require("./models/models");
 const PORT = process.env.PORT || 5000;
+const router = require("./routes/index");
+const errorHander = require("./middleware/ErrorHandlingMiddleware");
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use("/api", router);
+
+//Handler errors
+app.use(errorHander);
 
 app.get("/", (reg, res) => {
   res.status(200).json({ message: "WORKING!!!" });
