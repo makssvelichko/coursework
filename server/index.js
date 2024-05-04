@@ -15,10 +15,6 @@ app.use("/api", router);
 //Handler errors
 app.use(errorHander);
 
-app.get("/", (reg, res) => {
-  res.status(200).json({ message: "WORKING!!!" });
-});
-
 const start = async () => {
   try {
     await sequelize.authenticate();
