@@ -10,6 +10,21 @@ import React, { useState } from 'react';
 import AnchorLink from '../components/AnchorLink';
 import './../styles/registrationtwo.css'
 
+const Card = ({ title, initialValue }) => {
+    const [value, setValue] = useState(initialValue);
+  
+    return (
+      <div className="card">
+        <div className="title">{title}</div>
+        <div className="value">{value}</div>
+        <div className="controls">
+          <button className='btn-plus' onClick={() => setValue(value - 1)}>-</button>
+          <button className='btn-minus' onClick={() => setValue(value + 1)}>+</button>
+        </div>
+      </div>
+    );
+};
+
 const RegistrationTwo = () => {
 
     const [isChecked, setIsChecked] = useState(false);
@@ -48,8 +63,12 @@ const RegistrationTwo = () => {
                         </div>
                     </div>
 
-                    
-                    
+                    {/* Insert the Card components here */}
+                    <div className='card-container'>
+                        <Card title="Biк" initialValue={24} />
+                        <Card title="Baгa" initialValue={82} />
+                        <Card title="Зріст" initialValue={178} />
+                    </div>
 
                     <div>
                     <form className='checkbox'>

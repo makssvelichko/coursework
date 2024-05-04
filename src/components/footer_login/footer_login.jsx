@@ -3,8 +3,6 @@ import logocard from './../../img/logo/mc_symbol.svg.png'
 import logo from './../../img/logo/logo.png'
 import logo_inst_footer from './../../img/logo/Link → instagram.png.png'
 import logo_telega_footer from './../../img/logo/Link → telegram-footer.svg.png'
-import AnchorLink from '../AnchorLink'
-import { NavLink } from 'react-router-dom'
 
 function FooterLogin(){
     return(
