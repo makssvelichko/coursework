@@ -11,8 +11,6 @@ const User = sequelize.define("user", {
   token: { type: DataTypes.STRING, unique: true },
   refresh_token: { type: DataTypes.STRING, unique: true },
   reset_password_token: { type: DataTypes.STRING, unique: true },
-  created_at: { type: DataTypes.TIME },
-  delete_at: { type: DataTypes.TIME },
 });
 
 const User_payment = sequelize.define("user_payment", {
@@ -25,13 +23,12 @@ const User_payment = sequelize.define("user_payment", {
 const Subscribe = sequelize.define("subscribe", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   payment_type: { type: DataTypes.STRING },
-  created_at: { type: DataTypes.TIME },
   finished_at: { type: DataTypes.TIME },
-  delete_at: { type: DataTypes.TIME },
 });
 
 const Subscribe_types = sequelize.define("subscribe_types", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  name: { type: DataTypes.STRING, unique: true, allowNull: false },
   duration: { type: DataTypes.TIME },
   price: { type: DataTypes.INTEGER, allowNull: false },
 });
