@@ -1,6 +1,6 @@
 import FooterLogin from '../components/footer_login/footer_login';
 import HeaderLogin from '../components/header_login/header_login';
-
+import { NavLink } from 'react-router-dom';
 import logo_google from './../img/logo/google.png'
 
 import AnchorLink from '../components/AnchorLink';
@@ -42,11 +42,12 @@ const Login = () => {
                             <p className='t_enter'>УВІЙТИ</p>
                         </div>
                     </AnchorLink>
-                    <AnchorLink id="#!" className='l_registration'>
+                    
+                    <NavLink to='/registration' className='l_registration'>
                         <div className='registration'>
                             <p className='t_registration'>РЕЄСТРАЦІЯ</p>
                         </div>
-                    </AnchorLink>
+                    </NavLink>
                     </div>
 
                     </div>
