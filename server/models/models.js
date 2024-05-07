@@ -14,6 +14,8 @@ const User = sequelize.define("user", {
   token: { type: DataTypes.STRING, unique: true },
   refresh_token: { type: DataTypes.STRING, unique: true },
   reset_password_token: { type: DataTypes.STRING, unique: true },
+  isActivated: { type: Boolean, default: false },
+  activationLink: { type: String },
 });
 
 const User_payment = sequelize.define("user_payment", {

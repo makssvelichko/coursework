@@ -4,6 +4,7 @@ const uuid = require("uuid");
 const path = require("path");
 const jwt = require("jsonwebtoken");
 const { User } = require("../models/models");
+const userService = require("../service/userService");
 
 const generateJwt = (id, email, role) => {
   return jwt.sign({ id, email, role }, process.env.SECRET_KEY, {
@@ -14,42 +15,23 @@ const generateJwt = (id, email, role) => {
 class UserController {
   async registration(req, res, next) {
     try {
-      const { username, email, password, sex, age, weight, height, role } =
-        req.body;
-
-      /*const { profile_photo } = req.files;
-      let fileName = uuid.v4() + ".jpg";
-      profile_photo.mv(path.resolve(__dirname, "..", "static", fileName));*/
-      if (
-        !email ||
-        !password ||
-        !username ||
-        !sex ||
-        !age ||
-        !weight ||
-        !height
-      ) {
-        return next(ApiError.badRequest("You don`t fill all info"));
-      }
-      const candidate = await User.findOne({ where: { email } });
-      if (candidate) {
-        return next(ApiError.badRequest("Use another email"));
-      }
-      const hashPassword = await bcrypt.hash(password, 5);
-      const user = await User.create({
-        email,
-        role,
+      const { username, email, password, sex, age, weight, height } = req.body;
+      const userData = await userService.registration(
         username,
+        email,
+        password,
         sex,
         age,
         weight,
-        height,
-        password: hashPassword,
+        height
+      );
+      res.cookie("refresh_Token", userData.refresh_Token, {
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+        httpOnly: true,
       });
-      const token = generateJwt(user.id, user.email, user.role);
-      return res.json({ token });
+      return res.json(userData);
     } catch (e) {
-      next(ApiError.badRequest(e.message));
+      console.log(e);
     }
   }
 
@@ -70,6 +52,27 @@ class UserController {
   async check(req, res, next) {
     const token = generateJwt(req.user.id, req.user.email, req.user.role);
     return res.json({ token });
+  }
+
+  async logout(req, res, next) {
+    try {
+    } catch (e) {}
+  }
+
+  async activate(req, res, next) {
+    try {
+    } catch (e) {}
+  }
+
+  async refresh(req, res, next) {
+    try {
+    } catch (e) {}
+  }
+
+  async getUsers(req, res, next) {
+    try {
+      res.json(["123", "456"]);
+    } catch (e) {}
   }
 }
 module.exports = new UserController();
