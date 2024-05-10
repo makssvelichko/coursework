@@ -1,13 +1,14 @@
-const User = require("../models/models");
+const { User } = require("../models/models");
 const bcrypt = require("bcrypt");
 const uuid = require("uuid");
 const mailService = require("./mailService");
 const tokenService = require("./tokenService");
 const UserDto = require("../dtos/user-dto");
+const ApiError = require("../error/ApiError");
 
 class UserService {
   async registration(username, email, password, sex, age, weight, height) {
-    const candidate = await User.findOne({ email });
+    const candidate = await User.findOne({ where: { email } });
     if (candidate) {
       throw ApiError.internal(`User with this ${email} already exist`);
     }
@@ -26,7 +27,12 @@ class UserService {
     await mailService.sendActivationMail(email, activationLink);
     const userDto = new UserDto(user);
     const tokens = tokenService.generateToken({ ...userDto });
-    await tokenService.saveToken(userDto.id, tokens.refresh_Token);
+
+    await tokenService.saveToken(
+      userDto.id,
+      tokens.refresh_Token,
+      tokens.accessToken
+    );
 
     return {
       ...tokens,

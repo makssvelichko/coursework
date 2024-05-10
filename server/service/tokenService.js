@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
-const User = require("../models/models");
+const { User } = require("../models/models");
+const ApiError = require("../error/ApiError");
 
 class TokenService {
   generateToken(payload) {
@@ -15,24 +16,19 @@ class TokenService {
         refresh_Token,
       };
     } catch (e) {
-      next(ApiError.forbidden(e.message));
+      throw ApiError.forbidden(e.message);
     }
   }
 
-  async saveToken(id, refresh_Token) {
+  async saveToken(id, refresh_Token, accessToken) {
     try {
-      const tokenData = await User.findOne({ user: id });
-      if (tokenData) {
-        tokenData.refresh_Token = refresh_Token;
-        return tokenData.save();
-      }
       const token = await User.update(
-        { refresh_Token: refresh_Token },
-        { where: { id } }
+        { token: accessToken, refresh_token: refresh_Token },
+        { where: { id: id } }
       );
       return token;
     } catch (e) {
-      next(ApiError.forbidden(e.message));
+      throw ApiError.forbidden(e.message);
     }
   }
 }
