@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/coursework/static/css/main.25d7c66e.css",
-    "main.js": "/coursework/static/js/main.3df0d90b.js",
+    "main.css": "/coursework/static/css/main.f6fe8504.css",
+    "main.js": "/coursework/static/js/main.9f652778.js",
     "static/media/Section0.png": "/coursework/static/media/Section0.0da663e28b8992570931.png",
     "static/media/Rectangle 32.png": "/coursework/static/media/Rectangle 32.18af7631e1d97275917a.png",
     "static/media/Section2.png": "/coursework/static/media/Section2.aa432969410539fc016e.png",
@@ -18,11 +18,11 @@
     "static/media/logo.png": "/coursework/static/media/logo.f47a5e94e189602e1137.png",
     "static/media/revicons.woff": "/coursework/static/media/revicons.e8746a624ed098489406.woff",
     "index.html": "/coursework/index.html",
-    "main.25d7c66e.css.map": "/coursework/static/css/main.25d7c66e.css.map",
-    "main.3df0d90b.js.map": "/coursework/static/js/main.3df0d90b.js.map"
+    "main.f6fe8504.css.map": "/coursework/static/css/main.f6fe8504.css.map",
+    "main.9f652778.js.map": "/coursework/static/js/main.9f652778.js.map"
   },
   "entrypoints": [
-    "static/css/main.25d7c66e.css",
-    "static/js/main.3df0d90b.js"
+    "static/css/main.f6fe8504.css",
+    "static/js/main.9f652778.js"
   ]
 }
