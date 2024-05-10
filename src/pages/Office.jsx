@@ -12,6 +12,8 @@ import { FaDumbbell } from "react-icons/fa6";
 import { PiForkKnifeBold } from "react-icons/pi";
 import { GiProgression } from "react-icons/gi";
 
+import Card from './../components/Card';
+
 const Office = () => {
 
     const [modalVisible, setModalVisible] = useState(false);
@@ -38,11 +40,67 @@ const Office = () => {
             </ModalContext.Provider>
 
             <div className="half_office">
-                <p className='hello'>hello</p>
-                <p className='hello'>hello</p>
-                <p className='hello'>hello</p>
-                <p className='hello'>hello</p>
-                <p className='hello'>hello</p>
+                <p className='t_programs'>Усі програми</p>
+
+                <div className="cards_programs1">
+                    <Card
+                    title="ГНУЧКА СПИНА"
+                    image="/path/to/image.jpg"
+                    sessions={6}
+                    duration="25-30 хв"
+                    intensity="Низька"
+                    reviews={5}
+                    />
+
+                    <Card
+                    title="TURBO DUMBBELLS"
+                    image="/path/to/image.jpg"
+                    sessions={6}
+                    duration="25-30 хв"
+                    intensity="Низька"
+                    reviews={5}
+                    />
+
+                    <Card
+                    title="NEW GENERATION"
+                    image="/path/to/image.jpg"
+                    sessions={6}
+                    duration="25-30 хв"
+                    intensity="Низька"
+                    reviews={5}
+                    />
+                
+                </div>
+
+                <div className="cards_programs2">
+                    <Card
+                    title="ЗДОРОВА ГНУЧКІСТЬ"
+                    image="/path/to/image.jpg"
+                    sessions={6}
+                    duration="25-30 хв"
+                    intensity="Низька"
+                    reviews={5}
+                    />
+
+                    <Card
+                    title="ПРУЖНІ СІДНИЦІ"
+                    image="/path/to/image.jpg"
+                    sessions={6}
+                    duration="25-30 хв"
+                    intensity="Низька"
+                    reviews={5}
+                    />
+
+                    <Card
+                    title="TABATA ENERGY"
+                    image="/path/to/image.jpg"
+                    sessions={6}
+                    duration="25-30 хв"
+                    intensity="Низька"
+                    reviews={5}
+                    />
+                
+                </div>
             
             </div>
                 <div className="half_office">

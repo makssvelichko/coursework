@@ -132,3 +132,15 @@
 .hello {
     padding: 80px;
 }
+
+.t_programs {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 240px;
+    padding-top: 100px;
+    padding-bottom: 20px;
+    font-weight: 800;
+    font-size: 30px;
+}

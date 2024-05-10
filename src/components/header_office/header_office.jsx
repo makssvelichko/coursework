@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import AnchorLink from '../AnchorLink';
 import React, { useState, createContext, useContext } from 'react';
 import { FaRegUserCircle } from "react-icons/fa";
+import { OFFICE_ROUTE } from '../../utils/consts';
 
 export const ModalContext = createContext();
 
@@ -21,7 +22,7 @@ function HeaderOffice() {
             <div className="container">
                 <div className="header_row">
                     <div className="header_logo">
-                        <NavLink to='/'><img src={logo} alt="LOGO" /></NavLink>
+                        <NavLink to={OFFICE_ROUTE}><img src={logo} alt="LOGO" /></NavLink>
                     </div>
                     <nav className="header_nav_office">
                         <ul>
