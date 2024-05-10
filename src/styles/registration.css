@@ -164,6 +164,26 @@
     font-weight: 300;
 }
 
+.input-container.error input[type=email],
+.input-container.error input[type=password],
+.input-container.error input[type=name] {
+    border-left: 4px solid red;
+}
+
+.error-message {
+    margin-top: 10px;
+    color: red;
+    font-size: 12px;
+}
+
+.error-message1 {
+    margin-top: 10px;
+    color: red;
+    font-size: 12px;
+    font-family: 'Montserrat';
+}
+
+
 .plog2 {
     margin-bottom: 15px;
     font-size: 18px;
@@ -205,7 +225,7 @@
 .btns_log1 {
     color: #000;
     font-family: 'Montserrat';
-    margin-top: 76px;
+    margin-top: 56px;
     display: flex;
     column-gap: 25px;
     align-items: center;

@@ -1,12 +1,16 @@
-.footer_login {
+.footer_office {
     position: relative;
-    height: 115px;
+    height: 165px;
     background-color: #000;
     color: #fff;
 }
 
 .footer_row1log{
-    padding-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20px;
+
 }
 
 .footer_row2{

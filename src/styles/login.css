@@ -53,8 +53,21 @@
     font-weight: 300;
 }
 
-.plog2 {
+
+.input-container.error input[type=email],
+.input-container.error input[type=password] {
+    border-left: 4px solid red;
+}
+
+.error-message {
     margin-top: 10px;
+    color: red;
+    font-size: 12px;
+}
+
+
+.plog3 {
+    margin-top: 20px;
     font-size: 18px;
     font-weight: 400;
     font-family: 'Montserrat';
@@ -90,23 +103,23 @@
     transition: filter 0.3s ease;
 }
 
-.checkbox{
+.checkbox1{
     margin-top: 80px;
     margin-left: 5px;
 }
 
-.check_box {
+.check_box1 {
     display: none;
 }
 
-.check_box + label {
+.check_box1 + label {
     position: relative;
     padding-left: 35px;
     cursor: pointer;
     display: inline-block;
 }
 
-.check_box + label:before {
+.check_box1 + label:before {
     content: "";
     position: absolute;
     left: 0;
@@ -117,11 +130,11 @@
     background: white;
 }
 
-.check_box:checked + label:before {
+.check_box1:checked + label:before {
     background: black;
 }
 
-.check_box + label:after {
+.check_box1 + label:after {
     content: "";
     position: absolute;
     left: 8px;
@@ -134,7 +147,7 @@
     display: none;
 }
 
-.check_box:checked + label:after {
+.check_box1:checked + label:after {
     display: block;
 }
 

@@ -2,6 +2,7 @@ import './header.css'
 import logo from './../../img/logo/logo.png'
 import { NavLink } from 'react-router-dom';
 import AnchorLink from '../AnchorLink';
+import { LOGIN_ROUTE } from '../../utils/consts';
 
 
 function Header(){
@@ -19,7 +20,7 @@ function Header(){
                             <li><AnchorLink id="plans">ПЛАНИ ПІДПИСОК</AnchorLink></li>
                             <li><AnchorLink id="#!" className='header_btn'>ПРИДБАТИ ПІДПИСКУ</AnchorLink></li>
                             <li className='stick'>|</li>
-                            <li><NavLink to='/login'>УВІЙТИ</NavLink></li>
+                            <li><NavLink to={LOGIN_ROUTE}>УВІЙТИ</NavLink></li>
                         </ul>
                     </nav>
                 </div>

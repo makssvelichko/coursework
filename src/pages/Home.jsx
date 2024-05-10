@@ -27,6 +27,8 @@ import Footer from '../components/footer/footer'
 
 import AnchorLink from '../components/AnchorLink';
 
+import { NavLink } from 'react-router-dom';
+
 
 const responsive = {
     superLargeDesktop: {
@@ -77,7 +79,7 @@ const Home = () => {
                     <li className='li_one'>Різні рівні підготовки</li>
                     <li className='li_two'>Тренування будь-де та відео уроки для тебе</li>
                     <li className='li_p'>.</li>
-                    <li className='btn_start'><AnchorLink id="#!" className='btn_a'>Почати</AnchorLink></li>
+                    <li className='btn_start'><NavLink to='/login' className='btn_a'>Почати</NavLink></li>
                 </ul>
             </div>
             </div>
@@ -205,7 +207,7 @@ const Home = () => {
                         <div className='image-text-plans'>
                             <p className='image-text-plans1'>1 МІСЯЦЬ</p>
                             <p className='image-text-plans2'>640 <mark className='grn'>грн</mark></p>
-                            <p className='image-text-plans3'><AnchorLink className='start_plan' id="#!">Почати</AnchorLink></p>
+                            <p className='image-text-plans3'><NavLink to='/login' className='start_plan'>Почати</NavLink></p>
                         </div>
                 </div>
                 <div className='image-text-wrapper-plans'>
@@ -213,7 +215,7 @@ const Home = () => {
                         <div className='image-text-plans'>
                             <p className='image-text-plans1'>3 МІСЯЦІВ</p>
                             <p className='image-text-plans2'>1632 <mark className='grn'>грн</mark></p>
-                            <p className='image-text-plans3'><AnchorLink className='start_plan' id="#!">Почати</AnchorLink></p>
+                            <p className='image-text-plans3'><NavLink to='/login' className='start_plan'>Почати</NavLink></p>
                         </div>
                 </div>
                 <div className='image-text-wrapper-plans'>
@@ -221,7 +223,7 @@ const Home = () => {
                         <div className='image-text-plans'>
                             <p className='image-text-plans1'>6 МІСЯЦІВ</p>
                             <p className='image-text-plans2'>2496 <mark className='grn'>грн</mark></p>
-                            <p className='image-text-plans3'><AnchorLink className='start_plan' id="#!">Почати</AnchorLink></p>
+                            <p className='image-text-plans3'><NavLink to='/login' className='start_plan'>Почати</NavLink></p>
                         </div>
                 </div>
                 <div className='image-text-wrapper-plans'>
@@ -229,7 +231,7 @@ const Home = () => {
                         <div className='image-text-plans'>
                             <p className='image-text-plans1'>12 МІСЯЦІВ</p>
                             <p className='image-text-plans2'>3840 <mark className='grn'>грн</mark></p>
-                            <p className='image-text-plans3'><AnchorLink className='start_plan' id="#!">Почати</AnchorLink></p>
+                            <p className='image-text-plans3'><NavLink to='/login' className='start_plan'>Почати</NavLink></p>
                         </div>
                 </div>
             </Carousel>

@@ -7,8 +7,13 @@ import { IoWomanOutline } from "react-icons/io5";
 
 import React, { useState } from 'react';
 
-import AnchorLink from '../components/AnchorLink';
 import './../styles/registrationtwo.css'
+import { OFFICE_ROUTE, REGISTRATION_ROUTE } from '../utils/consts';
+
+import { IoIosCheckmarkCircleOutline } from "react-icons/io";
+import { GiWeightScale } from "react-icons/gi";
+import { GiMuscularTorso } from "react-icons/gi";
+import { GiRunningShoe } from "react-icons/gi";
 
 const Card = ({ title, initialValue }) => {
     const [value, setValue] = useState(initialValue);
@@ -25,27 +30,41 @@ const Card = ({ title, initialValue }) => {
     );
 };
 
+const Card2 = ({ text, selected, onSelect, icon }) => (
+    <div className={`card2 ${selected ? 'selected' : ''}`} onClick={onSelect}>
+      <div className="card-icon">{icon}</div>
+      <h3>{text}</h3>
+      {selected && <div className="checkmark"><IoIosCheckmarkCircleOutline /></div>}
+    </div>
+  );
+
 const RegistrationTwo = () => {
 
     const [isChecked, setIsChecked] = useState(false);
 
     const [active, setActive] = useState('man');
+
+    const [selectedCard, setSelectedCard] = useState(null);
+    const cards = [
+        { text: 'Спалити жир', icon: <GiWeightScale /> },
+        { text: 'Набір м\'язів', icon: <GiMuscularTorso /> },
+        { text: 'Підтримка форми', icon: <GiRunningShoe /> },
+      ];
     return ( 
         <>
         <HeaderLogin/>
         <div className='registrationtwo'>
-        <body>
             <div className="container_registrationtwo">
                 <div className="half">
                 <div className='divstep2'>
-                <div class="step2">
+                <div className="step2">
                     <div className='step_text12'>Створити акаунт</div>
-                    <div class="circle12">1</div>
+                    <div className="circle12">1</div>
                 </div>
 
-                <div class="step2">
+                <div className="step2">
                     <div className='step_text22'>Особисті дані</div>
-                    <div class="circle22">2</div>
+                    <div className="circle22">2</div>
                 </div>
                 </div>
                 </div>
@@ -63,11 +82,28 @@ const RegistrationTwo = () => {
                         </div>
                     </div>
 
-                    {/* Insert the Card components here */}
                     <div className='card-container'>
                         <Card title="Biк" initialValue={24} />
                         <Card title="Baгa" initialValue={82} />
                         <Card title="Зріст" initialValue={178} />
+                    </div>
+
+
+                    <div>
+                        <p className='plog2'>Яка ваша мета:</p>
+                    </div>
+
+                    
+                    <div className="card-container2">
+                        {cards.map((card, index) => (
+                            <Card2
+                              key={index}
+                              text={card.text}
+                              icon={card.icon}
+                              selected={selectedCard === index}
+                              onSelect={() => setSelectedCard(index)}
+                            />
+                        ))}
                     </div>
 
                     <div>
@@ -84,12 +120,12 @@ const RegistrationTwo = () => {
                     </label>
                     </form>
                         <div className='btns_log'>
-                            <AnchorLink id="#!" className={isChecked ? 'active' : 'disabled'}>
+                            <NavLink to={OFFICE_ROUTE} className={isChecked ? 'active' : 'disabled'}>
                                <div className='next'>
                                    <p className='t_enter'>РЕЄСТРАЦІЯ</p>
                                 </div>
-                            </AnchorLink>
-                            <NavLink to='/registration' className='l_registration'>
+                            </NavLink>
+                            <NavLink to={REGISTRATION_ROUTE} className='l_registration'>
                                 <div className='back'>
                                     <p className='t_registration'>ПОВЕРНУТИСЯ</p>
                                 </div>
@@ -98,7 +134,6 @@ const RegistrationTwo = () => {
                     </div>
                 </div>
             </div>
-        </body>
         </div>
         <FooterLogin/>
         </>

@@ -2,10 +2,14 @@ import Home from "./pages/Home"
 import Login from "./pages/Login"
 import Registration from "./pages/Registration"
 import RegistrationTwo from "./pages/RegistrationTwo"
-import { HOME_ROUTE, LOGIN_ROUTE, REGISTRATIONTWO_ROUTE, REGISTRATION_ROUTE } from "./utils/consts"
+import Office from "./pages/Office"
+import { HOME_ROUTE, LOGIN_ROUTE, OFFICE_ROUTE, REGISTRATIONTWO_ROUTE, REGISTRATION_ROUTE } from "./utils/consts"
 
 export const authRoutes = [
-
+    {
+        path: OFFICE_ROUTE,
+        Component: Office
+    },
 
 ]
 
@@ -27,8 +31,6 @@ export const publicRoutes = [
         path: REGISTRATIONTWO_ROUTE,
         Component: RegistrationTwo
     }
-
-
 
 ]
     
