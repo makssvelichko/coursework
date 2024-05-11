@@ -5,15 +5,30 @@ const mailService = require("./mailService");
 const tokenService = require("./tokenService");
 const UserDto = require("../dtos/user-dto");
 const ApiError = require("../error/ApiError");
+const path = require("path");
 
 class UserService {
-  async registration(username, email, password, sex, age, weight, height) {
+  async registration(
+    username,
+    email,
+    password,
+    sex,
+    age,
+    weight,
+    height,
+    profile_photo
+  ) {
     const candidate = await User.findOne({ where: { email } });
     if (candidate) {
       throw ApiError.internal(`User with this ${email} already exist`);
     }
     const hashPassword = await bcrypt.hash(password, 5);
     const activationLink = uuid.v4();
+
+    const fileName = uuid.v4() + ".jpg"; // Generate unique file name
+    const profilePhotoPath = path.resolve(__dirname, "..", "static", fileName); // Path to save the file
+    await profile_photo.mv(profilePhotoPath); // Save the file
+
     const user = await User.create({
       username,
       email,
@@ -23,6 +38,7 @@ class UserService {
       weight,
       height,
       activationLink,
+      profile_photo: fileName,
     });
     await mailService.sendActivationMail(email, activationLink);
     const userDto = new UserDto(user);

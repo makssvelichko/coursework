@@ -10,6 +10,7 @@ class UserController {
   async registration(req, res, next) {
     try {
       const { username, email, password, sex, age, weight, height } = req.body;
+      const profilePhoto = req.files.profile_photo;
       const userData = await userService.registration(
         username,
         email,
@@ -17,7 +18,8 @@ class UserController {
         sex,
         age,
         weight,
-        height
+        height,
+        profilePhoto
       );
       res.cookie("refresh_Token", userData.refresh_Token, {
         maxAge: 30 * 24 * 60 * 60 * 1000,
