@@ -25,9 +25,9 @@ class UserService {
     const hashPassword = await bcrypt.hash(password, 5);
     const activationLink = uuid.v4();
 
-    const fileName = uuid.v4() + ".jpg"; // Generate unique file name
+    const fileName = uuid.v4() + ".jpg";
     const profilePhotoPath = path.resolve(__dirname, "..", "static", fileName); // Path to save the file
-    await profile_photo.mv(profilePhotoPath); // Save the file
+    await profile_photo.mv(profilePhotoPath);
 
     const user = await User.create({
       username,

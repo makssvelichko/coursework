@@ -5,12 +5,28 @@ const path = require("path");
 const jwt = require("jsonwebtoken");
 const { User } = require("../models/models");
 const userService = require("../service/userService");
+const fs = require("fs");
 
 class UserController {
   async registration(req, res, next) {
     try {
       const { username, email, password, sex, age, weight, height } = req.body;
-      const profilePhoto = req.files.profile_photo;
+      let profilePhoto = req.files?.profile_photo || null;
+
+      if (!profilePhoto) {
+        const defaultPhotoPath = path.resolve(
+          __dirname,
+          "..",
+          "static",
+          "def.jpg"
+        );
+        profilePhoto = {
+          mv: async (filePath) => {
+            await fs.promises.copyFile(defaultPhotoPath, filePath);
+          },
+        };
+      }
+
       const userData = await userService.registration(
         username,
         email,
