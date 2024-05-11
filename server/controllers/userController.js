@@ -6,12 +6,6 @@ const jwt = require("jsonwebtoken");
 const { User } = require("../models/models");
 const userService = require("../service/userService");
 
-const generateJwt = (id, email, role) => {
-  return jwt.sign({ id, email, role }, process.env.SECRET_KEY, {
-    expiresIn: "24h",
-  });
-};
-
 class UserController {
   async registration(req, res, next) {
     try {
