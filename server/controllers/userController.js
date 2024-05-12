@@ -6,10 +6,15 @@ const jwt = require("jsonwebtoken");
 const { User } = require("../models/models");
 const userService = require("../service/userService");
 const fs = require("fs");
+const { validationResult } = require("express-validator");
 
 class UserController {
   async registration(req, res, next) {
     try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return next(ApiError.badRequest("Validation Error"));
+      }
       const { username, email, password, sex, age, weight, height } = req.body;
       let profilePhoto = req.files?.profile_photo || null;
 
