@@ -96,6 +96,32 @@ class UserService {
     const token = await tokenService.removeToken(refresh_Token);
     return token;
   }
+
+  async refresh(refresh_Token) {
+    if (!refresh_Token) {
+      throw ApiError.UnauthorizedError();
+    }
+    const userData = tokenService.validateRefreshToken(refresh_Token);
+    const tokenFromDb = await tokenService.findToken(refresh_Token);
+    if (!userData || !tokenFromDb) {
+      throw ApiError.UnauthorizedError();
+    }
+
+    const user = await User.findOne({ where: { id: userData.id } });
+    const userDto = new UserDto(user);
+    const tokens = tokenService.generateToken({ ...userDto });
+
+    await tokenService.saveToken(
+      userDto.id,
+      tokens.refresh_Token,
+      tokens.accessToken
+    );
+
+    return {
+      ...tokens,
+      user: userDto,
+    };
+  }
 }
 
 module.exports = new UserService();
