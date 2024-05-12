@@ -42,7 +42,7 @@ class UserService {
     });
     await mailService.sendActivationMail(
       email,
-      `${process.env.API_URL}/api/activate/activationLink`
+      `${process.env.API_URL}/api/user/activate/${activationLink}`
     );
     const userDto = new UserDto(user);
     const tokens = tokenService.generateToken({ ...userDto });
@@ -57,6 +57,14 @@ class UserService {
       ...tokens,
       user: userDto,
     };
+  }
+
+  async activate(activationLink) {
+    const user = await User.update(
+      { isActivated: true },
+      { where: { activationLink: activationLink } }
+    );
+    console.log(user.isActivated);
   }
 }
 
