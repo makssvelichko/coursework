@@ -43,22 +43,15 @@ class UserController {
       });
       return res.json(userData);
     } catch (e) {
-      console.log(e);
+      next(e);
     }
   }
 
   async login(req, res, next) {
-    const { email, password } = req.body;
-    const user = await User.findOne({ where: { email } });
-    if (!user) {
-      return next(ApiError.internal("User with thi email not found"));
+    try {
+    } catch (e) {
+      next(e);
     }
-    let comparePassword = bcrypt.compareSync(password, user.password);
-    if (!comparePassword) {
-      return next(ApiError.internal("Incorrect password"));
-    }
-    const token = generateJwt(user.id, user.email, user.role);
-    return res.json({ token });
   }
 
   async check(req, res, next) {
@@ -68,7 +61,9 @@ class UserController {
 
   async logout(req, res, next) {
     try {
-    } catch (e) {}
+    } catch (e) {
+      next(e);
+    }
   }
 
   async activate(req, res, next) {
@@ -77,19 +72,23 @@ class UserController {
       await userService.activate(activationLink);
       return res.redirect(process.env.CLIENT_URL);
     } catch (e) {
-      console.log(e);
+      next(e);
     }
   }
 
   async refresh(req, res, next) {
     try {
-    } catch (e) {}
+    } catch (e) {
+      next(e);
+    }
   }
 
   async getUsers(req, res, next) {
     try {
       res.json(["123", "456"]);
-    } catch (e) {}
+    } catch (e) {
+      next(e);
+    }
   }
 }
 module.exports = new UserController();

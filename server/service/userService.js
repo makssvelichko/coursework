@@ -20,7 +20,7 @@ class UserService {
   ) {
     const candidate = await User.findOne({ where: { email } });
     if (candidate) {
-      throw ApiError.internal(`User with this ${email} already exist`);
+      throw ApiError.badRequest(`User with this ${email} already exist`);
     }
     const hashPassword = await bcrypt.hash(password, 5);
     const activationLink = uuid.v4();
