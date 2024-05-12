@@ -66,6 +66,31 @@ class UserService {
     );
     console.log(user.isActivated);
   }
+
+  async login(email, password) {
+    const user = await User.findOne({ where: { email } });
+    if (!user) {
+      throw ApiError.badRequest("Not found user with such email");
+    }
+    console.log(`Founded user:${user}`);
+    const isPassEquals = await bcrypt.compare(password, user.password);
+    if (!isPassEquals) {
+      throw ApiError.badRequest("Not correct password");
+    }
+    const userDto = new UserDto(user);
+    const tokens = tokenService.generateToken({ ...userDto });
+
+    await tokenService.saveToken(
+      userDto.id,
+      tokens.refresh_Token,
+      tokens.accessToken
+    );
+
+    return {
+      ...tokens,
+      user: userDto,
+    };
+  }
 }
 
 module.exports = new UserService();
