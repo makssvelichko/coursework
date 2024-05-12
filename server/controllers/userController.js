@@ -66,13 +66,12 @@ class UserController {
     }
   }
 
-  async check(req, res, next) {
-    const token = generateJwt(req.user.id, req.user.email, req.user.role);
-    return res.json({ token });
-  }
-
   async logout(req, res, next) {
     try {
+      const { refresh_Token } = req.cookies;
+      const token = await userService.logout(refresh_Token);
+      res.clearCookie("refresh_Token");
+      return res.json(token);
     } catch (e) {
       next(e);
     }

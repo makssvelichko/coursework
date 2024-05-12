@@ -91,6 +91,11 @@ class UserService {
       user: userDto,
     };
   }
+
+  async logout(refresh_Token) {
+    const token = await tokenService.removeToken(refresh_Token);
+    return token;
+  }
 }
 
 module.exports = new UserService();

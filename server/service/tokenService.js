@@ -31,6 +31,14 @@ class TokenService {
       throw ApiError.forbidden(e.message);
     }
   }
+
+  async removeToken(refresh_Token) {
+    const tokenData = await User.update(
+      { token: null, refresh_token: null },
+      { where: { refresh_token: refresh_Token } }
+    );
+    return tokenData.refresh_token;
+  }
 }
 
 module.exports = new TokenService();
