@@ -6,11 +6,16 @@ const User = sequelize.define("user", {
   username: { type: DataTypes.STRING, unique: true },
   email: { type: DataTypes.STRING, unique: true },
   password: { type: DataTypes.STRING },
-  profile_photo: { type: DataTypes.STRING, allowNull: false },
+  profile_photo: { type: DataTypes.STRING },
+  sex: { type: DataTypes.STRING },
+  weight: { type: DataTypes.INTEGER },
+  height: { type: DataTypes.INTEGER },
   role: { type: DataTypes.STRING, defaultValue: "USER" },
   token: { type: DataTypes.STRING, unique: true },
   refresh_token: { type: DataTypes.STRING, unique: true },
   reset_password_token: { type: DataTypes.STRING, unique: true },
+  isActivated: { type: DataTypes.BOOLEAN, defaultValue: false },
+  activationLink: { type: DataTypes.STRING },
 });
 
 const User_payment = sequelize.define("user_payment", {
@@ -29,7 +34,7 @@ const Subscribe = sequelize.define("subscribe", {
 const Subscribe_types = sequelize.define("subscribe_types", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   name: { type: DataTypes.STRING, unique: true, allowNull: false },
-  duration: { type: DataTypes.TIME },
+  duration: { type: DataTypes.INTEGER, allowNull: false },
   price: { type: DataTypes.INTEGER, allowNull: false },
 });
 
