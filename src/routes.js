@@ -3,14 +3,23 @@ import Login from "./pages/Login"
 import Registration from "./pages/Registration"
 import RegistrationTwo from "./pages/RegistrationTwo"
 import Office from "./pages/Office"
-import { HOME_ROUTE, LOGIN_ROUTE, OFFICE_ROUTE, REGISTRATIONTWO_ROUTE, REGISTRATION_ROUTE } from "./utils/consts"
+import Progress from "./pages/Progress"
+import { FOOD_ROUTE, HOME_ROUTE, LOGIN_ROUTE, OFFICE_ROUTE, PROGRESS_ROUTE, REGISTRATIONTWO_ROUTE, REGISTRATION_ROUTE } from "./utils/consts"
+import Food from "./pages/Food"
 
 export const authRoutes = [
     {
         path: OFFICE_ROUTE,
         Component: Office
     },
-
+    {
+        path: FOOD_ROUTE,
+        Component: Food
+    },
+    {
+        path: PROGRESS_ROUTE,
+        Component: Progress
+    },
 ]
 
 

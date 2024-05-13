@@ -1,0 +1,107 @@
+.card_food {
+    width: 300px;
+    height: 425px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    overflow: hidden;
+    margin: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.31);
+}
+  
+.card_food img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+  
+.card_food h2 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 700;
+    color: #3b3d00;
+    margin-top: 6px;
+    margin-bottom: 8px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 8px;
+}
+  
+.card_food p {
+    display: flex;
+    font-size: 16px;
+    color: #666;
+    margin: 0;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.spacebetween_cardsfood {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.box_cardsfood{
+    background-color: #dddddd56;
+    margin-left: 15px;
+    margin-right: 15px;
+    border-radius: 8px;
+}
+
+.val_card{
+    font-weight: 600;
+}
+
+.val-icon{
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.checkbox_food{
+    margin-top: 15px;
+}
+
+.checkbox_food_c {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkbox_food label {
+    padding-left: 35px;
+    height: 25px;
+    display: inline-block;
+    line-height: 25px;
+    font-size: 1.2em;
+    cursor: pointer;
+    position: relative;
+}
+
+.checkbox_food label::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #000;
+    border-radius: 2px;
+    background: #fff;
+}
+
+.checkbox_food_c:checked + label::after {
+    display: flex;
+    content: "✔️";
+    background-color: #F0F712;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+}

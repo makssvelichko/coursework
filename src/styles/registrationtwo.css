@@ -174,9 +174,9 @@
     margin-bottom: 15px;
     margin-right: 20px;
     cursor: pointer;
-    display: flex; /* Add this */
-    justify-content: center; /* Add this */
-    align-items: center; /* Add this */
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
 }
   

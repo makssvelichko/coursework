@@ -234,6 +234,7 @@
 
 
 .next2{
+    cursor: pointer;
     border-radius: 3px;
     background-color: yellow;
     padding-left: 45px;

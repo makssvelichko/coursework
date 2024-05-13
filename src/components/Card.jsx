@@ -1,15 +1,37 @@
 import React from 'react';
 import './../styles/card.css';
 
+import { BsCalendarDate } from "react-icons/bs";
+import { IoIosTimer } from "react-icons/io";
+import { GiSpeedometer } from "react-icons/gi";
+
+
 function Card({ title, image, sessions, duration, intensity, reviews }) {
   return (
-    <div className="card">
+    <div className="card_office">
       <img src={image} alt={title} />
       <h2>{title}</h2>
-      <p>{sessions} тренувань</p>
-      <p>Тривалість: {duration}</p>
-      <p>Інтенсивність: {intensity}</p>
-      <p>Відгуки: {reviews} зірок</p>
+      <div className="spacebetween_cardsoffice">
+        <p>Тренувань:</p>
+        <div className='val-icon'>
+          <p className='val_card'>{sessions}</p>
+          <p><BsCalendarDate /></p>
+        </div>
+      </div>
+      <div className="spacebetween_cardsoffice">
+        <p>Тривалість:</p>
+        <div className='val-icon'>
+          <p className='val_card'>{duration}</p>
+          <p><IoIosTimer /></p>
+        </div>
+      </div>
+      <div className="spacebetween_cardsoffice">
+        <p>Інтенсивність:</p>
+        <div className='val-icon'>
+          <p className='val_card'>{intensity}</p>
+          <p><GiSpeedometer /></p>
+        </div>
+      </div>
     </div>
   );
 }

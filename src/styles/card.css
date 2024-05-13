@@ -1,46 +1,54 @@
-.card {
+.card_office {
     width: 300px;
+    height: 400px;
+    border-radius: 8px;
     border: 1px solid #ddd;
     overflow: hidden;
     margin: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.31);
 }
   
-.card img {
+.card_office img {
     width: 100%;
-    height: 200px;
+    height: 220px;
     object-fit: cover;
 }
   
-.card h2 {
+.card_office h2 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 20px;
-    color: #333;
-    margin: 0;
-    padding: 10px;
+    font-weight: 800;
+    color: #3b3d00;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    padding: 8px;
 }
   
-.card p {
+.card_office p {
+    display: flex;
     font-size: 16px;
     color: #666;
     margin: 0;
-    padding: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
-.cards_programs1 {
-    margin-top: 40px;
-    margin-left: 100px;
+.spacebetween_cardsoffice {
     display: flex;
-    column-gap: 50px;
-    align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
-.cards_programs2 {
-    margin-top: 40px;
-    margin-left: 100px;
-    margin-bottom: 80px;
+.val_card{
+    font-weight: 600;
+}
+
+.val-icon{
     display: flex;
-    column-gap: 50px;
-    align-items: center;
     justify-content: flex-start;
+    gap: 10px;
 }
