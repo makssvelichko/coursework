@@ -56,6 +56,7 @@ const Office = () => {
                 <p className='t_name_cards'>Для залу</p>
                 <div className="cards_programs1">
                     <Card
+                    id="beginner-office"
                     title="Beginner"
                     image={j1}
                     sessions={6}
@@ -64,6 +65,7 @@ const Office = () => {
                     />
 
                     <Card
+                    id="intermediate-office"
                     title="Intermediate"
                     image={j2}
                     sessions={8}
@@ -72,6 +74,7 @@ const Office = () => {
                     />
 
                     <Card
+                    id="advanced-office"
                     title="Advanced"
                     image={j3}
                     sessions={12}
@@ -84,6 +87,7 @@ const Office = () => {
 
                 <div className="cards_programs2">
                     <Card
+                    id="beginner-court"
                     title="Beginner"
                     image={c1}
                     sessions={6}
@@ -92,6 +96,7 @@ const Office = () => {
                     />
 
                     <Card
+                    id="intermediate-court"
                     title="Intermediate"
                     image={c2}
                     sessions={8}
@@ -100,6 +105,7 @@ const Office = () => {
                     />
 
                     <Card
+                    id="advanced-court"
                     title="Advanced"
                     image={c3}
                     sessions={12}
@@ -111,6 +117,7 @@ const Office = () => {
                 <p className='t_name_cards'>Вдома</p>
                 <div className="cards_programs3">
                     <Card
+                    id="beginner-home"
                     title="Beginner"
                     image={h1}
                     sessions={6}
@@ -119,6 +126,7 @@ const Office = () => {
                     />
 
                     <Card
+                    id="intermediate-home"
                     title="Intermediate"
                     image={h2}
                     sessions={8}
@@ -127,6 +135,7 @@ const Office = () => {
                     />
 
                     <Card
+                    id="advanced-home"
                     title="Advanced"
                     image={h3}
                     sessions={12}

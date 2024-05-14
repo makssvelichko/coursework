@@ -5,9 +5,12 @@ import { BsCalendarDate } from "react-icons/bs";
 import { IoIosTimer } from "react-icons/io";
 import { GiSpeedometer } from "react-icons/gi";
 
+import { NavLink } from 'react-router-dom';
+import { DETAILS_ROUTE } from '../utils/consts';
 
-function Card({ title, image, sessions, duration, intensity, reviews }) {
+function Card({ id, title, image, sessions, duration, intensity }) {
   return (
+    <NavLink to={DETAILS_ROUTE.replace(':id', id)} activeClassName="active">
     <div className="card_office">
       <img src={image} alt={title} />
       <h2>{title}</h2>
@@ -33,6 +36,7 @@ function Card({ title, image, sessions, duration, intensity, reviews }) {
         </div>
       </div>
     </div>
+    </NavLink>
   );
 }
 
