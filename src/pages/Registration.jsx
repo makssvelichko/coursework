@@ -352,7 +352,7 @@ const Registration = () => {
                     to={OFFICE_ROUTE}
                     className={isChecked ? "active" : "disabled"}
                   >
-                    <div className="next">
+                    <div className="next" onClick={signIn}>
                       <p className="t_enter">РЕЄСТРАЦІЯ</p>
                     </div>
                   </NavLink>
