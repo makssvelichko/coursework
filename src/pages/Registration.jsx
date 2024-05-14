@@ -16,7 +16,8 @@ import defimage from "./../img/photo/def.jpg";
 import { NavLink } from "react-router-dom";
 import { MdPhotoCamera } from "react-icons/md";
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { Context } from "../index";
 
 import AnchorLink from "../components/AnchorLink";
 import "./../styles/registration.css";
@@ -88,6 +89,7 @@ const Registration = () => {
   const [age, setAge] = useState(24);
   const [weight, setWeight] = useState(82);
   const [height, setHeight] = useState(178);
+  const { user } = useContext(Context);
 
   const handleLogin = () => {
     setEmailError(email === "");
@@ -117,7 +119,7 @@ const Registration = () => {
   ];
 
   const signIn = async () => {
-    const response = await registration(
+    const newUser = await registration(
       username,
       email,
       password,
@@ -126,11 +128,14 @@ const Registration = () => {
       weight,
       height
     );
+    user.setUser(newUser);
+    user.setIsAuth(true);
   };
 
-  console.log(`Стать ${sex}
-              Вік${age}, Вага${weight}, Зріст${height} 
-  `);
+  //   if (isAuth) {
+  //     return navigate(OFFICE_ROUTE);
+  //     //return redirect(OFFICE_ROUTE);
+  //   }
   return (
     <>
       <HeaderLogin />
