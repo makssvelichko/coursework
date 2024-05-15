@@ -5,7 +5,7 @@ import './../styles/office.css'
 
 import React, { useState } from 'react';
 import HeaderOffice, { ModalContext } from './../components/header_office/header_office';
-import { FOOD_ROUTE, HOME_ROUTE, OFFICE_ROUTE, PROGRESS_ROUTE } from '../utils/consts';
+import { FOOD_ROUTE, HOME_ROUTE, OFFICE_ROUTE, PERSONINFORMATION_ROUTE, PROGRESS_ROUTE, SUBSCRIPTIONS_ROUTE } from '../utils/consts';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 import { FaDumbbell } from "react-icons/fa6";
@@ -42,8 +42,8 @@ const Office = () => {
                     <div className="modal" onClick={() => setModalVisible(false)}>
                         <div className="modal-content" onClick={e => e.stopPropagation()}>
                             <div className="dark-container">
-                                <button className="modal-button" onClick={() => {}}>ОСОБИСТА ІНФОРМАЦІЯ</button>
-                                <button className="modal-button" onClick={() => {}}>МОЯ ПІДПИСКА</button>
+                                <button className="modal-button" onClick={() => navigate(PERSONINFORMATION_ROUTE)}>ОСОБИСТА ІНФОРМАЦІЯ</button>
+                                <button className="modal-button" onClick={() => navigate(SUBSCRIPTIONS_ROUTE)}>МОЯ ПІДПИСКА</button>
                                 <button className="modal-button" onClick={() => navigate(HOME_ROUTE)}>ВИХІД</button>
                             </div>
                         </div>

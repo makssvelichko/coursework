@@ -1,0 +1,147 @@
+.offers-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    padding: 20px;
+    width: 1100px;
+    margin-left: 80px;
+    margin-top: 25px;
+    margin-bottom:80px;
+}
+  
+.offer-card {
+    position: relative;
+    overflow: hidden;
+}
+  
+.offer-card img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+  
+.offer-card .info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    text-align: center;
+
+}
+  
+.offer-card .duration {
+    font-size: 30px;
+    font-weight: 800;
+    margin: 10px 0;
+}
+
+.offer-card .price{
+    font-size: 34px;
+    font-weight: 400;
+    margin: 10px 0;
+}
+  
+.offer-card button {
+    margin-bottom: 25px;
+    background-color: #F0F712;
+    color: rgb(0, 0, 0);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+  
+.offer-card button:hover {
+    background-color: #F0F712;
+}
+
+.offer-card button:active {
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+    filter: brightness(95%);
+    transition: filter 0.3s ease;
+}
+
+
+
+
+.header_sub {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    background-color: #f5f5f5;
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+  
+  .logo {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .trainer-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .trainer-info img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+  }
+  
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  .content img {
+    width: 100%;
+    height: auto;
+  }
+
+.bold_t{
+    font-weight: 700;
+}
+
+.icon_Trending{
+    margin-right: 15px;
+    font-size: 30px;
+    font-weight: 800;
+    color: red;
+    padding: 6px;
+    padding-left: 12px;
+    padding-right: 12px;
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+.img_trainer_t1{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.img_trainer_logo1{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.head_title{
+    margin-top: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 25px;
+}

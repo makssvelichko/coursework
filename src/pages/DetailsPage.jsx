@@ -8,7 +8,7 @@ import './../styles/detailspage.css'
 
 import React, { useState } from 'react';
 import HeaderOffice, { ModalContext } from './../components/header_office/header_office';
-import { FOOD_ROUTE, HOME_ROUTE, OFFICE_ROUTE, PROGRESS_ROUTE } from '../utils/consts';
+import { FOOD_ROUTE, HOME_ROUTE, OFFICE_ROUTE, PERSONINFORMATION_ROUTE, PROGRESS_ROUTE, SUBSCRIPTIONS_ROUTE } from '../utils/consts';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 import { FaDumbbell } from "react-icons/fa6";
@@ -203,8 +203,8 @@ const DetailsPage = () => {
                 <div className="modal" onClick={() => setModalVisible(false)}>
                     <div className="modal-content" onClick={e => e.stopPropagation()}>
                         <div className="dark-container">
-                            <button className="modal-button" onClick={() => {}}>ОСОБИСТА ІНФОРМАЦІЯ</button>
-                            <button className="modal-button" onClick={() => {}}>МОЯ ПІДПИСКА</button>
+                            <button className="modal-button" onClick={() => navigate(PERSONINFORMATION_ROUTE)}>ОСОБИСТА ІНФОРМАЦІЯ</button>
+                            <button className="modal-button" onClick={() => navigate(SUBSCRIPTIONS_ROUTE)}>МОЯ ПІДПИСКА</button>
                             <button className="modal-button" onClick={() => navigate(HOME_ROUTE)}>ВИХІД</button>
                         </div>
                     </div>
@@ -235,19 +235,19 @@ const DetailsPage = () => {
                     <div className='content_detail'>
                         <img src={details.image} alt={details.title} className='img_detailspage'/>
                         {/* Відобразити інші деталі... */}
-                        <p className='t_trains'><p className='mark'><CiBookmark /></p>{details.description1}</p>
+                        <div className='t_trains'><p className='mark'><CiBookmark /></p>{details.description1}</div>
                         <img src={details.image1} alt={details.title} className='img_detail_photo'/>
-                        <p className='t_trains'><p className='mark'><CiBookmark /></p>{details.description2}</p>
+                        <div className='t_trains'><p className='mark'><CiBookmark /></p>{details.description2}</div>
                         <img src={details.image2} alt={details.title} className='img_detail_photo'/>
-                        <p className='t_trains'><p className='mark'><CiBookmark /></p>{details.description3}</p>
+                        <div className='t_trains'><p className='mark'><CiBookmark /></p>{details.description3}</div>
                         <img src={details.image3} alt={details.title} className='img_detail_photo'/>
-                        <p className='t_trains'><p className='mark'><CiBookmark /></p>{details.description4}</p>
+                        <div className='t_trains'><p className='mark'><CiBookmark /></p>{details.description4}</div>
                         <img src={details.image4} alt={details.title} className='img_detail_photo'/>
-                        <p className='t_trains'><p className='mark'><CiBookmark /></p>{details.description5}</p>
+                        <div className='t_trains'><p className='mark'><CiBookmark /></p>{details.description5}</div>
                         <img src={details.image5} alt={details.title} className='img_detail_photo'/>
-                        <p className='t_trains'><p className='mark'><CiBookmark /></p>{details.description6}</p>
+                        <div className='t_trains'><p className='mark'><CiBookmark /></p>{details.description6}</div>
                         <img src={details.image6} alt={details.title} className='img_detail_photo'/>
-                        <p className='t_trains'><p className='mark'><CiBookmark /></p>{details.description7}</p>
+                        <div className='t_trains'><p className='mark'><CiBookmark /></p>{details.description7}</div>
                         <img src={details.image7} alt={details.title} className='img_detail_photo'/>
                     </div>
                 </div>

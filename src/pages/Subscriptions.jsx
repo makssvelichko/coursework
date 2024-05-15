@@ -1,6 +1,6 @@
 import FooterOffice from '../components/footer_office/footer_office';
 
-import './../styles/progress.css'
+import './../styles/subscriptions.css'
 
 import React, { useState } from 'react';
 import HeaderOffice, { ModalContext } from './../components/header_office/header_office';
@@ -11,64 +11,42 @@ import { FaDumbbell } from "react-icons/fa6";
 import { PiForkKnifeBold } from "react-icons/pi";
 import { GiProgression } from "react-icons/gi";
 
-import { FaFire } from "react-icons/fa";
+import { LiaAddressCard } from "react-icons/lia";
+import { BsCalendarDateFill } from "react-icons/bs";
 
-import { LineChart, Line, XAxis, YAxis, Tooltip, Area } from 'recharts';
 
-const Card = ({ title, weight, setWeight, calories, setCalories }) => {
-    const handleMinus = () => {
-        setWeight(weight - 1);
-        setCalories(calories - 7700);
-    };
+import plans1 from './../img/photo/Section2.png'
+import plans2 from './../img/photo/Section1.png'
+import plans3 from './../img/photo/Section.png'
+import plans4 from './../img/photo/Section (1).png'
 
-    const handlePlus = () => {
-        setWeight(weight + 1);
-        setCalories(calories + 7700);
-    };
-
+const OfferCard = ({ image, duration, price, discount }) => {
+    const discountedPrice = price - (price * discount / 100);
+    
     return (
-      <div className="card_progress">
-        <div className="title_progress">{title}</div>
-        <div className="value_progress">{weight}</div>
-        <div className="controls_progress">
-          <button className='btn-plus_progress' onClick={handleMinus}>-</button>
-          <button className='btn-minus_progress' onClick={handlePlus}>+</button>
+      <div className="offer-card">
+        <img src={image} alt="Exercise" />
+        <div className="info">
+          <div className="duration">{duration} місяці</div>
+          <div className="price">{discountedPrice}₴</div>
+          <button>Продовжити</button>
         </div>
       </div>
     );
-};
+  };
 
-const Progress = () => {
+const Subscriptions = () => {
 
     const [modalVisible, setModalVisible] = useState(false);
     const navigate = useNavigate();
 
-    const [data, setData] = useState([
-        {date: new Date().toLocaleDateString(), weight: 74, calories: 0},
-    ]);
-
-    const [weight, setWeight] = useState(data[data.length - 1].weight);
-    const [calories, setCalories] = useState(data[data.length - 1].calories);
-
-    const updateData = () => {
-        setData(prevData => [...prevData, {date: new Date().toLocaleDateString(), weight: weight, calories: calories}]);
-    };
-
-    const months = ['Січ', 'Лют', 'Бер', 'Кві', 'Тра', 'Чер', 'Лип', 'Сер', 'Вер', 'Жов', 'Лис', 'Гру'];
-
-
-    const transformedData = data.map(item => {
-    const date = new Date(item.date.split('.').reverse().join('-'));
-    const month = months[date.getMonth()];
-    return { ...item, date: month };
-    });
-
-
-    console.log(`Вага: ${data[data.length - 1].weight} кг`);
-    console.log(`Дата: ${data[data.length - 1].date}`);
-    console.log(`Калорії: ${data[data.length - 1].calories} cal`);
-
-
+    const offers = [
+        { image: plans1, duration: 1, price: 640, discount: 0 },
+        { image: plans2, duration: 3, price: 1920, discount: 15 },
+        { image: plans3, duration: 6, price: 3840, discount: 35 },
+        { image: plans4, duration: 12, price: 7680, discount: 50 },
+      ];
+    
     return ( 
         <>
         <HeaderOffice/>
@@ -90,38 +68,30 @@ const Progress = () => {
             </ModalContext.Provider>
 
             <div className="half_office">
-                <p className='t_programs'>Прогрес</p>
-
-                <div className='graph'>
-                    
-                    <div>
-                        <h2 className='h2_progress'>Графік втрати ваги</h2>
-                        <div className='graph_area'>
-                        <LineChart
-                            width={600}
-                            height={350}
-                            data={transformedData}
-                            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                        >
-                            <XAxis dataKey="date" />
-                            <YAxis />
-                            <Tooltip />
-                            <Line type="monotone" dataKey="weight" stroke="#FF0000" strokeWidth={3} activeDot={{ r: 8 }} />
-                            <Area type="monotone" dataKey="weight" stroke="#FF0000" fill="#82ca9d" />
-                        </LineChart>
+            <div className="details-container">
+                    <div className='head_title'>
+                        <h1 className='h1_details_title'>Моя підписка</h1>
+                    </div>
+                    <div className="header_sub">
+                        <div className='img_trainer_t1'>
+                            <LiaAddressCard className='img_trainer_logo1' />
+                            <div>Підписка на: <strong>1 місяць</strong></div>
                         </div>
-                        <div className='p_progress'>Всього згоріло: <p className='val_calories'>{calories}</p> ккал <p className='FaFire'><FaFire /></p></div>
+                        <div className='location_t'>
+                            
+                        </div>
+                        <div className="trainer-info">
+                            <div className='icon_Trending'><BsCalendarDateFill /></div>
+                            <span>Залишилось: <p className='bold_t'>5 днів</p></span>
+                        </div>
                     </div>
-                    <div>
-                        <Card title="Вага" weight={weight} setWeight={setWeight} calories={calories} setCalories={setCalories} />
-                        <button className='btn_up_progress' onClick={updateData}>ОНОВИТИ</button>
-                    </div>
-                    
                 </div>
-            
-            
-                
-                
+            <p className='t_programs'>Доступні підписки</p>
+            <div className="offers-grid">
+                {offers.map((offer, index) => (
+                    <OfferCard key={index} {...offer} />
+                ))}
+            </div>
             
             </div>
                 <div className="half_office">
@@ -159,7 +129,7 @@ const Progress = () => {
         </div>
         <FooterOffice/>
         </>
-     ); 
+     );
 }
  
-export default Progress;
+export default Subscriptions;

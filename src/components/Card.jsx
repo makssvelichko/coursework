@@ -10,7 +10,7 @@ import { DETAILS_ROUTE } from '../utils/consts';
 
 function Card({ id, title, image, sessions, duration, intensity }) {
   return (
-    <NavLink to={DETAILS_ROUTE.replace(':id', id)} activeClassName="active">
+    <NavLink to={DETAILS_ROUTE.replace(':id', id)} >
     <div className="card_office">
       <img src={image} alt={title} />
       <h2>{title}</h2>

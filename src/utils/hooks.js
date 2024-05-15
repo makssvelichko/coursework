@@ -18,7 +18,7 @@ const useProtected = () => {
     if (!token) {
       navigate(HOME_ROUTE);
     }
-  }, []);
+  }, [token, navigate]); // Додано залежності token і navigate
 };
 
 export default useProtected;
