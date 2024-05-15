@@ -20,7 +20,8 @@ export const registration = async (
     height,
   });
   localStorage.setItem("token", data.token);
-  return data.user;
+  console.log(`Дані юзера: ${data.token}`);
+  return jwtDecode(data.token);
 };
 
 export const login = async (email, password) => {

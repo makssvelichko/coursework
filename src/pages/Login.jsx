@@ -6,21 +6,31 @@ import logo_google from "./../img/logo/google.png";
 import AnchorLink from "../components/AnchorLink";
 import "./../styles/login.css";
 import { OFFICE_ROUTE, REGISTRATION_ROUTE } from "../utils/consts";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { login } from "../http/AuthServices";
+import { Context } from "../index";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+  const { user } = useContext(Context);
   const navigate = useNavigate();
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     setEmailError(email === "");
     setPasswordError(password === "");
 
     if (email !== "" && password !== "") {
-      navigate(OFFICE_ROUTE);
+      const userData = await login(email, password);
+      if (userData) {
+        user.setUser(userData);
+        user.setIsAuth(true);
+        navigate(OFFICE_ROUTE);
+      } else {
+        console.error("Login failed!");
+      }
     }
   };
 
