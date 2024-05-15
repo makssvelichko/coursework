@@ -16,7 +16,7 @@ class UserService {
     age,
     weight,
     height,
-    profile_photo
+    profilePhoto
   ) {
     const candidate = await User.findOne({ where: { email } });
     if (candidate) {
@@ -27,7 +27,7 @@ class UserService {
 
     const fileName = uuid.v4() + ".jpg";
     const profilePhotoPath = path.resolve(__dirname, "..", "static", fileName); // Path to save the file
-    await profile_photo.mv(profilePhotoPath);
+    await profilePhoto.mv(profilePhotoPath);
 
     const user = await User.create({
       username,
@@ -38,7 +38,7 @@ class UserService {
       weight,
       height,
       activationLink,
-      profile_photo: fileName,
+      profilePhoto: fileName,
     });
     await mailService.sendActivationMail(
       email,
@@ -47,11 +47,7 @@ class UserService {
     const userDto = new UserDto(user);
     const tokens = tokenService.generateToken({ ...userDto });
 
-    await tokenService.saveToken(
-      userDto.id,
-      tokens.refresh_Token,
-      tokens.accessToken
-    );
+    await tokenService.saveToken(userDto.id, tokens.refreshToken, tokens.token);
 
     return {
       ...tokens,
@@ -80,11 +76,7 @@ class UserService {
     const userDto = new UserDto(user);
     const tokens = tokenService.generateToken({ ...userDto });
 
-    await tokenService.saveToken(
-      userDto.id,
-      tokens.refresh_Token,
-      tokens.accessToken
-    );
+    await tokenService.saveToken(userDto.id, tokens.refreshToken, tokens.token);
 
     return {
       ...tokens,
@@ -92,17 +84,17 @@ class UserService {
     };
   }
 
-  async logout(refresh_Token) {
-    const token = await tokenService.removeToken(refresh_Token);
-    return token;
+  async logout(refreshToken) {
+    const oldToken = await tokenService.removeToken(refreshToken);
+    return oldToken;
   }
 
-  async refresh(refresh_Token) {
-    if (!refresh_Token) {
+  async refresh(refreshToken) {
+    if (!refreshToken) {
       throw ApiError.UnauthorizedError();
     }
-    const userData = tokenService.validateRefreshToken(refresh_Token);
-    const tokenFromDb = await tokenService.findToken(refresh_Token);
+    const userData = tokenService.validateRefreshToken(refreshToken);
+    const tokenFromDb = await tokenService.findToken(refreshToken);
     if (!userData || !tokenFromDb) {
       throw ApiError.UnauthorizedError();
     }
@@ -111,22 +103,12 @@ class UserService {
     const userDto = new UserDto(user);
     const tokens = tokenService.generateToken({ ...userDto });
 
-    await tokenService.saveToken(
-      userDto.id,
-      tokens.refresh_Token,
-      tokens.accessToken
-    );
+    await tokenService.saveToken(userDto.id, tokens.refreshToken, tokens.token);
 
     return {
       ...tokens,
       user: userDto,
     };
-  }
-
-  async getAllUsers() {
-    const users = await User.findAll();
-    console.log(`Всі користувачі ${users}`);
-    return users;
   }
 }
 

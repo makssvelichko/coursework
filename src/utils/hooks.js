@@ -2,20 +2,20 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { HOME_ROUTE } from "./consts";
 
-const getAccessToken = () => {
+const getToken = () => {
   const result = localStorage.getItem("token");
   if (!result) {
-    console.error("There is no access token");
+    console.error("There is no token");
   }
   return result;
 };
 
 const useProtected = () => {
-  const accessToken = getAccessToken();
+  const token = getToken();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!accessToken) {
+    if (!token) {
       navigate(HOME_ROUTE);
     }
   }, []);

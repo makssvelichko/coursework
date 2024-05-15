@@ -101,10 +101,10 @@ const Registration = () => {
     }
   };
 
-  const [image, setImage] = useState("");
+  const [profilePhoto, setProfilePhoto] = useState("");
 
-  const handleImageChange = (e) => {
-    setImage(URL.createObjectURL(e.target.files[0]));
+  const handleProfilePhotoChange = (e) => {
+    setProfilePhoto(URL.createObjectURL(e.target.files[0]));
   };
 
   const [isChecked, setIsChecked] = useState(false);
@@ -132,10 +132,6 @@ const Registration = () => {
     user.setIsAuth(true);
   };
 
-  //   if (isAuth) {
-  //     return navigate(OFFICE_ROUTE);
-  //     //return redirect(OFFICE_ROUTE);
-  //   }
   return (
     <>
       <HeaderLogin />
@@ -192,14 +188,14 @@ const Registration = () => {
                 </div>
                 <div className="profile-container">
                   <img
-                    className="profile-image"
-                    src={image || defimage}
-                    alt="Profile"
+                    className="profile-photo"
+                    src={profilePhoto || defimage}
+                    alt="ProfilePhoto"
                   />
                   <label className="profile-image-label">
                     <input
                       type="file"
-                      onChange={handleImageChange}
+                      onChange={handleProfilePhotoChange}
                       style={{ display: "none" }}
                     />
                     <span className="camera-icon">
