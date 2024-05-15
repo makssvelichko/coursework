@@ -1,9 +1,5 @@
 const ApiError = require("../error/ApiError");
-const bcrypt = require("bcrypt");
-const uuid = require("uuid");
 const path = require("path");
-const jwt = require("jsonwebtoken");
-const { User } = require("../models/models");
 const userService = require("../service/userService");
 const fs = require("fs");
 const { validationResult } = require("express-validator");
@@ -42,7 +38,7 @@ class UserController {
         height,
         profilePhoto
       );
-      res.cookie("refresh_Token", userData.refresh_Token, {
+      res.cookie("refreshToken", userData.refreshToken, {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
       });
@@ -56,7 +52,7 @@ class UserController {
     try {
       const { email, password } = req.body;
       const userData = await userService.login(email, password);
-      res.cookie("refresh_Token", userData.refresh_Token, {
+      res.cookie("refreshToken", userData.refreshToken, {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
       });
@@ -68,10 +64,10 @@ class UserController {
 
   async logout(req, res, next) {
     try {
-      const { refresh_Token } = req.cookies;
-      const token = await userService.logout(refresh_Token);
-      res.clearCookie("refresh_Token");
-      return res.json(token);
+      const { refreshToken } = req.cookies;
+      const oldToken = await userService.logout(refreshToken);
+      res.clearCookie("refreshToken");
+      return res.json(oldToken);
     } catch (e) {
       next(e);
     }
@@ -89,22 +85,13 @@ class UserController {
 
   async refresh(req, res, next) {
     try {
-      const { refresh_Token } = res.cookies;
-      const userData = await userService.refresh(refresh_Token);
-      res.cookie("refresh_Token", userData.refresh_Token, {
+      const { refreshToken } = res.cookies;
+      const userData = await userService.refresh(refreshToken);
+      res.cookie("refreshToken", userData.refreshToken, {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
       });
       return res.json(userData);
-    } catch (e) {
-      next(e);
-    }
-  }
-
-  async getUsers(req, res, next) {
-    try {
-      const users = await userService.getAllUsers();
-      return res.json(users);
     } catch (e) {
       next(e);
     }

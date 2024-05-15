@@ -1,15 +1,13 @@
-import AppRouter from './components/AppRouter.js';
+import AppRouter from "./components/AppRouter.js";
 
-
-import { HashRouter as Router} from 'react-router-dom';
+import { HashRouter as Router } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <AppRouter/>
+        <AppRouter />
       </Router>
-
     </div>
   );
 }

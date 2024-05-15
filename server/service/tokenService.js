@@ -5,22 +5,22 @@ const ApiError = require("../error/ApiError");
 class TokenService {
   generateToken(payload) {
     try {
-      const accessToken = jwt.sign(payload, process.env.JWT_ACCESS_SECRET, {
+      const token = jwt.sign(payload, process.env.JWT_ACCESS_SECRET, {
         expiresIn: "30m",
       });
-      const refresh_Token = jwt.sign(payload, process.env.JWT_REFRESH_SECRET, {
+      const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH_SECRET, {
         expiresIn: "30d",
       });
       return {
-        accessToken,
-        refresh_Token,
+        token,
+        refreshToken,
       };
     } catch (e) {
       throw ApiError.forbidden(e.message);
     }
   }
 
-  validateAccessToken(token) {
+  validateToken(token) {
     try {
       const userData = jwt.verify(token, process.env.JWT_ACCESS_SECRET);
       return userData;
@@ -38,28 +38,28 @@ class TokenService {
     }
   }
 
-  async saveToken(id, refresh_Token, accessToken) {
+  async saveToken(id, refreshToken, token) {
     try {
-      const token = await User.update(
-        { token: accessToken, refresh_token: refresh_Token },
+      const newToken = await User.update(
+        { token: token, refreshToken: refreshToken },
         { where: { id: id } }
       );
-      return token;
+      return newToken;
     } catch (e) {
       throw ApiError.forbidden(e.message);
     }
   }
 
-  async removeToken(refresh_Token) {
+  async removeToken(refreshToken) {
     const tokenData = await User.update(
-      { token: null, refresh_token: null },
-      { where: { refresh_token: refresh_Token } }
+      { token: null, refreshToken: null },
+      { where: { refreshToken: refreshToken } }
     );
-    return tokenData.refresh_token;
+    return tokenData.refreshToken;
   }
 
-  async findToken(refresh_Token) {
-    const tokenData = await User.findOne({ refresh_token: refresh_Token });
+  async findToken(refreshToken) {
+    const tokenData = await User.findOne({ refreshToken: refreshToken });
     return tokenData;
   }
 }
