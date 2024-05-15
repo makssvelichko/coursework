@@ -121,6 +121,7 @@
 }
 
 .t_trains{
+  line-height: 1.8;
     display: flex;
     flex-direction: row;
     font-size: 18px;
@@ -128,8 +129,27 @@
     font-weight: 600;
 }
 
+
+.t_trains_1{
+  line-height: 1.8;
+  display: flex;
+    margin-top: 15px;
+    flex-direction: row;
+    font-size: 16px;
+    font-family: 'Montserrat';
+    font-weight: 400;
+}
+
+
+
 .mark {
     color: red;
     margin-right: 5px;
     font-size: 22px;
+}
+
+.t_trains_first{
+  line-height: 1.8;
+  margin-bottom: 35px;
+  font-size: 18px;
 }
