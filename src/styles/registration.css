@@ -129,7 +129,7 @@
     font-family: 'Montserrat';
 }
 
-.forms {
+.forms_r {
     font-family: 'Montserrat';
     margin-top: 25px;
     display: flex;
@@ -275,3 +275,124 @@
     filter: brightness(90%);
     transition: filter 0.3s ease;
 }
+
+
+@media (max-width: 1350px) {
+    .profile-container {
+        width: 90px !important;
+        height: 90px !important;
+        margin-left: 50px !important;
+        margin-bottom: 20px;
+    }
+    .divstep {
+        display: none;
+    }
+    .half {
+        height: 90vh;
+    }
+}
+
+@media (max-width: 850px) {
+    .profile-container {
+        width: 75px !important;
+        height: 75px !important;
+        margin-left: 10px !important; 
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 650px) {
+    .profile-container {
+        width: 60px !important;
+        height: 60px !important;
+        margin-left: 0px !important; 
+        margin-bottom: 20px;
+    }
+    .forms_r {
+        column-gap: 15px;
+    }
+    .input-container input[type=email] {
+        max-width: 165px;
+    }
+      
+    .input-container input[type=password] {
+        max-width: 165px;
+    }
+    
+    .input-container input[type=username] {
+        max-width: 165px;
+    }
+    .plog2{
+        font-size: 14px;
+    }
+    .error-message {
+        margin-top: 8px;
+        font-size: 9px;
+    }
+    
+    .error-message1 {
+        margin-top: 8px;
+        font-size: 9px;
+    }
+}
+
+@media (max-width: 450px) {
+    .profile-container {
+        width: 50px !important;
+        height: 50px !important;
+        margin-left: 0px !important; 
+        margin-bottom: 20px;
+    }
+    .forms_r {
+        column-gap: 10px;
+    }
+    .input-container input[type=email] {
+        max-width: 135px;
+    }
+      
+    .input-container input[type=password] {
+        max-width: 135px;
+    }
+    
+    .input-container input[type=username] {
+        max-width: 135px;
+    }
+    .plog2{
+        font-size: 14px;
+    }
+    .next2{
+        cursor: pointer;
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    
+    .t_enter{
+        color: #000;
+        font-size: 12px;
+    }
+    .back {
+        padding-left: 35px;
+        padding-right: 35px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    
+    .t_registration{
+        font-size: 12px;
+    }
+    .camera-icon {
+        font-size: 14px;
+    }
+    .error-message {
+        margin-top: 8px;
+        font-size: 8px;
+    }
+    
+    .error-message1 {
+        margin-top: 8px;
+        font-size: 8px;
+    }
+}
+

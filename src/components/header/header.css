@@ -11,6 +11,7 @@ html{
     top: 0;  
     z-index: 100;  
     width: 100%; 
+    overflow: auto;
 }
 
 .header_row{
@@ -71,3 +72,73 @@ AnchorLink.header_btn:active{
     padding: 0;
     font-weight: 200;
 }
+
+
+@media (max-width: 850px) {
+    .header_nav{
+       font-size: 10px !important;
+    }
+
+    .header_btn {
+        padding: 8px !important;
+    }
+
+    .header_nav ul li {
+        margin-right: 5px !important;
+    }
+
+    .header_logo img {
+        max-width: 80px !important;
+    }
+    .header_nav ul{
+        column-gap: 18px !important;
+    }
+}
+
+@media (max-width: 650px) {
+    .header_nav{
+       font-size: 7px !important;
+    }
+
+    .header_btn {
+        padding: 4px !important;
+    }
+
+    .header_nav ul li {
+        margin-right: 3px !important;
+    }
+
+    .header_logo img {
+        max-width: 50px !important;
+    }
+    .header_nav ul{
+        column-gap: 10px !important;
+    }
+}
+
+
+@media (max-width: 440px) {
+    .header_nav{
+       font-size: 6px !important;
+    }
+
+    .header_btn {
+        padding: 5px !important;
+    }
+
+    .header_nav ul li {
+        margin-right: 2px !important;
+    }
+
+    .header_logo img {
+        max-width: 45px !important;
+    }
+    .header_nav ul{
+        column-gap: 5px !important;
+    }
+    .header_row{
+        column-gap: 5px !important;
+    }
+}
+
+

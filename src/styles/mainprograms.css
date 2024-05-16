@@ -118,3 +118,225 @@
 .programs_card li:active {
     filter: brightness(70%);
 }
+
+
+@media (max-width: 1350px) {
+    .programs_card ul{
+        column-gap: 40px; /* Зменшуємо відстань між картками */
+    }
+
+    .programs_card1, .programs_card2, .programs_card3 {
+        max-width: 90%; /* Зменшуємо розмір карток */
+    }
+    .image-text1 {
+        font-size: 12px !important; /* Зменшуємо розмір шрифту */
+    }
+
+    .image-text2 {
+        font-size: 16px !important; /* Зменшуємо розмір шрифту */
+    }
+
+    .image-text3 {
+        font-size: 14px !important; /* Зменшуємо розмір шрифту */
+    }
+    .image-text1, .image-text2, .image-text3 {
+        margin-left: 35px !important; /* Зменшуємо відступи зліва */
+    }
+    .text_programs{
+        font-size: 28px !important;
+        padding-top: 52px;
+        padding-bottom: 22px;
+    }
+
+    .programs_btn{
+        margin-top: 45px;
+        margin-bottom: 60px;
+    }
+    
+    .programs_btn a{
+        font-size: 15px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 19px;
+        padding-right: 19px;
+    }
+    
+}
+
+@media (max-width: 850px) {
+    .programs_card ul{
+        column-gap: 20px; /* Зменшуємо відстань між картками */
+    }
+
+    .programs_card1, .programs_card2, .programs_card3 {
+        max-width: 90%; /* Зменшуємо розмір карток */
+    }
+    .image-text1 {
+        font-size: 10px !important; /* Зменшуємо розмір шрифту */
+    }
+
+    .image-text2 {
+        font-size: 14px !important; /* Зменшуємо розмір шрифту */
+    }
+
+    .image-text3 {
+        font-size: 12px !important; /* Зменшуємо розмір шрифту */
+    }
+    .image-text1, .image-text2, .image-text3 {
+        margin-left: 35px !important; /* Зменшуємо відступи зліва */
+    }
+    .image-text1 {
+        max-width: 70px;
+    }
+    .text_programs{
+        font-size: 25px !important;
+        padding-top: 48px;
+        padding-bottom: 20px;
+    }
+    .programs_btn{
+        margin-top: 40px;
+        margin-bottom: 54px;
+    }
+    
+    .programs_btn a{
+        font-size: 15px;
+        padding-top: 9px;
+        padding-bottom: 9px;
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+}
+
+@media (max-width: 650px) {
+    .programs_card ul{
+        column-gap: 15px; /* Зменшуємо відстань між картками */
+    }
+
+    .programs_card1, .programs_card2, .programs_card3 {
+        max-width: 90%; /* Зменшуємо розмір карток */
+    }
+    .image-text1 {
+        font-size: 7px !important; /* Зменшуємо розмір шрифту */
+    }
+
+    .image-text2 {
+        font-size: 10px !important; /* Зменшуємо розмір шрифту */
+    }
+
+    .image-text3 {
+        font-size: 8px !important; /* Зменшуємо розмір шрифту */
+    }
+    .image-text1, .image-text2, .image-text3 {
+        margin-left: 20px !important; /* Зменшуємо відступи зліва */
+    }
+    .image-text1 {
+        max-width: 60px;
+        margin: 12px;
+    }
+    .text_programs{
+        font-size: 22px !important;
+        padding-top: 42px;
+        padding-bottom: 18px;
+    }
+    .programs_btn{
+        margin-top: 37px;
+        margin-bottom: 47px;
+    }
+    
+    .programs_btn a{
+        font-size: 13px;
+        padding-top: 7px;
+        padding-bottom: 7px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+}
+
+
+@media (max-width: 450px) {
+    .image-text1 {
+        font-size: 6px !important; /* Зменшуємо розмір шрифту */
+    }
+
+    .image-text2 {
+        font-size: 8px !important; /* Зменшуємо розмір шрифту */
+    }
+
+    .image-text3 {
+        font-size: 7px !important; /* Зменшуємо розмір шрифту */
+    }
+    .image-text1, .image-text2, .image-text3 {
+        margin-left: 20px !important; /* Зменшуємо відступи зліва */
+    }
+    .image-text1 {
+        max-width: 60px;
+        margin: 12px;
+    }
+    .text_programs{
+        font-size: 16px !important;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+    .programs_btn{
+        margin-top: 35px;
+        margin-bottom: 45px;
+    }
+    
+    .programs_btn a{
+        font-size: 12px;
+        padding-top: 6px;
+        padding-bottom: 6px;
+        padding-left: 13px;
+        padding-right: 13px;
+    }
+
+}
+
+
+
+@media (max-width: 400px) {
+    .programs_card ul{
+        column-gap: 10px; /* Зменшуємо відстань між картками */
+    }
+
+    .programs_card1, .programs_card2, .programs_card3 {
+        max-width: 90%; /* Зменшуємо розмір карток */
+    }
+    .image-text1 {
+        font-size: 6px !important; /* Зменшуємо розмір шрифту */
+    }
+
+    .image-text2 {
+        font-size: 8px !important; /* Зменшуємо розмір шрифту */
+    }
+
+    .image-text3 {
+        font-size: 6px !important; /* Зменшуємо розмір шрифту */
+    }
+    .image-text1, .image-text2, .image-text3 {
+        margin-left: 15px !important; /* Зменшуємо відступи зліва */
+    }
+    .image-text1 {
+        max-width: 40px;
+    }
+    .text_programs{
+        font-size: 18px !important;
+        padding-top: 30px;
+        padding-bottom: 13px;
+    }
+
+    .programs_btn{
+        margin-top: 30px;
+        margin-bottom: 40px;
+    }
+    
+    .programs_btn a{
+        font-size: 11px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+}

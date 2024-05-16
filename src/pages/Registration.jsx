@@ -153,7 +153,7 @@ const Registration = () => {
             </div>
             <div className="half">
               <p className="plog1">Створити свій обліковий запис</p>
-              <form className="forms">
+              <form className="forms_r">
                 <div
                   className={"input-container " + (emailError ? "error" : "")}
                 >
@@ -257,7 +257,7 @@ const Registration = () => {
       {step === 2 && (
         <div id="registerStepTwo" className="registrationtwo">
           <div className="container_registrationtwo">
-            <div className="half">
+            <div className="half_r2">
               <div className="divstep2">
                 <div className="step2">
                   <div className="step_text12">Створити акаунт</div>
@@ -270,7 +270,7 @@ const Registration = () => {
                 </div>
               </div>
             </div>
-            <div className="half">
+            <div className="half_r2">
               <p className="plog1">Особисті дані</p>
 
               <div className="switch">
