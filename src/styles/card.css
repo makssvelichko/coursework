@@ -52,3 +52,56 @@
   justify-content: flex-start;
   gap: 10px;
 }
+
+
+@media (max-width: 1450px) {
+  .card_office {
+    width: 280px;
+    height: 390px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .card_office {
+    width: 260px;
+    height: 390px;
+  }
+}
+
+@media (max-width: 650px) {
+  .card_office {
+    width: 240px;
+    height: 360px;
+  }
+  .card_office h2 {
+    font-size: 16px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    padding: 8px;
+  }
+  
+  .card_office p {
+    font-size: 13px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+}
+
+@media (max-width: 450px) {
+  .card_office {
+    width: 220px;
+    height: 340px;
+  }
+  .card_office h2 {
+    font-size: 15px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    padding: 6px;
+  }
+  
+  .card_office p {
+    font-size: 12px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+  }
+}

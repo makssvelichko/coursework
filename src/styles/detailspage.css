@@ -1,4 +1,4 @@
-.details-container {
+.details-container-t {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -140,8 +140,6 @@
     font-weight: 400;
 }
 
-
-
 .mark {
     color: red;
     margin-right: 5px;
@@ -152,4 +150,124 @@
   line-height: 1.8;
   margin-bottom: 35px;
   font-size: 18px;
+}
+
+@media (max-width: 1350px) {
+  .details-container-t {
+      margin-left: 0px !important;
+      width: 63% !important;
+      padding: 10px;
+  }
+
+  .header_details {
+      flex-direction: column;
+      padding-left: 10px;
+      padding-right: 10px;
+  }
+
+  .img_trainer_t, .trainer-info {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+  }
+
+  .head_title {
+      margin-top: 20px;
+  }
+
+  .content img, .img_detailspage, .img_detail_photo {
+      width: 100%;
+  }
+
+  .content_detail {
+      width: 100%;
+  }
+
+  .img_detail_photo {
+      margin-left: 0;
+  }
+  .h1_details_title{
+    margin-left: 55px;
+    font-size: 20px !important;
+}
+}
+
+@media (max-width: 850px) {
+  .details-container-t {
+      margin-left: 0px !important;
+      width: 63% !important;
+      padding: 10px;
+  }
+
+  .header_details {
+      flex-direction: column;
+      padding-left: 10px;
+      padding-right: 10px;
+  }
+
+  .img_trainer_t, .trainer-info {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+  }
+
+  .head_title {
+      margin-top: 20px;
+  }
+
+  .content img, .img_detailspage, .img_detail_photo {
+      width: 100%;
+  }
+
+  .content_detail {
+      width: 100%;
+  }
+
+  .img_detail_photo {
+      margin-left: 0;
+  }
+  .h1_details_title{
+    margin-left: 55px;
+}
+}
+
+
+@media (max-width: 450px) {
+  .details-container-t {
+      margin-left: 0px !important;
+      width: 63% !important;
+      padding: 10px;
+  }
+
+  .header_details {
+      flex-direction: column;
+      padding-left: 10px;
+      padding-right: 10px;
+  }
+
+  .img_trainer_t, .trainer-info {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+  }
+
+  .head_title {
+      margin-top: 20px;
+  }
+
+  .content img, .img_detailspage, .img_detail_photo {
+      width: 100%;
+  }
+
+  .content_detail {
+      width: 100%;
+  }
+
+  .img_detail_photo {
+      margin-left: 0;
+  }
+  .h1_details_title{
+    margin-left: 55px;
+    font-size: 20px !important;
+}
 }

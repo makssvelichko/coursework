@@ -184,3 +184,148 @@
     font-weight: 800;
     font-size: 24px;
 }
+
+
+@media (max-width: 1350px) {
+    .cards_programs1 {
+        max-width: 900px;
+    }
+    .cards_programs2 {
+        max-width: 900px;
+    }
+    .cards_programs3 {
+        max-width: 900px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .cards_programs1 {
+        max-width: 600px;
+        margin-left: 60px;
+    }
+    .cards_programs2 {
+        max-width: 600px;
+        margin-left: 60px;
+    }
+    .cards_programs3 {
+        max-width: 600px;
+        margin-left: 60px;
+    }
+    .t_programs {
+        margin-right: 250px;
+        padding-top: 100px;
+        font-size: 26px;
+    }
+    .t_name_cards {
+        margin-left: 70px !important;
+        font-size: 22px;
+    }
+    
+}
+
+@media (max-width: 650px) {
+    .cards_programs1 {
+        max-width: 400px;
+        margin-left: 30px;
+        margin-top: 20px;
+    }
+    .cards_programs2 {
+        max-width: 400px;
+        margin-left: 30px;
+        margin-top: 20px;
+    }
+    .cards_programs3 {
+        max-width: 400px;
+        margin-left: 30px;
+        margin-top: 20px;
+    }
+    .t_programs {
+        margin-right: 250px;
+        padding-top: 100px;
+        font-size: 22px;
+    }
+    .t_name_cards {
+        margin-left: 60px !important;
+        font-size: 18px !important;
+    }
+    .nav_btn {
+        padding-left: 8px !important;
+        padding-top: 18px;
+        padding-bottom: 18px;
+        gap: 10px;
+        font-size: 16px !important;
+    }
+    .text_btn_nav{
+        font-size: 10px !important;
+    }
+    .nav-links li {
+        width: 170px !important;
+    }
+    .modal-content {
+        border-radius: 6px;
+        top: 60px;
+        width: 170px !important;
+        height: 30% !important;
+    }
+    
+    .modal-button {
+        font-size: 10px !important;
+        width: 160px !important;
+        padding: 10px 10px !important;
+    }
+}
+
+@media (max-width: 450px) {
+    .cards_programs1 {
+        max-width: 300px;
+        margin-left: 10px;
+        margin-top: 1px !important;
+    }
+    .cards_programs2 {
+        max-width: 300px;
+        margin-left: 10px;
+        margin-top: 1px;
+    }
+    .cards_programs3 {
+        max-width: 300px;
+        margin-left: 10px;
+        margin-top: 1px;
+    }
+    .t_programs {
+        margin-right: 210px;
+        padding-top: 100px;
+        font-size: 20px;
+    }
+    .t_name_cards {
+        margin-bottom: 10px !important;
+        padding-bottom: 0px !important;
+        margin-left: 60px !important;
+        font-size: 16px !important;
+    }
+    .nav_btn {
+        padding-left: 8px !important;
+        padding-top: 18px;
+        padding-bottom: 18px;
+        gap: 10px;
+        font-size: 14px !important;
+    }
+    .text_btn_nav{
+        font-size: 9px !important;
+    }
+    .nav-links li {
+        width: 160px !important;
+    }
+
+    .modal-content {
+        border-radius: 6px;
+        top: 60px;
+        width: 160px !important;
+        height: 30% !important;
+    }
+    
+    .modal-button {
+        font-size: 10px !important;
+        width: 160px !important;
+        padding: 10px 10px !important;
+    }
+}

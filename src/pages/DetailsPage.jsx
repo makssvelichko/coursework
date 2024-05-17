@@ -378,7 +378,7 @@ const DetailsPage = () => {
         </ModalContext.Provider>
 
             <div className="half_office">
-                <div className="details-container">
+                <div className="details-container-t">
                     <div className='head_title'>
                         <h1 className='h1_details_title'>{details.title}</h1>
                         <GiMuscleUp alt="Логотип" className="logo"/>
