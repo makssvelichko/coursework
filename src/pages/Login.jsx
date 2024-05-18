@@ -1,27 +1,32 @@
 import FooterLogin from "../components/footer_login/footer_login";
 import HeaderLogin from "../components/header_login/header_login";
 import { NavLink, useNavigate } from "react-router-dom";
-import logo_google from "./../img/logo/google.png";
 
-import AnchorLink from "../components/AnchorLink";
 import "./../styles/login.css";
 import { OFFICE_ROUTE, REGISTRATION_ROUTE } from "../utils/consts";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect, useCallback } from "react";
 import { login } from "../http/AuthServices";
 import { Context } from "../index";
+
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from "jwt-decode";
+
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+
+  const [loginAttempt, setLoginAttempt] = useState(false);
+
   const { user } = useContext(Context);
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
+  const handleLogin = useCallback(async () => {
     setEmailError(email === "");
     setPasswordError(password === "");
-
+  
     if (email !== "" && password !== "") {
       const userData = await login(email, password);
       if (userData) {
@@ -32,7 +37,15 @@ const Login = () => {
         console.error("Login failed!");
       }
     }
-  };
+  }, [email, password, user, navigate]);
+
+
+  useEffect(() => {
+    if (loginAttempt) {
+      handleLogin();
+      setLoginAttempt(false);
+    }
+  }, [email, password, handleLogin, loginAttempt]);
 
   return (
     <>
@@ -43,45 +56,46 @@ const Login = () => {
           <div className="half">
             <p className="plog1">Авторизація</p>
             <form className="forms">
-              <div className={"input-container " + (emailError ? "error" : "")}>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="E-mail"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                {emailError && (
-                  <p className="error-message">Треба заповнити пусте поле</p>
-                )}
-              </div>
-              <div
-                className={"input-container " + (passwordError ? "error" : "")}
-              >
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  placeholder="Пароль"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                {passwordError && (
-                  <p className="error-message">Треба заповнити пусте поле</p>
-                )}
-              </div>
-            </form>
+                <div className={"input-container " + (emailError ? "error" : "")}>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="E-mail"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  {emailError && (
+                    <p className="error-message">Треба заповнити пусте поле</p>
+                  )}
+                </div>
+                <div className={"input-container " + (passwordError ? "error" : "")}>
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Пароль"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  {passwordError && (
+                    <p className="error-message">Треба заповнити пусте поле</p>
+                  )}
+                </div>
+                </form>
             <p className="plog3">Або увійти за допомогою соціальних мереж</p>
             <div className="btn_googl">
-              <AnchorLink id="#!" className="google-btn">
-                <img
-                  src={logo_google}
-                  alt="Google logo"
-                  className="google-img"
-                />
-                Google
-              </AnchorLink>
+            <GoogleLogin onSuccess={credentialResponse => {
+                const decoded = jwtDecode(credentialResponse?.credential);
+                console.log(decoded);
+                setEmail(decoded.email);
+                setPassword(decoded.sub);
+                setLoginAttempt(true);
+              }}
+              onError={() => {
+                console.log('Login Failed');
+              }}
+            />
 
               <form className="checkbox1">
                 <input

@@ -340,6 +340,11 @@
     transition: filter 0.3s ease;
 }
 
+.btn_googl{
+    margin-top: 25px;
+    max-width: 205px !important;
+}
+
 
 @media (max-width: 1350px) {
     .divstep2 {
