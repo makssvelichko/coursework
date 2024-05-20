@@ -38,6 +38,10 @@ class UserController {
         height,
         profilePhoto
       );
+      res.cookie("accessToken", userData.accessToken, {
+        maxAge: 30 * 60 * 60 * 1000,
+        httpOnly: true,
+      });
       res.cookie("refreshToken", userData.refreshToken, {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
@@ -52,6 +56,10 @@ class UserController {
     try {
       const { email, password } = req.body;
       const userData = await userService.login(email, password);
+      res.cookie("accessToken", userData.accessToken, {
+        maxAge: 30 * 60 * 60 * 1000,
+        httpOnly: true,
+      });
       res.cookie("refreshToken", userData.refreshToken, {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
@@ -64,10 +72,11 @@ class UserController {
 
   async logout(req, res, next) {
     try {
-      const { refreshToken } = req.cookies;
-      const oldToken = await userService.logout(refreshToken);
+      const { accessToken, refreshToken } = req.cookies;
+      await userService.logout(accessToken, refreshToken);
+      res.clearCookie("accessToken");
       res.clearCookie("refreshToken");
-      return res.json(oldToken);
+      return res.json({ message: "Logged out successfully" });
     } catch (e) {
       next(e);
     }
@@ -85,14 +94,28 @@ class UserController {
 
   async refresh(req, res, next) {
     try {
-      const { refreshToken } = res.cookies;
+      const { refreshToken } = req.cookies;
+      if (!refreshToken) {
+        return next(ApiError.UnauthorizedError());
+      }
+
       const userData = await userService.refresh(refreshToken);
+      if (!userData) {
+        return next(ApiError.UnauthorizedError());
+      }
+
+      res.cookie("accessToken", userData.accessToken, {
+        maxAge: 30 * 60 * 60 * 1000,
+        httpOnly: true,
+      });
       res.cookie("refreshToken", userData.refreshToken, {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
       });
+
       return res.json(userData);
     } catch (e) {
+      console.error(e); // Логування помилок
       next(e);
     }
   }

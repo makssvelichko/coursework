@@ -5,14 +5,14 @@ const ApiError = require("../error/ApiError");
 class TokenService {
   generateToken(payload) {
     try {
-      const token = jwt.sign(payload, process.env.JWT_ACCESS_SECRET, {
+      const accessToken = jwt.sign(payload, process.env.JWT_ACCESS_SECRET, {
         expiresIn: "30m",
       });
       const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH_SECRET, {
         expiresIn: "30d",
       });
       return {
-        token,
+        accessToken,
         refreshToken,
       };
     } catch (e) {
@@ -38,10 +38,10 @@ class TokenService {
     }
   }
 
-  async saveToken(id, refreshToken, token) {
+  async saveToken(id, refreshToken, accessToken) {
     try {
       const newToken = await User.update(
-        { token: token, refreshToken: refreshToken },
+        { accessToken: accessToken, refreshToken: refreshToken },
         { where: { id: id } }
       );
       return newToken;
@@ -50,12 +50,15 @@ class TokenService {
     }
   }
 
-  async removeToken(refreshToken) {
-    const tokenData = await User.update(
-      { token: null, refreshToken: null },
-      { where: { refreshToken: refreshToken } }
-    );
-    return tokenData.refreshToken;
+  async removeToken(accessToken, refreshToken) {
+    try {
+      await User.update(
+        { accessToken: null, refreshToken: null },
+        { where: { accessToken: accessToken, refreshToken: refreshToken } }
+      );
+    } catch (e) {
+      throw ApiError.forbidden(e.message);
+    }
   }
 
   async findToken(refreshToken) {

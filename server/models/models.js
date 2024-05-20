@@ -11,7 +11,7 @@ const User = sequelize.define("user", {
   weight: { type: DataTypes.INTEGER },
   height: { type: DataTypes.INTEGER },
   role: { type: DataTypes.STRING, defaultValue: "USER" },
-  token: { type: DataTypes.STRING, unique: true },
+  accessToken: { type: DataTypes.STRING, unique: true },
   refreshToken: { type: DataTypes.STRING, unique: true },
   isActivated: { type: DataTypes.BOOLEAN, defaultValue: false },
   activationLink: { type: DataTypes.STRING },
