@@ -13,6 +13,8 @@ import { GiProgression } from "react-icons/gi";
 
 import { FaFire } from "react-icons/fa";
 
+import { logout } from './../http/AuthServices';
+
 import { LineChart, Line, XAxis, YAxis, Tooltip, Area } from 'recharts';
 
 const Card = ({ title, weight, setWeight, calories, setCalories }) => {
@@ -101,7 +103,7 @@ const Progress = () => {
                             <div className="dark-container">
                                 <button className="modal-button" onClick={() => navigate(PERSONINFORMATION_ROUTE)}>ОСОБИСТА ІНФОРМАЦІЯ</button>
                                 <button className="modal-button" onClick={() => navigate(SUBSCRIPTIONS_ROUTE)}>МОЯ ПІДПИСКА</button>
-                                <button className="modal-button" onClick={() => navigate(HOME_ROUTE)}>ВИХІД</button>
+                                <button className="modal-button" onClick={() => {logout(); navigate(HOME_ROUTE);}}>ВИХІД</button>
                             </div>
                         </div>
                     </div>

@@ -16,6 +16,8 @@ import { MdPhotoCamera } from "react-icons/md";
 import { IoManOutline } from "react-icons/io5";
 import { IoWomanOutline } from "react-icons/io5";
 
+import { logout } from './../http/AuthServices';
+
 
 const Card = ({ title, initialValue, onSelect, min, max }) => {
     const [value, setValue] = useState(initialValue);
@@ -99,7 +101,7 @@ const PersonInformation = () => {
                             <div className="dark-container">
                                 <button className="modal-button" onClick={() => navigate(PERSONINFORMATION_ROUTE)}>ОСОБИСТА ІНФОРМАЦІЯ</button>
                                 <button className="modal-button" onClick={() => navigate(SUBSCRIPTIONS_ROUTE)}>МОЯ ПІДПИСКА</button>
-                                <button className="modal-button" onClick={() => navigate(HOME_ROUTE)}>ВИХІД</button>
+                                <button className="modal-button" onClick={() => {logout(); navigate(HOME_ROUTE);}}>ВИХІД</button>
                             </div>
                         </div>
                     </div>

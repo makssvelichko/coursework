@@ -11,6 +11,7 @@ import { Context } from "../index";
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
 
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -48,6 +49,7 @@ const Login = () => {
   }, [email, password, handleLogin, loginAttempt]);
 
   return (
+    <GoogleOAuthProvider clientId="899348282415-rhce4qf0726geh0t9316g296sksn3u1c.apps.googleusercontent.com">
     <>
       <HeaderLogin />
       <div className="login">
@@ -127,6 +129,7 @@ const Login = () => {
       </div>
       <FooterLogin />
     </>
+    </GoogleOAuthProvider>
   );
 };
 

@@ -26,7 +26,9 @@ import { registration } from "../http/AuthServices";
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
 
-const Card = ({ title, initialValue, onSelect, min, max }) => {
+import { GoogleOAuthProvider } from '@react-oauth/google';
+
+export const Card = ({ title, initialValue, onSelect, min, max }) => {
   const [value, setValue] = useState(initialValue);
 
   const decreaseValue = () => {
@@ -57,7 +59,7 @@ const Card = ({ title, initialValue, onSelect, min, max }) => {
   );
 };
 
-const Card2 = ({ text, selected, onSelect, icon }) => (
+export const Card2 = ({ text, selected, onSelect, icon }) => (
   <div className={`card2 ${selected ? "selected" : ""}`} onClick={onSelect}>
     <div className="card-icon">{icon}</div>
     <h3>{text}</h3>
@@ -134,7 +136,10 @@ const Registration = () => {
     user.setIsAuth(true);
   };
 
+  
+
   return (
+    <GoogleOAuthProvider clientId="899348282415-rhce4qf0726geh0t9316g296sksn3u1c.apps.googleusercontent.com">
     <>
       <HeaderLogin />
       {step === 1 && (
@@ -378,6 +383,7 @@ const Registration = () => {
 
       <FooterLogin />
     </>
+    </GoogleOAuthProvider>
   );
 };
 

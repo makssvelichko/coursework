@@ -12,6 +12,7 @@ import { FaDumbbell } from "react-icons/fa6";
 import { PiForkKnifeBold } from "react-icons/pi";
 import { GiProgression } from "react-icons/gi";
 
+import { logout } from './../http/AuthServices';
 
 import s1 from './../img/photo/s1.jpg'
 import s2 from './../img/photo/s2.jpg'
@@ -118,7 +119,7 @@ const Food = () => {
                             <div className="dark-container">
                                 <button className="modal-button" onClick={() => navigate(PERSONINFORMATION_ROUTE)}>ОСОБИСТА ІНФОРМАЦІЯ</button>
                                 <button className="modal-button" onClick={() => navigate(SUBSCRIPTIONS_ROUTE)}>МОЯ ПІДПИСКА</button>
-                                <button className="modal-button" onClick={() => navigate(HOME_ROUTE)}>ВИХІД</button>
+                                <button className="modal-button" onClick={() => {logout(); navigate(HOME_ROUTE);}}>ВИХІД</button>
                             </div>
                         </div>
                     </div>
