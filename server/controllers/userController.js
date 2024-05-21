@@ -41,10 +41,12 @@ class UserController {
       res.cookie("accessToken", userData.accessToken, {
         maxAge: 30 * 60 * 60 * 1000,
         httpOnly: true,
+        sameSite: "strict",
       });
       res.cookie("refreshToken", userData.refreshToken, {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
+        sameSite: "strict",
       });
       return res.json(userData);
     } catch (e) {
@@ -59,10 +61,12 @@ class UserController {
       res.cookie("accessToken", userData.accessToken, {
         maxAge: 30 * 60 * 60 * 1000,
         httpOnly: true,
+        sameSite: "strict",
       });
       res.cookie("refreshToken", userData.refreshToken, {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
+        sameSite: "strict",
       });
       return res.json(userData);
     } catch (e) {
@@ -72,10 +76,17 @@ class UserController {
 
   async logout(req, res, next) {
     try {
+      console.log("Cookies:", req.cookies);
       const { accessToken, refreshToken } = req.cookies;
+
+      if (!accessToken || !refreshToken) {
+        return next(ApiError.badRequest("Tokens are missing"));
+      }
       await userService.logout(accessToken, refreshToken);
-      res.clearCookie("accessToken");
-      res.clearCookie("refreshToken");
+
+      res.clearCookie("accessToken", { httpOnly: true, sameSite: "strict" });
+      res.clearCookie("refreshToken", { httpOnly: true, sameSite: "strict" });
+
       return res.json({ message: "Logged out successfully" });
     } catch (e) {
       next(e);
