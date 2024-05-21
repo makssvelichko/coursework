@@ -3,7 +3,7 @@ import FooterOffice from '../components/footer_office/footer_office';
 
 import './../styles/food.css'
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import HeaderOffice, { ModalContext } from '../components/header_office/header_office';
 import { FOOD_ROUTE, HOME_ROUTE, OFFICE_ROUTE, PERSONINFORMATION_ROUTE, PROGRESS_ROUTE, SUBSCRIPTIONS_ROUTE } from '../utils/consts';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -12,6 +12,7 @@ import { FaDumbbell } from "react-icons/fa6";
 import { PiForkKnifeBold } from "react-icons/pi";
 import { GiProgression } from "react-icons/gi";
 
+import { logout } from './../http/AuthServices';
 
 import s1 from './../img/photo/s1.jpg'
 import s2 from './../img/photo/s2.jpg'
@@ -76,6 +77,35 @@ const Food = () => {
       }));
     };
 
+    const [centerSlidePercentage, setCenterSlidePercentage] = useState(31);
+
+    useEffect(() => {
+        const handleResize = () => {
+            const width = window.innerWidth;
+
+            // Змінюйте значення відсотків відповідно до вашого дизайну
+            if (width < 650) {
+                setCenterSlidePercentage(74);
+            }else if (width < 850) {
+                setCenterSlidePercentage(48);
+            } else if (width < 1350) {
+                setCenterSlidePercentage(40);
+            }
+            else {
+                setCenterSlidePercentage(31);
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        // Викликайте функцію при завантаженні сторінки
+        handleResize();
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
     return ( 
         <>
         <HeaderOffice/>
@@ -89,7 +119,7 @@ const Food = () => {
                             <div className="dark-container">
                                 <button className="modal-button" onClick={() => navigate(PERSONINFORMATION_ROUTE)}>ОСОБИСТА ІНФОРМАЦІЯ</button>
                                 <button className="modal-button" onClick={() => navigate(SUBSCRIPTIONS_ROUTE)}>МОЯ ПІДПИСКА</button>
-                                <button className="modal-button" onClick={() => navigate(HOME_ROUTE)}>ВИХІД</button>
+                                <button className="modal-button" onClick={() => {logout(); navigate(HOME_ROUTE);}}>ВИХІД</button>
                             </div>
                         </div>
                     </div>
@@ -106,7 +136,8 @@ const Food = () => {
                 showStatus={false} 
                 showIndicators={false} 
                 centerMode 
-                centerSlidePercentage={31}
+                centerSlidePercentage={centerSlidePercentage}
+                // centerSlidePercentage={31}
                 infiniteLoop={true}
                 renderArrowPrev={(onClickHandler, hasPrev, label) => 
                     hasPrev && (
@@ -227,7 +258,7 @@ const Food = () => {
                 showStatus={false} 
                 showIndicators={false} 
                 centerMode 
-                centerSlidePercentage={31}
+                centerSlidePercentage={centerSlidePercentage}
                 infiniteLoop={true}
                 renderArrowPrev={(onClickHandler, hasPrev, label) => 
                     hasPrev && (
@@ -349,7 +380,7 @@ const Food = () => {
                 showStatus={false} 
                 showIndicators={false} 
                 centerMode 
-                centerSlidePercentage={31}
+                centerSlidePercentage={centerSlidePercentage}
                 infiniteLoop={true}
                 renderArrowPrev={(onClickHandler, hasPrev, label) => 
                     hasPrev && (

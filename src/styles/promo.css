@@ -24,3 +24,101 @@
     font-size: 18px;
     font-weight: 100;
 }
+
+
+@media (max-width: 1350px) {
+
+    .toptext{
+        font-size: 32px; /* Зменшуємо розмір шрифту */
+        padding: 2px; /* Зменшуємо відступи */
+    }
+
+    .img img {
+        margin-top: 40px;
+    }
+    .text{
+        top: 40%;
+    }
+
+}
+
+
+@media (max-width: 850px) {
+
+    .img img {
+        margin-top: 45px;
+    }
+
+    .toptext{
+        font-size: 25px; /* Зменшуємо розмір шрифту */
+        padding: 2px; /* Зменшуємо відступи */
+    }
+
+    .bottomtext{
+        font-size: 16px; /* Зменшуємо розмір шрифту */
+        padding: 2px; /* Зменшуємо відступи */
+    }
+    .text{
+        top: 35%;
+    }
+}
+
+@media (max-width: 650px) {
+
+    .img img {
+        margin-top: 50px;
+    }
+
+    .toptext{
+        font-size: 18px; /* Зменшуємо розмір шрифту */
+        padding: 2px; /* Зменшуємо відступи */
+    }
+
+    .bottomtext{
+        font-size: 12px; /* Зменшуємо розмір шрифту */
+        padding: 2px; /* Зменшуємо відступи */
+    }
+    .text{
+        top: 28%;
+    }
+}
+
+@media (max-width: 450px) {
+
+    .img img {
+        margin-top: 55px;
+    }
+
+    .toptext{
+        font-size: 15px; /* Зменшуємо розмір шрифту */
+        padding: 2px; /* Зменшуємо відступи */
+    }
+
+    .bottomtext{
+        font-size: 10px; /* Зменшуємо розмір шрифту */
+        padding: 2px; /* Зменшуємо відступи */
+    }
+    .text{
+        top: 25%;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .img img {
+        margin-top: 55px;
+    }
+
+    .toptext{
+        font-size: 14px; /* Зменшуємо розмір шрифту */
+        padding: 2px; /* Зменшуємо відступи */
+    }
+
+    .bottomtext{
+        font-size: 9px; /* Зменшуємо розмір шрифту */
+        padding: 2px; /* Зменшуємо відступи */
+    }
+    .text{
+        top: 24%;
+    }
+}

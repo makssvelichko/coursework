@@ -204,3 +204,217 @@
     filter: brightness(90%);
     transition: filter 0.3s ease;
 }
+
+@media (max-width: 850px) {
+    .plog1 {
+        font-size: 20px !important;
+    }
+    .plog3 {
+        font-size: 16px !important;
+    }
+    .input-container input[type=email] {
+        padding: 8px !important;
+    }
+    .input-container input[type=password] {
+        padding: 8px !important;
+    }
+    .input-container input[type=username] {
+        padding: 8px !important;
+        max-width: 205px
+    }
+    .half:last-child {
+        padding-top: 130px !important;
+        padding-left: 50px !important;
+        padding-right: 50px !important;
+    }
+    .google-btn {
+        margin-top: 25px;
+        width: 190px !important;
+        padding: 9px !important;
+    }
+    .enter{
+        padding-left: 70px;
+        padding-right: 70px;
+        padding-top: 11px;
+        padding-bottom: 11px;
+    }
+    .registration {
+        padding-left: 50px;
+        padding-right: 50px;
+        padding-top: 11px;
+        padding-bottom: 11px;
+    }
+    .t_enter{
+        font-size: 14px;
+    }
+    .t_registration{
+        font-size: 14px;
+    }
+    .check_box1 + label:before {
+        width: 21px !important;
+        height: 21px !important;
+    }
+    
+    .check_box1 + label:after {
+        left: 8px;
+        top: 0px;
+        width: 7px;
+        height: 14px;
+    }
+    .btns_log {
+        margin-top: 25px;
+        column-gap: 25px;
+        justify-content: flex-start;
+    }
+    .remember-me1{
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 650px) {
+    .plog1 {
+        font-size: 18px !important;
+    }
+    .plog3 {
+        font-size: 14px !important;
+    }
+    .input-container input[type=email] {
+        padding: 7px !important;
+        font-size: 14px !important;
+    }
+    .input-container input[type=password] {
+        padding: 7px !important;
+        font-size: 14px !important;
+    }
+    .input-container input[type=username] {
+        padding: 7px !important;
+        font-size: 14px !important;
+        max-width: 180px
+    }
+    .half:last-child {
+        padding-left: 20px !important;
+        padding-right: 5px !important;
+    }
+    .google-btn {
+        margin-top: 25px;
+        width: 170px !important;
+        padding: 8px !important;
+        font-size: 14px;
+    }
+    .enter{
+        padding-left: 65px;
+        padding-right: 65px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .registration {
+        padding-left: 45px;
+        padding-right: 45px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .t_enter{
+        font-size: 12px;
+    }
+    .t_registration{
+        font-size: 12px;
+    }
+    .check_box1 + label:before {
+        width: 19px !important;
+        height: 19px !important;
+    }
+    
+    .check_box1 + label:after {
+        left: 7px;
+        top: 0px;
+        bottom: 5px !important;
+        width: 6px;
+        height: 12px;
+    }
+    .btns_log {
+        margin-top: 25px;
+        column-gap: 20px;
+        justify-content: flex-start;
+    }
+    .remember-me1{
+        font-size: 13px;
+    }
+
+}
+
+@media (max-width: 450px) {
+    .plog1 {
+        font-size: 16px !important;
+    }
+    .plog3 {
+        font-size: 12px !important;
+    }
+    .input-container input[type=email] {
+        padding: 6px !important;
+        font-size: 12px !important;
+    }
+    .input-container input[type=password] {
+        padding: 6px !important;
+        font-size: 12px !important;
+    }
+    .input-container input[type=username] {
+        padding: 6px !important;
+        font-size: 12px !important;
+        max-width: 160px;
+    }
+    .half:last-child {
+        padding-left: 20px !important;
+        padding-right: 10px !important;
+    }
+    .google-btn {
+        margin-top: 25px;
+        width: 150px !important;
+        padding: 8px !important;
+        font-size: 12px;
+    }
+    .enter{
+        padding-left: 50px;
+        padding-right: 50px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+    .registration {
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+    .t_enter{
+        font-size: 12px !important;
+    }
+    .t_registration{
+        font-size: 12px !important;
+    }
+    .check_box1 + label:before {
+        width: 15px !important;
+        height: 15px !important;
+    }
+    
+    .check_box1 + label:after {
+        left: 6px;
+        top: 0px;
+        bottom: 5px !important;
+        width: 5px;
+        height: 10px;
+    }
+    .btns_log {
+        margin-top: 25px;
+        column-gap: 20px;
+        justify-content: flex-start;
+        margin-bottom: 50px;
+    }
+    .remember-me1{
+        font-size: 11px;
+    }
+    .forms {
+        column-gap: 15px !important;
+    }
+    .half {
+        height: 85vh !important;
+    }
+}

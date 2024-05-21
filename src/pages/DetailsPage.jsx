@@ -21,6 +21,8 @@ import artem from './../img/photo/artem.jpg'
 import { IoTrendingUpOutline } from "react-icons/io5";
 import { GiMuscleUp } from "react-icons/gi";
 
+import { logout } from './../http/AuthServices';
+
 import j1 from './../img/photo/jm1.jpeg'
 import j2 from './../img/photo/jm3.jpg'
 import j3 from './../img/photo/jm2.jpg'
@@ -370,7 +372,7 @@ const DetailsPage = () => {
                         <div className="dark-container">
                             <button className="modal-button" onClick={() => navigate(PERSONINFORMATION_ROUTE)}>ОСОБИСТА ІНФОРМАЦІЯ</button>
                             <button className="modal-button" onClick={() => navigate(SUBSCRIPTIONS_ROUTE)}>МОЯ ПІДПИСКА</button>
-                            <button className="modal-button" onClick={() => navigate(HOME_ROUTE)}>ВИХІД</button>
+                            <button className="modal-button" onClick={() => {logout(); navigate(HOME_ROUTE);}}>ВИХІД</button>
                         </div>
                     </div>
                 </div>
@@ -378,7 +380,7 @@ const DetailsPage = () => {
         </ModalContext.Provider>
 
             <div className="half_office">
-                <div className="details-container">
+                <div className="details-container-t">
                     <div className='head_title'>
                         <h1 className='h1_details_title'>{details.title}</h1>
                         <GiMuscleUp alt="Логотип" className="logo"/>

@@ -11,7 +11,6 @@ import { GiRunningShoe } from "react-icons/gi";
 
 import FooterLogin from "../components/footer_login/footer_login";
 import HeaderLogin from "../components/header_login/header_login";
-import logo_google from "./../img/logo/google.png";
 import defimage from "./../img/photo/def.jpg";
 import { NavLink } from "react-router-dom";
 import { MdPhotoCamera } from "react-icons/md";
@@ -19,13 +18,17 @@ import { MdPhotoCamera } from "react-icons/md";
 import React, { useContext, useState } from "react";
 import { Context } from "../index";
 
-import AnchorLink from "../components/AnchorLink";
 import "./../styles/registration.css";
 import { LOGIN_ROUTE } from "../utils/consts";
 
 import { registration } from "../http/AuthServices";
 
-const Card = ({ title, initialValue, onSelect, min, max }) => {
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from "jwt-decode";
+
+import { GoogleOAuthProvider } from '@react-oauth/google';
+
+export const Card = ({ title, initialValue, onSelect, min, max }) => {
   const [value, setValue] = useState(initialValue);
 
   const decreaseValue = () => {
@@ -56,7 +59,7 @@ const Card = ({ title, initialValue, onSelect, min, max }) => {
   );
 };
 
-const Card2 = ({ text, selected, onSelect, icon }) => (
+export const Card2 = ({ text, selected, onSelect, icon }) => (
   <div className={`card2 ${selected ? "selected" : ""}`} onClick={onSelect}>
     <div className="card-icon">{icon}</div>
     <h3>{text}</h3>
@@ -92,6 +95,7 @@ const Registration = () => {
   const { user } = useContext(Context);
 
   const handleLogin = () => {
+    
     setEmailError(email === "");
     setPasswordError(password === "");
     setNameError(username === "");
@@ -132,7 +136,10 @@ const Registration = () => {
     user.setIsAuth(true);
   };
 
+  
+
   return (
+    <GoogleOAuthProvider clientId="899348282415-rhce4qf0726geh0t9316g296sksn3u1c.apps.googleusercontent.com">
     <>
       <HeaderLogin />
       {step === 1 && (
@@ -153,7 +160,7 @@ const Registration = () => {
             </div>
             <div className="half">
               <p className="plog1">Створити свій обліковий запис</p>
-              <form className="forms">
+              <form className="forms_r">
                 <div
                   className={"input-container " + (emailError ? "error" : "")}
                 >
@@ -225,14 +232,19 @@ const Registration = () => {
 
               <p className="plog2">Або увійти за допомогою соціальних мереж</p>
               <div className="btn_googl">
-                <AnchorLink id="#!" className="google-btn">
-                  <img
-                    src={logo_google}
-                    alt="Google logo"
-                    className="google-img"
-                  />
-                  Google
-                </AnchorLink>
+                <GoogleLogin onSuccess={credentialResponse => {
+                      const decoded = jwtDecode(credentialResponse?.credential);
+                      console.log(decoded);
+                      setEmail(decoded.email);
+                      setPassword(decoded.sub);
+                      setUserName(decoded.name);
+                      showNextStep();
+                    }}
+                    onError={() => {
+                      console.log('Login Failed');
+                    }}
+                    
+                />
               </div>
 
               <div>
@@ -257,7 +269,7 @@ const Registration = () => {
       {step === 2 && (
         <div id="registerStepTwo" className="registrationtwo">
           <div className="container_registrationtwo">
-            <div className="half">
+            <div className="half_r2">
               <div className="divstep2">
                 <div className="step2">
                   <div className="step_text12">Створити акаунт</div>
@@ -270,7 +282,7 @@ const Registration = () => {
                 </div>
               </div>
             </div>
-            <div className="half">
+            <div className="half_r2">
               <p className="plog1">Особисті дані</p>
 
               <div className="switch">
@@ -371,6 +383,7 @@ const Registration = () => {
 
       <FooterLogin />
     </>
+    </GoogleOAuthProvider>
   );
 };
 

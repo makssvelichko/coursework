@@ -2,7 +2,7 @@ import FooterOffice from '../components/footer_office/footer_office';
 
 import './../styles/progress.css'
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import HeaderOffice, { ModalContext } from './../components/header_office/header_office';
 import { FOOD_ROUTE, HOME_ROUTE, OFFICE_ROUTE, PERSONINFORMATION_ROUTE, PROGRESS_ROUTE, SUBSCRIPTIONS_ROUTE } from '../utils/consts';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -12,6 +12,8 @@ import { PiForkKnifeBold } from "react-icons/pi";
 import { GiProgression } from "react-icons/gi";
 
 import { FaFire } from "react-icons/fa";
+
+import { logout } from './../http/AuthServices';
 
 import { LineChart, Line, XAxis, YAxis, Tooltip, Area } from 'recharts';
 
@@ -68,11 +70,30 @@ const Progress = () => {
     console.log(`Дата: ${data[data.length - 1].date}`);
     console.log(`Калорії: ${data[data.length - 1].calories} cal`);
 
+    const [dimensions, setDimensions] = useState({
+        width: window.innerWidth,
+        height: window.innerHeight,
+    });
+
+    useEffect(() => {
+        function handleResize() {
+            setDimensions({
+                width: window.innerWidth,
+                height: window.innerHeight,
+            });
+        }
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
     return ( 
         <>
         <HeaderOffice/>
-        <div className='office'>
+        <div className='progress'>
             <div className="container_office">
             <ModalContext.Provider value={setModalVisible}>
                 <HeaderOffice />
@@ -82,14 +103,14 @@ const Progress = () => {
                             <div className="dark-container">
                                 <button className="modal-button" onClick={() => navigate(PERSONINFORMATION_ROUTE)}>ОСОБИСТА ІНФОРМАЦІЯ</button>
                                 <button className="modal-button" onClick={() => navigate(SUBSCRIPTIONS_ROUTE)}>МОЯ ПІДПИСКА</button>
-                                <button className="modal-button" onClick={() => navigate(HOME_ROUTE)}>ВИХІД</button>
+                                <button className="modal-button" onClick={() => {logout(); navigate(HOME_ROUTE);}}>ВИХІД</button>
                             </div>
                         </div>
                     </div>
                 )}
             </ModalContext.Provider>
 
-            <div className="half_office">
+            <div className="half_progress">
                 <p className='t_programs'>Прогрес</p>
 
                 <div className='graph'>
@@ -98,8 +119,8 @@ const Progress = () => {
                         <h2 className='h2_progress'>Графік втрати ваги</h2>
                         <div className='graph_area'>
                         <LineChart
-                            width={600}
-                            height={350}
+                            width={dimensions.width * 0.42}
+                            height={dimensions.height * 0.5}
                             data={transformedData}
                             margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
                         >
@@ -124,7 +145,7 @@ const Progress = () => {
                 
             
             </div>
-                <div className="half_office">
+                <div className="half_progress">
                     
                     <div className="navigation-panel">
                         <ul className="nav-links">

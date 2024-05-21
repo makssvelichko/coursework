@@ -14,6 +14,8 @@ import { GiProgression } from "react-icons/gi";
 import { LiaAddressCard } from "react-icons/lia";
 import { BsCalendarDateFill } from "react-icons/bs";
 
+import { logout } from './../http/AuthServices';
+
 
 import plans1 from './../img/photo/Section2.png'
 import plans2 from './../img/photo/Section1.png'
@@ -60,7 +62,7 @@ const Subscriptions = () => {
                             <div className="dark-container">
                                 <button className="modal-button" onClick={() => navigate(PERSONINFORMATION_ROUTE)}>ОСОБИСТА ІНФОРМАЦІЯ</button>
                                 <button className="modal-button" onClick={() => navigate(SUBSCRIPTIONS_ROUTE)}>МОЯ ПІДПИСКА</button>
-                                <button className="modal-button" onClick={() => navigate(HOME_ROUTE)}>ВИХІД</button>
+                                <button className="modal-button" onClick={() => {logout(); navigate(HOME_ROUTE);}}>ВИХІД</button>
                             </div>
                         </div>
                     </div>

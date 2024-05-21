@@ -12,6 +12,8 @@ import { FaDumbbell } from "react-icons/fa6";
 import { PiForkKnifeBold } from "react-icons/pi";
 import { GiProgression } from "react-icons/gi";
 
+import { logout } from './../http/AuthServices';
+
 import j1 from './../img/photo/jm1.jpeg'
 import j2 from './../img/photo/jm3.jpg'
 import j3 from './../img/photo/jm2.jpg'
@@ -26,7 +28,7 @@ import h3 from './../img/photo/h3.1.jpeg'
 
 import Card from './../components/Card';
 
-const Office = () => {
+export const Office = () => {
 
     const [modalVisible, setModalVisible] = useState(false);
     const navigate = useNavigate();
@@ -44,7 +46,7 @@ const Office = () => {
                             <div className="dark-container">
                                 <button className="modal-button" onClick={() => navigate(PERSONINFORMATION_ROUTE)}>ОСОБИСТА ІНФОРМАЦІЯ</button>
                                 <button className="modal-button" onClick={() => navigate(SUBSCRIPTIONS_ROUTE)}>МОЯ ПІДПИСКА</button>
-                                <button className="modal-button" onClick={() => navigate(HOME_ROUTE)}>ВИХІД</button>
+                                <button className="modal-button" onClick={() => {logout(); navigate(HOME_ROUTE);}}>ВИХІД</button>
                             </div>
                         </div>
                     </div>
