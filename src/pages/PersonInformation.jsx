@@ -19,7 +19,7 @@ import { IoWomanOutline } from "react-icons/io5";
 import { logout } from './../http/AuthServices';
 
 
-const Card = ({ title, initialValue, onSelect, min, max }) => {
+export const Card = ({ title, initialValue, onSelect, min, max }) => {
     const [value, setValue] = useState(initialValue);
   
     const decreaseValue = () => {
@@ -51,7 +51,7 @@ const Card = ({ title, initialValue, onSelect, min, max }) => {
   };
 
 
-const PersonInformation = () => {
+export const PersonInformation = () => {
 
     const [username, setUserName] = useState("");
     const [/*sex*/ , setSex] = useState("men");

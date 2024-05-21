@@ -17,7 +17,7 @@ import { logout } from './../http/AuthServices';
 
 import { LineChart, Line, XAxis, YAxis, Tooltip, Area } from 'recharts';
 
-const Card = ({ title, weight, setWeight, calories, setCalories }) => {
+export const Card = ({ title, weight, setWeight, calories, setCalories }) => {
     const handleMinus = () => {
         setWeight(weight - 1);
         setCalories(calories - 7700);
@@ -33,14 +33,14 @@ const Card = ({ title, weight, setWeight, calories, setCalories }) => {
         <div className="title_progress">{title}</div>
         <div className="value_progress">{weight}</div>
         <div className="controls_progress">
-          <button className='btn-plus_progress' onClick={handleMinus}>-</button>
-          <button className='btn-minus_progress' onClick={handlePlus}>+</button>
+          <button className='btn-plus_progress' onClick={handleMinus} data-testid='-'>-</button>
+          <button className='btn-minus_progress' onClick={handlePlus} data-testid='+'>+</button>
         </div>
       </div>
     );
 };
 
-const Progress = () => {
+export const Progress = () => {
 
     const [modalVisible, setModalVisible] = useState(false);
     const navigate = useNavigate();

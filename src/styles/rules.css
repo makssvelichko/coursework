@@ -1,0 +1,28 @@
+.rulesimg {
+    width: 100%;
+    height: auto;
+    filter: brightness(45%);
+}
+
+.conteiner_text_rules{
+    margin: 100px;
+    font-family: 'Montserrat';
+}
+
+.rulesh2{
+    font-size: 24;
+    font-weight: 700;
+    margin: 15px;
+}
+
+.rulesh3{
+    font-size: 20;
+    font-weight: 600;
+    margin: 8px;
+}
+
+.ruleshp{
+    font-size: 15;
+    font-weight: 300;
+    margin: 6px;
+}

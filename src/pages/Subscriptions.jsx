@@ -22,7 +22,7 @@ import plans2 from './../img/photo/Section1.png'
 import plans3 from './../img/photo/Section.png'
 import plans4 from './../img/photo/Section (1).png'
 
-const OfferCard = ({ image, duration, price, discount }) => {
+export const OfferCard = ({ image, duration, price, discount }) => {
     const discountedPrice = price - (price * discount / 100);
     
     return (
@@ -37,7 +37,7 @@ const OfferCard = ({ image, duration, price, discount }) => {
     );
   };
 
-const Subscriptions = () => {
+export const Subscriptions = () => {
 
     const [modalVisible, setModalVisible] = useState(false);
     const navigate = useNavigate();
