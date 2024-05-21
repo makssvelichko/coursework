@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import { render, fireEvent } from '@testing-library/react';
-import { Card, Card2 } from './../pages/Registration';
+import { Card, Card2 } from '../pages/Registration';
 
 describe('Card component', () => {
   it('should render correctly', () => {

@@ -1,5 +1,5 @@
 import { render, fireEvent } from '@testing-library/react';
-import { Office } from './../pages/Office';
+import { Office } from '../pages/Office';
 import { BrowserRouter as Router } from 'react-router-dom';
 import '@testing-library/jest-dom';
 

@@ -1,7 +1,7 @@
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Context } from '../index';
-import Login from './Login';
+import Login from '../pages/Login';
 
 test('renders Login component and checks user interaction', async () => {
     const setUser = jest.fn();
