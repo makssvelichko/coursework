@@ -12,7 +12,7 @@ class UserController {
         return next(ApiError.badRequest("Validation Error"));
       }
       const { username, email, password, sex, age, weight, height } = req.body;
-      let profilePhoto = req.files?.profile_photo || null;
+      let profilePhoto = req.files?.profilePhoto || null;
 
       if (!profilePhoto) {
         const defaultPhotoPath = path.resolve(

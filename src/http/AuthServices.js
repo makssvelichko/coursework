@@ -14,7 +14,16 @@ const removeTokens = () => {
 
 export const registration = async (userData) => {
   try {
-    const { data } = await $host.post("api/user/registration", userData);
+    const formData = new FormData();
+    for (const key in userData) {
+      formData.append(key, userData[key]);
+    }
+
+    const { data } = await $host.post("api/user/registration", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
     setTokens(data);
     return jwtDecode(data.accessToken);
   } catch (error) {

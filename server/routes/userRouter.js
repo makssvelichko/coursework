@@ -8,8 +8,8 @@ router.post(
   "/registration",
   body("email").isEmail(),
   body("password").isLength({ min: 4, max: 32 }),
-  body("profile_photo").custom((value, { req }) => {
-    const photo = req.files?.profile_photo || null;
+  body("profilePhoto").custom((value, { req }) => {
+    const photo = req.files?.profilePhoto || null;
     if (photo) {
       const allowedExtensions = ["jpg", "jpeg", "png"];
       const fileExtension = photo.name.split(".").pop();

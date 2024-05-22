@@ -94,6 +94,7 @@ const Registration = () => {
   const [age, setAge] = useState(24);
   const [weight, setWeight] = useState(82);
   const [height, setHeight] = useState(178);
+  const [profilePhoto, setProfilePhoto] = useState(null);
   const { user } = useContext(Context);
 
   const handleLogin = () => {
@@ -106,10 +107,10 @@ const Registration = () => {
     }
   };
 
-  const [profilePhoto, setProfilePhoto] = useState("");
-
   const handleProfilePhotoChange = (e) => {
-    setProfilePhoto(URL.createObjectURL(e.target.files[0]));
+    if (e.target.files && e.target.files[0]) {
+      setProfilePhoto(e.target.files[0]);
+    }
   };
 
   const [isChecked, setIsChecked] = useState(false);
@@ -125,7 +126,7 @@ const Registration = () => {
 
   const signIn = async () => {
     try {
-      const newUser = await registration({
+      const userData = {
         username,
         email,
         password,
@@ -133,7 +134,10 @@ const Registration = () => {
         age,
         weight,
         height,
-      });
+        profilePhoto,
+      };
+
+      const newUser = await registration(userData);
       user.setUser(newUser);
       user.setIsAuth(true);
     } catch (error) {
@@ -203,7 +207,11 @@ const Registration = () => {
                   <div className="profile-container">
                     <img
                       className="profile-photo"
-                      src={profilePhoto || defimage}
+                      src={
+                        profilePhoto
+                          ? URL.createObjectURL(profilePhoto)
+                          : defimage
+                      }
                       alt="ProfilePhoto"
                     />
                     <label className="profile-image-label">
