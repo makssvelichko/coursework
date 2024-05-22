@@ -67,3 +67,16 @@ export const update = async (profileData) => {
     handleErrors(error);
   }
 };
+
+export const load = async () => {
+  try {
+    const response = await fetch('/api/user/load');
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Failed to load user data', error);
+  }
+};

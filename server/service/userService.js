@@ -167,6 +167,16 @@ class UserService {
 
     return updatedUsers;
   }
+
+  async load(id) {
+    const user = await User.findOne({ where: { id } });
+    if (!user) {
+      throw ApiError.badRequest("User not found");
+    }
+    const userDto = new UserDto(user);
+    return userDto;
+  }
+
 }
 
 module.exports = new UserService();

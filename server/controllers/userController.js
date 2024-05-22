@@ -151,5 +151,21 @@ class UserController {
       next(e);
     }
   }
+
+  async load(req, res, next) {
+    try {
+      const { id } = req.user;
+
+      const userData = await userService.load(id);
+
+      if (userData && typeof userData === 'object' && userData !== null) {
+        return res.json(userData);
+      } else {
+        throw new Error('Invalid user data');
+      }
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 module.exports = new UserController();

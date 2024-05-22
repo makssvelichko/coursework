@@ -2,7 +2,7 @@ import FooterOffice from "../components/footer_office/footer_office";
 
 import "./../styles/personalinformation.css";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import HeaderOffice, {
   ModalContext,
 } from "./../components/header_office/header_office";
@@ -27,19 +27,21 @@ import { IoWomanOutline } from "react-icons/io5";
 
 import { logout } from "./../http/AuthServices";
 import { update } from "./../http/AuthServices";
-const Card = ({ title, initialValue, onSelect, min, max }) => {
+import { load } from "./../http/AuthServices";
+
+const Card = ({ title, initialValue, onSelect, min, max, field }) => {
   const [value, setValue] = useState(initialValue);
 
   const decreaseValue = () => {
     const newValue = Math.max(min, value - 1);
     setValue(newValue);
-    onSelect(newValue);
+    onSelect(field, newValue);
   };
 
   const increaseValue = () => {
     const newValue = Math.min(max, value + 1);
     setValue(newValue);
-    onSelect(newValue);
+    onSelect(field, newValue);
   };
 
   return (
@@ -59,41 +61,45 @@ const Card = ({ title, initialValue, onSelect, min, max }) => {
 };
 
 const PersonInformation = () => {
-  const [username, setUserName] = useState("");
-  const [sex, setSex] = useState("men");
-  const [age, setAge] = useState(24);
-  const [weight, setWeight] = useState(82);
-  const [height, setHeight] = useState(178);
-
+  const [changedFields, setChangedFields] = useState({});
+  const [profilePhoto, setProfilePhoto] = useState(null);
+  const [active /**setActive**/] = useState("man");
   const [modalVisible, setModalVisible] = useState(false);
   const navigate = useNavigate();
 
-  const [profilePhoto, setProfilePhoto] = useState(null);
+  const handleFieldChange = (field, value) => {
+    setChangedFields(prev => ({ ...prev, [field]: value }));
+  };
 
   const handleProfilePhotoChange = (e) => {
     if (e.target.files && e.target.files[0]) {
-      setProfilePhoto(e.target.files[0]);
+      const file = e.target.files[0];
+      setProfilePhoto(file);
+      handleFieldChange('profilePhoto', file);
     }
   };
 
-  const [active, setActive] = useState("man");
-
   const updateData = async () => {
-    const profileData = {
-      username,
-      age,
-      weight,
-      height,
-      profilePhoto,
-    };
-
     try {
-      const updatedUser = await update(profileData);
+      const updatedUser = await update(changedFields);
       console.log("Profile updated successfully", updatedUser);
     } catch (error) {
       console.error("Failed to update profile", error);
     }
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await load(); // Замініть на вашу функцію завантаження даних
+        setChangedFields(data);
+      } catch (error) {
+        console.error("Failed to load user data", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -139,25 +145,25 @@ const PersonInformation = () => {
           <div className="half_office">
             <p className="t_programs">Особиста інформація</p>
             <div className="conteiner-name-photo">
-              <div className="profile-container-p">
-                <img
-                  className="profile-photo-p"
-                  src={
-                    profilePhoto ? URL.createObjectURL(profilePhoto) : defimage
-                  }
-                  alt="ProfilePhoto"
+            <div className="profile-container-p">
+              <img
+                className="profile-photo-p"
+                src={
+                  profilePhoto ? URL.createObjectURL(profilePhoto) : defimage
+                }
+                alt="ProfilePhoto"
+              />
+              <label className="profile-image-label-p">
+                <input
+                  type="file"
+                  onChange={handleProfilePhotoChange}
+                  style={{ display: "none" }}
                 />
-                <label className="profile-image-label-p">
-                  <input
-                    type="file"
-                    onChange={handleProfilePhotoChange}
-                    style={{ display: "none" }}
-                  />
-                  <span className="camera-icon-p">
-                    <MdPhotoCamera />
-                  </span>
-                </label>
-              </div>
+                <span className="camera-icon-p">
+                  <MdPhotoCamera />
+                </span>
+              </label>
+            </div>
 
               <div className={"input-container "}>
                 <p className="p-person-name">Ваше ім'я</p>
@@ -166,8 +172,8 @@ const PersonInformation = () => {
                   id="username"
                   name="username"
                   placeholder="Username"
-                  value={username}
-                  onChange={(e) => setUserName(e.target.value)}
+                  value={changedFields?.username || ''}
+                  onChange={(e) => handleFieldChange('username', e.target.value)}
                 />
               </div>
             </div>
@@ -176,7 +182,7 @@ const PersonInformation = () => {
               <div className="switch">
                 <div
                   className={`option ${active === "man" ? "active" : ""}`}
-                  onClick={() => setSex("man") || setActive("man")}
+                  onClick={() => handleFieldChange("sex", "man") || handleFieldChange("active", "man")}
                 >
                   <div className="icon">
                     <IoManOutline />
@@ -185,7 +191,7 @@ const PersonInformation = () => {
                 </div>
                 <div
                   className={`option ${active === "woman" ? "active" : ""}`}
-                  onClick={() => setSex("woman") || setActive("woman")}
+                  onClick={() => handleFieldChange("sex", "woman") || handleFieldChange("active", "woman")}
                 >
                   <div className="icon">
                     <IoWomanOutline />
@@ -199,23 +205,26 @@ const PersonInformation = () => {
               <Card
                 title="Вік"
                 initialValue={24}
-                onSelect={setAge}
+                onSelect={handleFieldChange}
                 min={1}
                 max={100}
+                field="age"
               />
               <Card
                 title="Вага"
                 initialValue={82}
-                onSelect={setWeight}
+                onSelect={handleFieldChange}
                 min={1}
                 max={500}
+                field="weight"
               />
               <Card
                 title="Зріст"
                 initialValue={178}
-                onSelect={setHeight}
+                onSelect={handleFieldChange}
                 min={1}
                 max={250}
+                field="height"
               />
               <div className="box-update-person">
                 <div className="btn-update-person">
