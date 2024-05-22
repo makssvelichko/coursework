@@ -173,10 +173,8 @@ class UserService {
     if (!user) {
       throw ApiError.badRequest("User not found");
     }
-    const userDto = new UserDto(user);
-    return userDto;
+    return user;
   }
-
 }
 
 module.exports = new UserService();

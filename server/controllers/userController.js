@@ -158,10 +158,18 @@ class UserController {
 
       const userData = await userService.load(id);
 
-      if (userData && typeof userData === 'object' && userData !== null) {
-        return res.json(userData);
+      if (userData && typeof userData === "object" && userData !== null) {
+        const filteredData = {
+          username: userData.username,
+          sex: userData.sex,
+          age: userData.age,
+          weight: userData.weight,
+          height: userData.height,
+          profilePhoto: userData.profilePhoto,
+        };
+        return res.json(filteredData);
       } else {
-        throw new Error('Invalid user data');
+        return next(ApiError.badRequest("Invalid user data"));
       }
     } catch (e) {
       next(e);
