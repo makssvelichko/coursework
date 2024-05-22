@@ -135,18 +135,16 @@ class UserService {
         "static",
         fileName
       );
-      if (typeof updates.profilePhoto.mv === "function") {
-        updates.profilePhoto.mv(profilePhotoPath, (err) => {
-          if (err) {
-            throw ApiError.badRequest("Failed to upload profile photo");
-          }
-        });
+      if (
+        updates.profilePhoto.mv &&
+        typeof updates.profilePhoto.mv === "function"
+      ) {
+        await updates.profilePhoto.mv(profilePhotoPath);
         updates.profilePhoto = fileName;
       } else {
         throw ApiError.badRequest("Invalid file object");
       }
     }
-
     const name = updates.username;
     if (name) {
       const user = await User.findOne({ where: { username: name } });
@@ -154,7 +152,6 @@ class UserService {
         throw ApiError.badRequest("Try another nickname");
       }
     }
-
     const [updatedCount, updatedUsers] = await User.update(updates, {
       where: { id },
       returning: true,

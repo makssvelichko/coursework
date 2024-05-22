@@ -70,13 +70,9 @@ export const update = async (profileData) => {
 
 export const load = async () => {
   try {
-    const response = await fetch('/api/user/load');
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
+    const { data } = await $authHost.get("/api/user/load");
     return data;
   } catch (error) {
-    console.error('Failed to load user data', error);
+    handleErrors(error);
   }
 };

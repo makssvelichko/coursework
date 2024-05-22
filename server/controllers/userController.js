@@ -169,7 +169,7 @@ class UserController {
         };
         return res.json(filteredData);
       } else {
-        return next(ApiError.badRequest("Invalid user data"));
+        return next(ApiError.badRequest("Invalid user"));
       }
     } catch (e) {
       next(e);

@@ -28,6 +28,7 @@ import { IoWomanOutline } from "react-icons/io5";
 import { logout } from "./../http/AuthServices";
 import { update } from "./../http/AuthServices";
 import { load } from "./../http/AuthServices";
+import { handleErrors } from "../errors/handleErrors";
 
 const Card = ({ title, initialValue, onSelect, min, max, field }) => {
   const [value, setValue] = useState(initialValue);
@@ -68,14 +69,14 @@ const PersonInformation = () => {
   const navigate = useNavigate();
 
   const handleFieldChange = (field, value) => {
-    setChangedFields(prev => ({ ...prev, [field]: value }));
+    setChangedFields((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleProfilePhotoChange = (e) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
       setProfilePhoto(file);
-      handleFieldChange('profilePhoto', file);
+      handleFieldChange("profilePhoto", file);
     }
   };
 
@@ -84,17 +85,17 @@ const PersonInformation = () => {
       const updatedUser = await update(changedFields);
       console.log("Profile updated successfully", updatedUser);
     } catch (error) {
-      console.error("Failed to update profile", error);
+      handleErrors(error);
     }
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await load(); // Замініть на вашу функцію завантаження даних
+        const data = await load();
         setChangedFields(data);
       } catch (error) {
-        console.error("Failed to load user data", error);
+        handleErrors(error);
       }
     };
 
@@ -145,25 +146,25 @@ const PersonInformation = () => {
           <div className="half_office">
             <p className="t_programs">Особиста інформація</p>
             <div className="conteiner-name-photo">
-            <div className="profile-container-p">
-              <img
-                className="profile-photo-p"
-                src={
-                  profilePhoto ? URL.createObjectURL(profilePhoto) : defimage
-                }
-                alt="ProfilePhoto"
-              />
-              <label className="profile-image-label-p">
-                <input
-                  type="file"
-                  onChange={handleProfilePhotoChange}
-                  style={{ display: "none" }}
+              <div className="profile-container-p">
+                <img
+                  className="profile-photo-p"
+                  src={
+                    profilePhoto ? URL.createObjectURL(profilePhoto) : defimage
+                  }
+                  alt="ProfilePhoto"
                 />
-                <span className="camera-icon-p">
-                  <MdPhotoCamera />
-                </span>
-              </label>
-            </div>
+                <label className="profile-image-label-p">
+                  <input
+                    type="file"
+                    onChange={handleProfilePhotoChange}
+                    style={{ display: "none" }}
+                  />
+                  <span className="camera-icon-p">
+                    <MdPhotoCamera />
+                  </span>
+                </label>
+              </div>
 
               <div className={"input-container "}>
                 <p className="p-person-name">Ваше ім'я</p>
@@ -172,8 +173,10 @@ const PersonInformation = () => {
                   id="username"
                   name="username"
                   placeholder="Username"
-                  value={changedFields?.username || ''}
-                  onChange={(e) => handleFieldChange('username', e.target.value)}
+                  value={changedFields?.username || ""}
+                  onChange={(e) =>
+                    handleFieldChange("username", e.target.value)
+                  }
                 />
               </div>
             </div>
@@ -182,7 +185,10 @@ const PersonInformation = () => {
               <div className="switch">
                 <div
                   className={`option ${active === "man" ? "active" : ""}`}
-                  onClick={() => handleFieldChange("sex", "man") || handleFieldChange("active", "man")}
+                  onClick={() =>
+                    handleFieldChange("sex", "man") ||
+                    handleFieldChange("active", "man")
+                  }
                 >
                   <div className="icon">
                     <IoManOutline />
@@ -191,7 +197,10 @@ const PersonInformation = () => {
                 </div>
                 <div
                   className={`option ${active === "woman" ? "active" : ""}`}
-                  onClick={() => handleFieldChange("sex", "woman") || handleFieldChange("active", "woman")}
+                  onClick={() =>
+                    handleFieldChange("sex", "woman") ||
+                    handleFieldChange("active", "woman")
+                  }
                 >
                   <div className="icon">
                     <IoWomanOutline />
