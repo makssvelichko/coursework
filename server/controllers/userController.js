@@ -130,5 +130,26 @@ class UserController {
       next(e);
     }
   }
+
+  async update(req, res, next) {
+    try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return next(ApiError.badRequest("Validation Error"));
+      }
+
+      const { id } = req.user;
+      const updates = req.body;
+      if (req.files && req.files.profilePhoto) {
+        updates.profilePhoto = req.files.profilePhoto;
+      }
+
+      const updatedUser = await userService.update(id, updates);
+
+      return res.json(updatedUser);
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 module.exports = new UserController();

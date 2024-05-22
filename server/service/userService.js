@@ -26,7 +26,7 @@ class UserService {
     const activationLink = uuid.v4();
 
     const fileName = uuid.v4() + ".jpg";
-    const profilePhotoPath = path.resolve(__dirname, "..", "static", fileName); // Path to save the file
+    const profilePhotoPath = path.resolve(__dirname, "..", "static", fileName);
     await profilePhoto.mv(profilePhotoPath);
 
     const user = await User.create({
@@ -124,6 +124,40 @@ class UserService {
       ...tokens,
       user: userDto,
     };
+  }
+
+  async update(id, updates) {
+    if (updates.profilePhoto) {
+      const fileName = uuid.v4() + ".jpg";
+      const profilePhotoPath = path.resolve(
+        __dirname,
+        "..",
+        "static",
+        fileName
+      );
+      await updates.profilePhoto.mv(profilePhotoPath);
+      updates.profilePhoto = fileName;
+    }
+
+    const name = updates.username;
+    if (name) {
+      const user = await User.findOne({ where: { username: name } });
+      if (user) {
+        throw ApiError.badRequest("Try another nickname");
+      }
+    }
+
+    const [updatedCount, updatedUsers] = await User.update(updates, {
+      where: { id },
+      returning: true,
+      plain: true,
+    });
+
+    if (updatedCount === 0) {
+      throw ApiError.badRequest("User not found or no changes made");
+    }
+
+    return updatedUsers;
   }
 }
 
