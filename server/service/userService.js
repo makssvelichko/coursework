@@ -135,8 +135,16 @@ class UserService {
         "static",
         fileName
       );
-      await updates.profilePhoto.mv(profilePhotoPath);
-      updates.profilePhoto = fileName;
+      if (typeof updates.profilePhoto.mv === "function") {
+        updates.profilePhoto.mv(profilePhotoPath, (err) => {
+          if (err) {
+            throw ApiError.badRequest("Failed to upload profile photo");
+          }
+        });
+        updates.profilePhoto = fileName;
+      } else {
+        throw ApiError.badRequest("Invalid file object");
+      }
     }
 
     const name = updates.username;

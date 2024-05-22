@@ -50,3 +50,20 @@ export const logout = async () => {
     handleErrors(error);
   }
 };
+
+export const update = async (profileData) => {
+  try {
+    const formData = new FormData();
+    for (const key in profileData) {
+      formData.append(key, profileData[key]);
+    }
+    const { data } = await $authHost.put("api/user/update", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return data;
+  } catch (error) {
+    handleErrors(error);
+  }
+};
