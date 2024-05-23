@@ -30,29 +30,32 @@ import { update } from "./../http/AuthServices";
 import { load } from "./../http/AuthServices";
 // import { handleErrors } from "../errors/handleErrors";
 
-import { UserContext } from './../components/UserContext';
 import { useUser } from './../components/UserContext';
 
-const Card = ({ title, value, onSelect, min, max, field }) => {
+const Card = ({ title, initialValue, onSelect, min, max, field }) => {
+  const [value, setValue] = useState(initialValue);
+
   const decreaseValue = () => {
-      const newValue = Math.max(min, value - 1);
-      onSelect(field, newValue);
+    const newValue = Math.max(min, value - 1);
+    setValue(newValue);
+    onSelect(field, newValue);
   };
 
   const increaseValue = () => {
-      const newValue = Math.min(max, value + 1);
-      onSelect(field, newValue);
+    const newValue = Math.min(max, value + 1);
+    setValue(newValue);
+    onSelect(field, newValue);
   };
 
   return (
-      <div className="card_personal">
-          <div className="title_personal">{title}</div>
-          <div className="value_personal">{value}</div>
-          <div className="controls_personal">
-              <button className="btn-plus_personal" onClick={decreaseValue}>-</button>
-              <button className="btn-minus_personal" onClick={increaseValue}>+</button>
-          </div>
+    <div className="card_personal">
+      <div className="title_personal">{title}</div>
+      <div className="value_personal">{value}</div>
+      <div className="controls_personal">
+        <button className="btn-plus_personal" onClick={decreaseValue}>-</button>
+        <button className="btn-minus_personal" onClick={increaseValue}>+</button>
       </div>
+    </div>
   );
 };
 
@@ -129,180 +132,182 @@ const PersonInformation = () => {
   }, [setUser]);
 
   console.log(profilePhoto);
-  
-    return (
-      <>
-        <div className="office">
-          <div className="container_office">
-            <ModalContext.Provider value={setModalVisible}>
-              <HeaderOffice/>
-              {modalVisible && (
-                <div className="modal" onClick={() => setModalVisible(false)}>
-                  <div
-                    className="modal-content"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <div className="dark-container">
-                      <button
-                        className="modal-button"
-                        onClick={() => navigate(PERSONINFORMATION_ROUTE)}
-                      >
-                        ОСОБИСТА ІНФОРМАЦІЯ
-                      </button>
-                      <button
-                        className="modal-button"
-                        onClick={() => navigate(SUBSCRIPTIONS_ROUTE)}
-                      >
-                        МОЯ ПІДПИСКА
-                      </button>
-                      <button
-                        className="modal-button"
-                        onClick={() => {
-                          logout();
-                          navigate(HOME_ROUTE);
-                        }}
-                      >
-                        ВИХІД
-                      </button>
-                    </div>
+
+  return (
+    <>
+      <div className="office">
+        <div className="container_office">
+          <ModalContext.Provider value={setModalVisible}>
+            <HeaderOffice />
+            {modalVisible && (
+              <div className="modal" onClick={() => setModalVisible(false)}>
+                <div
+                  className="modal-content"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <div className="dark-container">
+                    <button
+                      className="modal-button"
+                      onClick={() => navigate(PERSONINFORMATION_ROUTE)}
+                    >
+                      ОСОБИСТА ІНФОРМАЦІЯ
+                    </button>
+                    <button
+                      className="modal-button"
+                      onClick={() => navigate(SUBSCRIPTIONS_ROUTE)}
+                    >
+                      МОЯ ПІДПИСКА
+                    </button>
+                    <button
+                      className="modal-button"
+                      onClick={() => {
+                        logout();
+                        navigate(HOME_ROUTE);
+                      }}
+                    >
+                      ВИХІД
+                    </button>
                   </div>
                 </div>
-              )}
-            </ModalContext.Provider>
-  
-            <div className="half_office">
-              <p className="t_programs">Особиста інформація</p>
-              <div className="conteiner-name-photo">
-                <div className="profile-container-p">
-                  <img
-                    className="profile-photo-p"
-                    src={profilePhotoURL || defimage}
-                    alt="ProfilePhoto"
-                    onError={(e) => { e.target.src = defimage; }}
-                  />
-                  <label className="profile-image-label-p">
-                    <input
-                      type="file"
-                      onChange={handleProfilePhotoChange}
-                      style={{ display: "none" }}
-                    />
-                    <span className="camera-icon-p">
-                      <MdPhotoCamera />
-                    </span>
-                  </label>
-                </div>
-  
-                <div className={"input-container"}>
-                  <p className="p-person-name">Ваше ім'я</p>
+              </div>
+            )}
+          </ModalContext.Provider>
+
+          <div className="half_office">
+            <p className="t_programs">Особиста інформація</p>
+            <div className="conteiner-name-photo">
+              <div className="profile-container-p">
+                <img
+                  className="profile-photo-p"
+                  src={profilePhotoURL || defimage}
+                  alt="ProfilePhoto"
+                  onError={(e) => {
+                    e.target.src = defimage;
+                  }}
+                />
+                <label className="profile-image-label-p">
                   <input
-                    type="text"
-                    id="username"
-                    name="username"
-                    placeholder="Username"
-                    value={changedFields.username || ""}
-                    onChange={(e) =>
-                      handleFieldChange("username", e.target.value)
-                    }
+                    type="file"
+                    onChange={handleProfilePhotoChange}
+                    style={{ display: "none" }}
                   />
-                </div>
+                  <span className="camera-icon-p">
+                    <MdPhotoCamera />
+                  </span>
+                </label>
               </div>
-  
-              <div className="sex">
-                <div className="switch">
-                    <div
-                        className={`option ${active === "man" ? "active" : ""}`}
-                        onClick={() => {
-                        setActive("man");
-                        handleFieldChange("sex", "man");
-                        }}
-                    >
-                    <div className="icon">
-                      <IoManOutline />
-                    </div>
-                    <div className="t_switch">Чоловік</div>
-                  </div>
-                    <div
-                        className={`option ${active === "woman" ? "active" : ""}`}
-                        onClick={() => {
-                        setActive("woman");
-                        handleFieldChange("sex", "woman");
-                        }}
-                    >
-                    <div className="icon">
-                      <IoWomanOutline />
-                    </div>
-                    <div className="t_switch">Жінка</div>
-                  </div>
-                </div>
+
+              <div className={"input-container"}>
+                <p className="p-person-name">Ваше ім'я</p>
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  placeholder="Username"
+                  value={changedFields.username || ""}
+                  onChange={(e) =>
+                    handleFieldChange("username", e.target.value)
+                  }
+                />
               </div>
-  
-              <div className="card-personal">
-                <Card
-                  title="Вік"
-                  value={changedFields.age}
-                  onSelect={handleFieldChange}
-                  min={1}
-                  max={100}
-                  field="age"
-                />
-                <Card
-                  title="Вага"
-                  value={changedFields.weight}
-                  onSelect={handleFieldChange}
-                  min={1}
-                  max={500}
-                  field="weight"
-                />
-                <Card
-                  title="Зріст"
-                  value={changedFields.height}
-                  onSelect={handleFieldChange}
-                  min={1}
-                  max={250}
-                  field="height"
-                />
-                <div className="box-update-person">
-                  <div className="btn-update-person">
-                    <button onClick={updateData}>ОНОВИТИ</button>
+            </div>
+
+            <div className="sex">
+              <div className="switch">
+                <div
+                  className={`option ${active === "man" ? "active" : ""}`}
+                  onClick={() => {
+                    setActive("man");
+                    handleFieldChange("sex", "man");
+                  }}
+                >
+                  <div className="icon">
+                    <IoManOutline />
                   </div>
+                  <div className="t_switch">Чоловік</div>
+                </div>
+                <div
+                  className={`option ${active === "woman" ? "active" : ""}`}
+                  onClick={() => {
+                    setActive("woman");
+                    handleFieldChange("sex", "woman");
+                  }}
+                >
+                  <div className="icon">
+                    <IoWomanOutline />
+                  </div>
+                  <div className="t_switch">Жінка</div>
                 </div>
               </div>
             </div>
-            <div className="half_office">
-              <div className="navigation-panel">
-                <ul className="nav-links">
-                  <li>
-                    <NavLink to={OFFICE_ROUTE} className="l_registration">
-                      <div className="nav_btn">
-                        <FaDumbbell />
-                        <div className="text_btn_nav">ПРОГРАМИ ТРЕНУВАНЬ</div>
-                      </div>
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to={FOOD_ROUTE} className="l_registration">
-                      <div className="nav_btn">
-                        <PiForkKnifeBold />
-                        <div className="text_btn_nav">ХАРЧУВАННЯ</div>
-                      </div>
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to={PROGRESS_ROUTE} className="l_registration">
-                      <div className="nav_btn">
-                        <GiProgression />
-                        <div className="text_btn_nav">ПРОГРЕС</div>
-                      </div>
-                    </NavLink>
-                  </li>
-                </ul>
+
+            <div className="card-personal">
+              <Card
+                title="Вік"
+                initialValue={changedFields.age}
+                onSelect={handleFieldChange}
+                min={1}
+                max={100}
+                field="age"
+              />
+              <Card
+                title="Вага"
+                initialValue={changedFields.weight}
+                onSelect={handleFieldChange}
+                min={1}
+                max={500}
+                field="weight"
+              />
+              <Card
+                title="Зріст"
+                initialValue={changedFields.height}
+                onSelect={handleFieldChange}
+                min={1}
+                max={250}
+                field="height"
+              />
+              <div className="box-update-person">
+                <div className="btn-update-person">
+                  <button onClick={updateData}>ОНОВИТИ</button>
+                </div>
               </div>
             </div>
           </div>
+          <div className="half_office">
+            <div className="navigation-panel">
+              <ul className="nav-links">
+                <li>
+                  <NavLink to={OFFICE_ROUTE} className="l_registration">
+                    <div className="nav_btn">
+                      <FaDumbbell />
+                      <div className="text_btn_nav">ПРОГРАМИ ТРЕНУВАНЬ</div>
+                    </div>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to={FOOD_ROUTE} className="l_registration">
+                    <div className="nav_btn">
+                      <PiForkKnifeBold />
+                      <div className="text_btn_nav">ХАРЧУВАННЯ</div>
+                    </div>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to={PROGRESS_ROUTE} className="l_registration">
+                    <div className="nav_btn">
+                      <GiProgression />
+                      <div className="text_btn_nav">ПРОГРЕС</div>
+                    </div>
+                  </NavLink>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <FooterOffice />
-      </>
-    );
-  };
-  
-  export default PersonInformation;
+      </div>
+      <FooterOffice />
+    </>
+  );
+};
+
+export default PersonInformation;

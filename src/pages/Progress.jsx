@@ -152,7 +152,7 @@ const Progress = () => {
         const month = date ? months[date.getMonth()] : null;
         return { ...item, date: month };
     });
-
+    
     return (
         <>
         <HeaderOffice />
