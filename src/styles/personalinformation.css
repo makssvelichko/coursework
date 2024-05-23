@@ -131,6 +131,13 @@
     background-color: #F0F712;
 }
 
+.input-container input[type="text"] {
+    width: 210px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-left: 4px solid yellow;
+    font-weight: 300;
+  }
 
 @media (max-width: 1350px) {
     .conteiner-name-photo {
@@ -240,3 +247,4 @@
         height: 110px;
     }
 }
+
