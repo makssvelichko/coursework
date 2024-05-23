@@ -52,7 +52,7 @@ import { GrNext } from "react-icons/gr";
 
 import './../styles/cardfood.css'
 
-const Food = () => {
+export const Food = () => {
 
     const [modalVisible, setModalVisible] = useState(false);
     const navigate = useNavigate();

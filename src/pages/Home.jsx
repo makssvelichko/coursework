@@ -25,9 +25,8 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import Footer from '../components/footer/footer'
 
-import AnchorLink from '../components/AnchorLink';
-
 import { NavLink } from 'react-router-dom';
+import { LOGIN_ROUTE } from '../utils/consts'
 
 
 const responsive = {
@@ -95,7 +94,7 @@ const Home = () => {
                 <div className='programs_card'>
                     <ul>
                         <li>
-                            <AnchorLink id="#!">
+                            <NavLink to={LOGIN_ROUTE}>
                                 <div className='image-text-wrapper'>
                                     <img className='programs_card1' src={pprograms1} alt="card1" />
                                     <div className='image-text'>
@@ -106,9 +105,9 @@ const Home = () => {
                                         </div>
                                     </div>
                                 </div>
-                            </AnchorLink>
+                            </NavLink>
                         </li>
-                        <li><AnchorLink id="#!">
+                        <li><NavLink to={LOGIN_ROUTE}>
                         <div className='image-text-wrapper'>
                                     <img className='programs_card1' src={pprograms2} alt="card2" />
                                     <div className='image-text'>
@@ -119,9 +118,9 @@ const Home = () => {
                                         </div>
                                     </div>
                                 </div>
-                            </AnchorLink>
+                            </NavLink>
                         </li>
-                        <li><AnchorLink id="#!">
+                        <li><NavLink to={LOGIN_ROUTE}>
                         <div className='image-text-wrapper'>
                                     <img className='programs_card1' src={pprograms3} alt="card3" />
                                     <div className='image-text'>
@@ -132,12 +131,12 @@ const Home = () => {
                                         </div>
                                     </div>
                                 </div>
-                            </AnchorLink>
+                            </NavLink>
                         </li>
                     </ul>
                 </div>
                 <div className='programs_btn'>
-                    <AnchorLink id="#!">Всі програми</AnchorLink>
+                    <NavLink to={LOGIN_ROUTE}>Всі програми</NavLink>
                 </div>
             </div>
         </div>

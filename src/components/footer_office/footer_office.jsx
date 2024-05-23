@@ -4,7 +4,7 @@ import logo from './../../img/logo/logo.png'
 import logo_inst_footer from './../../img/logo/Link → instagram.png.png'
 import logo_telega_footer from './../../img/logo/Link → telegram-footer.svg.png'
 import { NavLink } from 'react-router-dom'
-import { OFFICE_ROUTE } from '../../utils/consts'
+import { RULES_ROUTE } from '../../utils/consts'
 
 function FooterOffice(){
     return(
@@ -20,8 +20,7 @@ function FooterOffice(){
                     <ul className="main-links">
                         <li></li>
                         <li><img className='logo_card_footer' src={logocard} alt="" /></li>
-                        <li><NavLink to={OFFICE_ROUTE}>Правила користування</NavLink></li>
-                        <li><NavLink to={OFFICE_ROUTE}>Політика конфіденційності</NavLink></li>
+                        <li><NavLink to={RULES_ROUTE}>Правила користування</NavLink></li>
                         <li className='instagram_footer'><a href="https://www.instagram.com/t.kruhliak?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer"><img src={logo_inst_footer} alt="" /></a></li>
                         <li><a href="https://t.me/kaisteam" target="_blank" rel="noopener noreferrer"><img src={logo_telega_footer} alt="" /></a></li>
                     </ul>

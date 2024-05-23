@@ -18,7 +18,7 @@ function Header(){
                             <li><AnchorLink id="programs">ПРОГРАМИ</AnchorLink></li>
                             <li><AnchorLink id="trainer">ТРЕНЕР</AnchorLink></li>
                             <li><AnchorLink id="plans">ПЛАНИ ПІДПИСОК</AnchorLink></li>
-                            <li><AnchorLink id="#!" className='header_btn'>ПРИДБАТИ ПІДПИСКУ</AnchorLink></li>
+                            <li><NavLink to={LOGIN_ROUTE} className='header_btn'>ПРИДБАТИ ПІДПИСКУ</NavLink></li>
                             <li className='stick'>|</li>
                             <li><NavLink to={LOGIN_ROUTE}>УВІЙТИ</NavLink></li>
                         </ul>

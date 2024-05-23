@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './../styles/cardfood.css';
 
-const FoodCard = ({ image, name, calories, proteins, fats, carbs, addToMenu, removeFromMenu }) => {
+export const FoodCard = ({ image, name, calories, proteins, fats, carbs, addToMenu, removeFromMenu }) => {
     const [isChecked, setIsChecked] = useState(false);
   
     const toggleCheckbox = () => {
@@ -39,8 +39,8 @@ const FoodCard = ({ image, name, calories, proteins, fats, carbs, addToMenu, rem
           </div>
         </div>
         <div className='checkbox_food'>
-            <input className='checkbox_food_c' type="checkbox" checked={isChecked} onChange={toggleCheckbox} />
-            <label >Додати до меню</label>
+            <input className='checkbox_food_c' type="checkbox" checked={isChecked} onChange={toggleCheckbox}  id="menuCheckbox"/>
+            <label htmlFor="menuCheckbox" >Додати до меню</label>
         </div>
       </div>
     );

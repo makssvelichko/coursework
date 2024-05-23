@@ -1,7 +1,6 @@
 import './header_login.css'
 import logo from './../../img/logo/logo.png'
 import { NavLink } from 'react-router-dom';
-import AnchorLink from '../AnchorLink';
 
 function HeaderLogin(){
     return(
@@ -14,7 +13,7 @@ function HeaderLogin(){
                     <nav className="header_nav">
                         <ul>
                             <li className='stick'>|</li>
-                            <li><AnchorLink id="#!">USER</AnchorLink></li>
+                            <li><div>ОСОБИСТИЙ КАБІНЕТ</div></li>
                         </ul>
                     </nav>
                 </div>
