@@ -30,110 +30,112 @@ import { update } from "./../http/AuthServices";
 import { load } from "./../http/AuthServices";
 // import { handleErrors } from "../errors/handleErrors";
 
+import { UserContext } from './../components/UserContext';
+import { useUser } from './../components/UserContext';
+
 const Card = ({ title, value, onSelect, min, max, field }) => {
-    const decreaseValue = () => {
+  const decreaseValue = () => {
       const newValue = Math.max(min, value - 1);
       onSelect(field, newValue);
-    };
-  
-    const increaseValue = () => {
+  };
+
+  const increaseValue = () => {
       const newValue = Math.min(max, value + 1);
       onSelect(field, newValue);
-    };
-  
-    return (
-      <div className="card_personal">
-        <div className="title_personal">{title}</div>
-        <div className="value_personal">{value}</div>
-        <div className="controls_personal">
-          <button className="btn-plus_personal" onClick={decreaseValue}>-</button>
-          <button className="btn-minus_personal" onClick={increaseValue}>+</button>
-        </div>
-      </div>
-    );
   };
-  
-  const PersonInformation = () => {
-    const [changedFields, setChangedFields] = useState({});
-    const [initialFields, setInitialFields] = useState({});
-    const [profilePhoto, setProfilePhoto] = useState(null);
-    const [profilePhotoURL, setProfilePhotoURL] = useState(null);
-    const [modalVisible, setModalVisible] = useState(false);
-    const [active, setActive] = useState("man");
-    const navigate = useNavigate();
-  
-    const handleFieldChange = (field, value) => {
-        setChangedFields((prev) => ({ ...prev, [field]: value }));
-        if (field === "sex") {
-          setActive(value);
-        }
-      };
-  
-    const handleProfilePhotoChange = (e) => {
-      if (e.target.files && e.target.files[0]) {
-        const file = e.target.files[0];
-        setProfilePhoto(file);
-        const photoURL = URL.createObjectURL(file);
-        setProfilePhotoURL(photoURL);
-        handleFieldChange("profilePhoto", file);
-        console.log("Profile photo URL set to:", photoURL);
-      }
-    };
-  
-    const updateData = async () => {
-      const fieldsToUpdate = Object.keys(changedFields).reduce((acc, key) => {
-        if (changedFields[key] !== undefined && changedFields[key] !== null) {
-          if (initialFields[key] !== changedFields[key]) {
-            acc[key] = changedFields[key];
-          }
-        }
-        return acc;
-      }, {});
-  
-      try {
-        const updatedUser = await update(fieldsToUpdate);
-        console.log("Profile updated successfully", updatedUser);
-        setInitialFields(updatedUser);
-        if (updatedUser.profilePhoto) {
-          const photoPath = `./server/static/${updatedUser.profilePhoto}`;
-          setProfilePhotoURL(photoPath);
-          console.log("Profile photo URL updated to:", photoPath);
-        }
-      } catch (error) {
-        console.error("Error updating profile:", error);
-      }
-    };
-  
-    useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const data = await load();
-            setInitialFields(data);
-            setChangedFields(data);
-            if (data.profilePhoto) {
-              const photoPath = `./server/static/${data.profilePhoto}`;
-              setProfilePhotoURL(photoPath);
-              console.log("Profile photo URL loaded from server:", photoPath);
-            }
-            // Встановлюємо початковий статус статі
-            setActive(data.sex || "man");
-          } catch (error) {
-            console.error("Error loading profile data:", error);
-          }
-        };
-    
-        fetchData();
-      }, []);
 
-    console.log(profilePhoto)
+  return (
+      <div className="card_personal">
+          <div className="title_personal">{title}</div>
+          <div className="value_personal">{value}</div>
+          <div className="controls_personal">
+              <button className="btn-plus_personal" onClick={decreaseValue}>-</button>
+              <button className="btn-minus_personal" onClick={increaseValue}>+</button>
+          </div>
+      </div>
+  );
+};
+
+const PersonInformation = () => {
+  const { user, setUser } = useUser();
+  const [changedFields, setChangedFields] = useState(user);
+  const [profilePhoto, setProfilePhoto] = useState(null);
+  const [profilePhotoURL, setProfilePhotoURL] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [active, setActive] = useState("man");
+  const navigate = useNavigate();
+
+  const handleFieldChange = (field, value) => {
+    setChangedFields((prev) => ({ ...prev, [field]: value }));
+    if (field === "sex") {
+      setActive(value);
+    }
+  };
+
+  const handleProfilePhotoChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      setProfilePhoto(file);
+      const photoURL = URL.createObjectURL(file);
+      setProfilePhotoURL(photoURL);
+      handleFieldChange("profilePhoto", file);
+      console.log("Profile photo URL set to:", photoURL);
+    }
+  };
+
+  const updateData = async () => {
+    const fieldsToUpdate = Object.keys(changedFields).reduce((acc, key) => {
+      if (changedFields[key] !== undefined && changedFields[key] !== null) {
+        if (user[key] !== changedFields[key]) {
+          acc[key] = changedFields[key];
+        }
+      }
+      return acc;
+    }, {});
+
+    try {
+      const updatedUser = await update(fieldsToUpdate);
+      console.log("Profile updated successfully", updatedUser);
+      setUser(updatedUser);
+      if (updatedUser.profilePhoto) {
+        const photoPath = `./server/static/${updatedUser.profilePhoto}`;
+        setProfilePhotoURL(photoPath);
+        console.log("Profile photo URL updated to:", photoPath);
+      }
+    } catch (error) {
+      console.error("Error updating profile:", error);
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await load();
+        setUser(data);
+        setChangedFields(data);
+        if (data.profilePhoto) {
+          const photoPath = `./server/static/${data.profilePhoto}`;
+          setProfilePhotoURL(photoPath);
+          console.log("Profile photo URL loaded from server:", photoPath);
+        }
+        // Встановлюємо початковий статус статі
+        setActive(data.sex || "man");
+      } catch (error) {
+        console.error("Error loading profile data:", error);
+      }
+    };
+
+    fetchData();
+  }, [setUser]);
+
+  console.log(profilePhoto);
   
     return (
       <>
-        <HeaderOffice />
         <div className="office">
           <div className="container_office">
             <ModalContext.Provider value={setModalVisible}>
-              <HeaderOffice />
+              <HeaderOffice/>
               {modalVisible && (
                 <div className="modal" onClick={() => setModalVisible(false)}>
                   <div
