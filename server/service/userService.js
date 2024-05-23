@@ -26,7 +26,7 @@ class UserService {
     const activationLink = uuid.v4();
 
     const fileName = uuid.v4() + ".jpg";
-    const profilePhotoPath = path.resolve(__dirname, "..", "static", fileName); // Path to save the file
+    const profilePhotoPath = path.resolve(__dirname, "..", "static", fileName);
     await profilePhoto.mv(profilePhotoPath);
 
     const user = await User.create({
@@ -47,7 +47,11 @@ class UserService {
     const userDto = new UserDto(user);
     const tokens = tokenService.generateToken({ ...userDto });
 
-    await tokenService.saveToken(userDto.id, tokens.refreshToken, tokens.token);
+    await tokenService.saveToken(
+      userDto.id,
+      tokens.refreshToken,
+      tokens.accessToken
+    );
 
     return {
       ...tokens,
@@ -76,7 +80,11 @@ class UserService {
     const userDto = new UserDto(user);
     const tokens = tokenService.generateToken({ ...userDto });
 
-    await tokenService.saveToken(userDto.id, tokens.refreshToken, tokens.token);
+    await tokenService.saveToken(
+      userDto.id,
+      tokens.refreshToken,
+      tokens.accessToken
+    );
 
     return {
       ...tokens,
@@ -84,9 +92,8 @@ class UserService {
     };
   }
 
-  async logout(refreshToken) {
-    const oldToken = await tokenService.removeToken(refreshToken);
-    return oldToken;
+  async logout(accessToken, refreshToken) {
+    await tokenService.removeToken(accessToken, refreshToken);
   }
 
   async refresh(refreshToken) {
@@ -98,17 +105,72 @@ class UserService {
     if (!userData || !tokenFromDb) {
       throw ApiError.UnauthorizedError();
     }
-
     const user = await User.findOne({ where: { id: userData.id } });
+
+    if (!user) {
+      throw ApiError.UnauthorizedError();
+    }
+
     const userDto = new UserDto(user);
     const tokens = tokenService.generateToken({ ...userDto });
 
-    await tokenService.saveToken(userDto.id, tokens.refreshToken, tokens.token);
+    await tokenService.saveToken(
+      userDto.id,
+      tokens.refreshToken,
+      tokens.accessToken
+    );
 
     return {
       ...tokens,
       user: userDto,
     };
+  }
+
+  async update(id, updates) {
+    if (updates.profilePhoto) {
+      const fileName = uuid.v4() + ".jpg";
+      const profilePhotoPath = path.resolve(
+        __dirname,
+        "..",
+        "static",
+        fileName
+      );
+      if (
+        updates.profilePhoto.mv &&
+        typeof updates.profilePhoto.mv === "function"
+      ) {
+        await updates.profilePhoto.mv(profilePhotoPath);
+        updates.profilePhoto = fileName;
+      } else {
+        throw ApiError.badRequest("Invalid file object");
+      }
+    }
+    const name = updates.username;
+    if (name) {
+      const user = await User.findOne({ where: { username: name } });
+      if (user) {
+        throw ApiError.badRequest("Try another nickname");
+      }
+    }
+    const [updatedCount, updatedUsers] = await User.update(updates, {
+      where: { id },
+      returning: true,
+      plain: true,
+    });
+
+    if (updatedCount === 0) {
+      throw ApiError.badRequest("User not found or no changes made");
+    }
+
+    return updatedUsers;
+  }
+
+  async load(id) {
+    const user = await User.findOne({ where: { id } });
+    if (!user) {
+      throw ApiError.badRequest("User not found");
+    }
+    return user;
   }
 }
 

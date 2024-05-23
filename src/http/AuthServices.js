@@ -1,70 +1,78 @@
-import { $host } from "./index";
+import { $host, $authHost } from "./index";
 import { jwtDecode } from "jwt-decode";
+import { handleErrors } from "../errors/handleErrors";
 
-export const registration = async (
-  username,
-  email,
-  password,
-  sex,
-  age,
-  weight,
-  height
-) => {
-  // Перевірка формату електронної пошти
-  const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
-  if (!emailRegex.test(email)) {
-    alert('Електронна пошта вказана без домену');
-    window.history.back();
-    return;
-  }
+const setTokens = (data) => {
+  localStorage.setItem("accessToken", data.accessToken);
+  localStorage.setItem("refreshToken", data.refreshToken);
+};
 
-  if (password.length < 4) {
-    alert('Пароль повинен містити принаймні 4 символи');
-    window.history.back();
-    return;
-  }
+const removeTokens = () => {
+  localStorage.removeItem("accessToken");
+  localStorage.removeItem("refreshToken");
+};
 
+export const registration = async (userData) => {
   try {
-    const { data } = await $host.post("api/user/registration", {
-      username,
-      email,
-      password,
-      sex,
-      age,
-      weight,
-      height,
-    });
-    localStorage.setItem("token", data.token);
-    console.log(`Дані юзера: ${data.token}`);
-    return jwtDecode(data.token);
-  } catch (error) {
-    localStorage.removeItem("token");
-    if (error.response && error.response.status === 404) {
-      alert('Сталася помилка. Будь ласка, спробуйте пізніше.');
-      return;
-    } else if (error.response && error.response.status === 409) {
-      alert('Електронна пошта вже існує в базі даних');
-      return;
-    } else {
-      console.log(error);
+    const formData = new FormData();
+    for (const key in userData) {
+      formData.append(key, userData[key]);
     }
+
+    const { data } = await $host.post("api/user/registration", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    setTokens(data);
+    return jwtDecode(data.accessToken);
+  } catch (error) {
+    handleErrors(error);
   }
 };
 
 export const login = async (email, password) => {
   try {
     const { data } = await $host.post("api/user/login", { email, password });
-    localStorage.setItem("token", data.token);
-    return jwtDecode(data.token);
+    setTokens(data);
+    return jwtDecode(data.accessToken);
   } catch (error) {
-    if (error.response && error.response.status === 404) {
-      alert('Неправильний пароль або ім\'я користувача');
-    } else {
-      alert('Сталася помилка. Будь ласка, спробуйте пізніше.');
-    }
+    handleErrors(error);
   }
 };
 
-export const logout = () => {
-  localStorage.removeItem("token");
+export const logout = async () => {
+  try {
+    console.log("Logging out");
+    await $authHost.post("api/user/logout", {}, { withCredentials: true });
+    removeTokens();
+  } catch (error) {
+    handleErrors(error);
+  }
+};
+
+export const update = async (profileData) => {
+  try {
+    const formData = new FormData();
+    for (const key in profileData) {
+      formData.append(key, profileData[key]);
+    }
+    const { data } = await $authHost.put("api/user/update", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return data;
+  } catch (error) {
+    handleErrors(error);
+  }
+};
+
+export const load = async () => {
+  try {
+    const { data } = await $authHost.get("/api/user/load");
+    return data;
+  } catch (error) {
+    handleErrors(error);
+  }
 };

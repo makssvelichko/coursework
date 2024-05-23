@@ -3,22 +3,23 @@ import { useNavigate } from "react-router-dom";
 import { HOME_ROUTE } from "./consts";
 
 const getToken = () => {
-  const result = localStorage.getItem("token");
-  if (!result) {
+  const accessToken = localStorage.getItem("accessToken");
+  const refreshToken = localStorage.getItem("refreshToken");
+  if (!accessToken && !refreshToken) {
     console.error("There is no token");
   }
-  return result;
+  return { accessToken, refreshToken };
 };
 
 const useProtected = () => {
-  const token = getToken();
+  const { accessToken, refreshToken } = getToken();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!token) {
+    if (!accessToken && !refreshToken) {
       navigate(HOME_ROUTE);
     }
-  }, [token, navigate]); // Додано залежності token і navigate
+  }, [accessToken, refreshToken, navigate]);
 };
 
 export default useProtected;

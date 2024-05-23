@@ -10,15 +10,16 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 
 const PORT = process.env.PORT || 5000;
+const corsOptions = {
+  origin: process.env.CLIENT_URL,
+  credentials: true,
+};
 
 const app = express();
-app.use(
-  cors({
-    credentials: true,
-    origin: process.env.CLIENT_URL,
-  })
-);
+
+app.use(cors(corsOptions));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.resolve(__dirname, "static")));
 app.use(fileUpload({}));

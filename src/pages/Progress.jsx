@@ -17,65 +17,123 @@ import { logout } from './../http/AuthServices';
 
 import { LineChart, Line, XAxis, YAxis, Tooltip, Area } from 'recharts';
 
-export const Card = ({ title, weight, setWeight, calories, setCalories }) => {
-    const handleMinus = () => {
-        setWeight(weight - 1);
-        setCalories(calories - 7700);
+
+import { update } from "./../http/AuthServices";
+import { load } from "./../http/AuthServices";
+
+const Card = ({ title, value, onSelect, min, max, field, calories, setCalories }) => {
+    const decreaseValue = () => {
+        const newValue = Math.max(min, value - 1);
+        onSelect(field, newValue);
+        setCalories(prevCalories => {
+            const updatedCalories = prevCalories - 7700;
+            localStorage.setItem('calories', updatedCalories); // Зберігаємо калорії в localStorage
+            return updatedCalories;
+        });
     };
 
-    const handlePlus = () => {
-        setWeight(weight + 1);
-        setCalories(calories + 7700);
+    const increaseValue = () => {
+        const newValue = Math.min(max, value + 1);
+        onSelect(field, newValue);
+        setCalories(prevCalories => {
+            const updatedCalories = prevCalories + 7700;
+            localStorage.setItem('calories', updatedCalories); // Зберігаємо калорії в localStorage
+            return updatedCalories;
+        });
     };
 
     return (
-      <div className="card_progress">
-        <div className="title_progress">{title}</div>
-        <div className="value_progress">{weight}</div>
-        <div className="controls_progress">
-          <button className='btn-plus_progress' onClick={handleMinus} data-testid='-'>-</button>
-          <button className='btn-minus_progress' onClick={handlePlus} data-testid='+'>+</button>
+        <div className="card_progress">
+            <div className="title_progress">{title}</div>
+            <div className="value_progress">{value}</div>
+            <div className="controls_progress">
+                <button className='btn-plus_progress' onClick={decreaseValue}>-</button>
+                <button className='btn-minus_progress' onClick={increaseValue}>+</button>
+            </div>
         </div>
-      </div>
     );
 };
 
-export const Progress = () => {
-
+const Progress = () => {
+    const [changedFields, setChangedFields] = useState({});
+    const [initialFields, setInitialFields] = useState({});
+    const [weightData, setWeightData] = useState([]); // масив для зберігання точок ваги і дати
+    const [calories, setCalories] = useState(0);
     const [modalVisible, setModalVisible] = useState(false);
     const navigate = useNavigate();
 
-    const [data, setData] = useState([
-        {date: new Date().toLocaleDateString(), weight: 74, calories: 0},
-    ]);
-
-    const [weight, setWeight] = useState(data[data.length - 1].weight);
-    const [calories, setCalories] = useState(data[data.length - 1].calories);
-
-    const updateData = () => {
-        setData(prevData => [...prevData, {date: new Date().toLocaleDateString(), weight: weight, calories: calories}]);
-    };
-
     const months = ['Січ', 'Лют', 'Бер', 'Кві', 'Тра', 'Чер', 'Лип', 'Сер', 'Вер', 'Жов', 'Лис', 'Гру'];
-
-
-    const transformedData = data.map(item => {
-    const date = new Date(item.date.split('.').reverse().join('-'));
-    const month = months[date.getMonth()];
-    return { ...item, date: month };
-    });
-
-
-    console.log(`Вага: ${data[data.length - 1].weight} кг`);
-    console.log(`Дата: ${data[data.length - 1].date}`);
-    console.log(`Калорії: ${data[data.length - 1].calories} cal`);
-
     const [dimensions, setDimensions] = useState({
         width: window.innerWidth,
         height: window.innerHeight,
     });
 
+    const handleFieldChange = (field, value) => {
+        setChangedFields((prev) => ({ ...prev, [field]: value }));
+    };
+
+    const updateData = async () => {
+        const fieldsToUpdate = Object.keys(changedFields).reduce((acc, key) => {
+            if (changedFields[key] !== undefined && changedFields[key] !== null) {
+                if (initialFields[key] !== changedFields[key]) {
+                    acc[key] = changedFields[key];
+                }
+            }
+            return acc;
+        }, {});
+
+        try {
+            const updatedUser = await update(fieldsToUpdate);
+            console.log("Profile updated successfully", updatedUser);
+            setInitialFields(updatedUser);
+        } catch (error) {
+            console.error("Error updating profile:", error);
+        }
+    };
+
+    const updateWeightData = (newWeight) => {
+        const newPoint = {
+            weight: newWeight,
+            date: new Date().toISOString() // Поточна дата і час
+        };
+        const updatedWeightData = [...weightData, newPoint];
+        setWeightData(updatedWeightData);
+        localStorage.setItem('weightData', JSON.stringify(updatedWeightData)); // Збереження в localStorage
+    };
+
+    const handleWeightUpdate = () => {
+        const newWeight = changedFields.weight; // Нове значення ваги з changedFields
+        updateWeightData(newWeight);
+        updateData(); // Оновлення інших даних (як ви робите вже)
+    };
+
     useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await load();
+                setInitialFields(data);
+                setChangedFields(data);
+                const storedCalories = localStorage.getItem('calories');
+                setCalories(storedCalories !== null ? parseInt(storedCalories, 10) : (data.calories || 0));
+                
+                const storedWeightData = localStorage.getItem('weightData');
+                if (storedWeightData) {
+                    setWeightData(JSON.parse(storedWeightData));
+                } else {
+                    setWeightData([ // Додаємо початкову точку з поточними значеннями
+                        {
+                            weight: data.weight,
+                            date: new Date().toISOString()
+                        }
+                    ]);
+                }
+            } catch (error) {
+                console.error("Error loading profile data:", error);
+            }
+        };
+
+        fetchData();
+
         function handleResize() {
             setDimensions({
                 width: window.innerWidth,
@@ -90,9 +148,15 @@ export const Progress = () => {
         };
     }, []);
 
-    return ( 
+    const transformedData = weightData.map(item => {
+        const date = item.date ? new Date(item.date) : null;
+        const month = date ? months[date.getMonth()] : null;
+        return { ...item, date: month };
+    });
+    
+    return (
         <>
-        <HeaderOffice/>
+        <HeaderOffice />
         <div className='progress'>
             <div className="container_office">
             <ModalContext.Provider value={setModalVisible}>
@@ -103,7 +167,7 @@ export const Progress = () => {
                             <div className="dark-container">
                                 <button className="modal-button" onClick={() => navigate(PERSONINFORMATION_ROUTE)}>ОСОБИСТА ІНФОРМАЦІЯ</button>
                                 <button className="modal-button" onClick={() => navigate(SUBSCRIPTIONS_ROUTE)}>МОЯ ПІДПИСКА</button>
-                                <button className="modal-button" onClick={() => {logout(); navigate(HOME_ROUTE);}}>ВИХІД</button>
+                                <button className="modal-button" onClick={() => { logout(); navigate(HOME_ROUTE); }}>ВИХІД</button>
                             </div>
                         </div>
                     </div>
@@ -114,7 +178,6 @@ export const Progress = () => {
                 <p className='t_programs'>Прогрес</p>
 
                 <div className='graph'>
-                    
                     <div>
                         <h2 className='h2_progress'>Графік втрати ваги</h2>
                         <div className='graph_area'>
@@ -134,53 +197,47 @@ export const Progress = () => {
                         <div className='p_progress'>Всього згоріло: <p className='val_calories'>{calories}</p> ккал <p className='FaFire'><FaFire /></p></div>
                     </div>
                     <div>
-                        <Card title="Вага" weight={weight} setWeight={setWeight} calories={calories} setCalories={setCalories} />
-                        <button className='btn_up_progress' onClick={updateData}>ОНОВИТИ</button>
+                        <Card title="Вага" value={changedFields.weight} onSelect={handleFieldChange} min={1} max={500} field="weight" calories={calories} setCalories={setCalories} />
+                        <button className='btn_up_progress' onClick={handleWeightUpdate}>ОНОВИТИ</button>
                     </div>
-                    
                 </div>
-            
-            
-                
-                
-            
             </div>
-                <div className="half_progress">
-                    
-                    <div className="navigation-panel">
-                        <ul className="nav-links">
-                            <li>
-                                <NavLink to={OFFICE_ROUTE} className='l_registration'>
-                                <div className='nav_btn'>
-                                    <FaDumbbell />
-                                    <div className='text_btn_nav'>ПРОГРАМИ ТРЕНУВАНЬ</div>
-                                </div>
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink to={FOOD_ROUTE} className='l_registration'>
-                                <div className='nav_btn'>
-                                    <PiForkKnifeBold />
-                                    <div className='text_btn_nav'>ХАРЧУВАННЯ</div>
-                                </div>
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink to={PROGRESS_ROUTE} className='l_registration'>
-                                <div className='nav_btn'>
-                                    <GiProgression />
-                                    <div className='text_btn_nav'>ПРОГРЕС</div>
-                                </div>
-                                </NavLink>
-                            </li>
-                        </ul>
-                    </div>
+
+            <div className="half_progress">
+                <div className="navigation-panel">
+                    <ul className="nav-links">
+                        <li>
+                            <NavLink to={OFFICE_ROUTE} className='l_registration'>
+                            <div className='nav_btn'>
+                                <FaDumbbell />
+                                <div className='text_btn_nav'>ПРОГРАМИ ТРЕНУВАНЬ</div>
+                            </div>
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={FOOD_ROUTE} className='l_registration'>
+                            <div className='nav_btn'>
+                                <PiForkKnifeBold />
+                                <div className='text_btn_nav'>ХАРЧУВАННЯ</div>
+                            </div>
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={PROGRESS_ROUTE} className='l_registration'>
+                            <div className='nav_btn'>
+                                <GiProgression />
+                                <div className='text_btn_nav'>ПРОГРЕС</div>
+                            </div>
+                            </NavLink>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
-        <FooterOffice/>
+        </div>
+        <FooterOffice />
         </>
-     ); 
+    );
 }
- 
+
 export default Progress;

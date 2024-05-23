@@ -6,9 +6,14 @@ import React, { useState, createContext, useContext } from 'react';
 import { FaRegUserCircle } from "react-icons/fa";
 import { OFFICE_ROUTE } from '../../utils/consts';
 
+import { useUser } from './../UserContext'; // Імпортуйте хук для доступу до контексту
+
 export const ModalContext = createContext();
 
 function HeaderOffice() {
+
+    const { user } = useUser();
+
     // const [image, setImage] = useState('');
     const [image] = useState('');
     const setModalVisible = useContext(ModalContext);
@@ -27,7 +32,7 @@ function HeaderOffice() {
                     <nav className="header_nav_office">
                         <ul>
                             <li><AnchorLink id="#!">
-                                <div className='header_user_name'>User Name</div>
+                                <div className='header_user_name'>{user?.username || 'Користувач'}</div>
                                 </AnchorLink>
                             </li>
                             <li><AnchorLink id="#!">
