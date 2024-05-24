@@ -8,11 +8,14 @@ import { OFFICE_ROUTE } from '../../utils/consts';
 
 import { useUser } from './../UserContext'; // Імпортуйте хук для доступу до контексту
 
+import { UserProvider } from './../../components/UserContext';
+
 export const ModalContext = createContext();
 
 function HeaderOffice() {
 
     const { user } = useUser();
+    const username = user ? user.username : '';
 
     // const [image, setImage] = useState('');
     const [image] = useState('');
@@ -23,6 +26,7 @@ function HeaderOffice() {
     // }
 
     return (
+        <UserProvider>
         <header className='header_office'>
             <div className="container">
                 <div className="header_row">
@@ -32,7 +36,7 @@ function HeaderOffice() {
                     <nav className="header_nav_office">
                         <ul>
                             <li><AnchorLink id="#!">
-                                <div className='header_user_name'>{user?.username || 'Користувач'}</div>
+                                <div className='header_user_name'>{username || 'Користувач'}</div>
                                 </AnchorLink>
                             </li>
                             <li><AnchorLink id="#!">
@@ -52,6 +56,7 @@ function HeaderOffice() {
                 </div>
             </div>
         </header>
+        </UserProvider>
     );
 }
 

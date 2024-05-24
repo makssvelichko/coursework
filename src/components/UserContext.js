@@ -1,9 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
 
-// Створюємо UserContext
 export const UserContext = createContext();
 
-// Компонент провайдер, який буде надавати дані користувача всім підлеглим компонентам
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState({});
 
@@ -14,5 +12,4 @@ export const UserProvider = ({ children }) => {
   );
 };
 
-// Кастомний хук для зручного використання контексту
 export const useUser = () => useContext(UserContext);

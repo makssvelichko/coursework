@@ -21,7 +21,7 @@ import { LineChart, Line, XAxis, YAxis, Tooltip, Area } from 'recharts';
 import { update } from "./../http/AuthServices";
 import { load } from "./../http/AuthServices";
 
-const Card = ({ title, value, onSelect, min, max, field, calories, setCalories }) => {
+export const Card = ({ title, value, onSelect, min, max, field, calories, setCalories }) => {
     const decreaseValue = () => {
         const newValue = Math.max(min, value - 1);
         onSelect(field, newValue);
@@ -54,7 +54,7 @@ const Card = ({ title, value, onSelect, min, max, field, calories, setCalories }
     );
 };
 
-const Progress = () => {
+export const Progress = () => {
     const [changedFields, setChangedFields] = useState({});
     const [initialFields, setInitialFields] = useState({});
     const [weightData, setWeightData] = useState([]); // масив для зберігання точок ваги і дати

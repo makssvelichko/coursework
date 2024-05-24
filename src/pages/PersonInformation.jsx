@@ -32,7 +32,7 @@ import { load } from "./../http/AuthServices";
 
 import { useUser } from './../components/UserContext';
 
-const Card = ({ title, initialValue, onSelect, min, max, field }) => {
+export const Card = ({ title, initialValue, onSelect, min, max, field }) => {
   const [value, setValue] = useState(initialValue);
 
   const decreaseValue = () => {
@@ -59,7 +59,7 @@ const Card = ({ title, initialValue, onSelect, min, max, field }) => {
   );
 };
 
-const PersonInformation = () => {
+export const PersonInformation = () => {
   const { user, setUser } = useUser();
   const [changedFields, setChangedFields] = useState(user);
   const [profilePhoto, setProfilePhoto] = useState(null);
