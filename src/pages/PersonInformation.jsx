@@ -30,8 +30,6 @@ import { update } from "./../http/AuthServices";
 import { load } from "./../http/AuthServices";
 // import { handleErrors } from "../errors/handleErrors";
 
-
-
 const Card = ({ title, value, onSelect, min, max, field }) => {
   const decreaseValue = () => {
     const newValue = Math.max(min, value - 1);
@@ -48,8 +46,12 @@ const Card = ({ title, value, onSelect, min, max, field }) => {
       <div className="title_personal">{title}</div>
       <div className="value_personal">{value}</div>
       <div className="controls_personal">
-        <button className="btn-plus_personal" onClick={decreaseValue}>-</button>
-        <button className="btn-minus_personal" onClick={increaseValue}>+</button>
+        <button className="btn-plus_personal" onClick={decreaseValue}>
+          -
+        </button>
+        <button className="btn-minus_personal" onClick={increaseValue}>
+          +
+        </button>
       </div>
     </div>
   );
@@ -65,11 +67,11 @@ export const PersonInformation = () => {
   const navigate = useNavigate();
 
   const handleFieldChange = (field, value) => {
-      setChangedFields((prev) => ({ ...prev, [field]: value }));
-      if (field === "sex") {
-        setActive(value);
-      }
-    };
+    setChangedFields((prev) => ({ ...prev, [field]: value }));
+    if (field === "sex") {
+      setActive(value);
+    }
+  };
 
   const handleProfilePhotoChange = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -107,29 +109,27 @@ export const PersonInformation = () => {
   };
 
   useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const data = await load();
-          setInitialFields(data);
-          setChangedFields(data);
-          if (data.profilePhoto) {
-            const photoPath = `./server/static/${data.profilePhoto}`;
-            setProfilePhotoURL(photoPath);
-            console.log("Profile photo URL loaded from server:", photoPath);
-          }
-          // Встановлюємо початковий статус статі
-          setActive(data.sex || "man");
-        } catch (error) {
-          console.error("Error loading profile data:", error);
+    const fetchData = async () => {
+      try {
+        const data = await load();
+        setInitialFields(data);
+        setChangedFields(data);
+        if (data.profilePhoto) {
+          setProfilePhotoURL(process.env.REACT_APP_API_URL + data.profilePhoto);
         }
-      };
-  
-      fetchData();
-    }, []);
+        // Встановлюємо початковий статус статі
+        setActive(data.sex || "man");
+      } catch (error) {
+        console.error("Error loading profile data:", error);
+      }
+    };
 
-  console.log(profilePhoto)
+    fetchData();
+  }, []);
 
-  const [userName, setUserName] = useState('');
+  console.log(profilePhoto);
+
+  const [userName, setUserName] = useState("");
 
   return (
     <>
@@ -180,7 +180,9 @@ export const PersonInformation = () => {
                   className="profile-photo-p"
                   src={profilePhotoURL || defimage}
                   alt="ProfilePhoto"
-                  onError={(e) => { e.target.src = defimage; }}
+                  onError={(e) => {
+                    e.target.src = defimage;
+                  }}
                 />
                 <label className="profile-image-label-p">
                   <input
@@ -211,25 +213,25 @@ export const PersonInformation = () => {
 
             <div className="sex">
               <div className="switch">
-                  <div
-                      className={`option ${active === "man" ? "active" : ""}`}
-                      onClick={() => {
-                      setActive("man");
-                      handleFieldChange("sex", "man");
-                      }}
-                  >
+                <div
+                  className={`option ${active === "man" ? "active" : ""}`}
+                  onClick={() => {
+                    setActive("man");
+                    handleFieldChange("sex", "man");
+                  }}
+                >
                   <div className="icon">
                     <IoManOutline />
                   </div>
                   <div className="t_switch">Чоловік</div>
                 </div>
-                  <div
-                      className={`option ${active === "woman" ? "active" : ""}`}
-                      onClick={() => {
-                      setActive("woman");
-                      handleFieldChange("sex", "woman");
-                      }}
-                  >
+                <div
+                  className={`option ${active === "woman" ? "active" : ""}`}
+                  onClick={() => {
+                    setActive("woman");
+                    handleFieldChange("sex", "woman");
+                  }}
+                >
                   <div className="icon">
                     <IoWomanOutline />
                   </div>
