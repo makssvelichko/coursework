@@ -52,6 +52,8 @@ import { GrNext } from "react-icons/gr";
 
 import './../styles/cardfood.css'
 
+import { load } from "./../http/AuthServices";
+
 export const Food = () => {
 
     const [modalVisible, setModalVisible] = useState(false);
@@ -105,6 +107,48 @@ export const Food = () => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
+
+    
+    const [/**userHeight**/, setUserHeight] = useState("");
+    const [/**userWeight**/, setUserWeight] = useState("");
+    const [/**userAge**/, setUserAge] = useState("");
+    const [/**userSex**/, setUserSex] = useState("");
+
+    const [lowActivityCalories, setLowActivityCalories] = useState(0);
+    const [moderateActivityCalories, setModerateActivityCalories] = useState(0);
+    const [highActivityCalories, setHighActivityCalories] = useState(0);
+
+    useEffect(() => {
+        const fetchData = async () => {
+        try {
+            const userData = await load();
+            if (userData) {
+            setUserHeight(userData.height);
+            setUserWeight(userData.weight);
+            setUserAge(userData.age);
+            setUserSex(userData.sex);
+            console.log(userData.sex)
+            // Розрахунок BMR за формулою Міффліна - Сан Жеора
+            let BMR;
+            if (userData.sex === "man") {
+                BMR = 10 * userData.weight + 6.25 * userData.height - 5 * userData.age + 5;
+            } else if (userData.sex === "woman") {
+                BMR = 10 * userData.weight + 6.25 * userData.height - 5 * userData.age - 161;
+            }
+    
+            // Розрахунок споживання калорій для різних рівнів активності
+            setLowActivityCalories((BMR * 1.2).toFixed(1));
+            setModerateActivityCalories((BMR * 1.55).toFixed(1));
+            setHighActivityCalories((BMR * 1.9).toFixed(1));
+            }
+        } catch (error) {
+            console.error("Помилка завантаження даних користувача: ", error);
+        }
+        };
+    
+        fetchData();
+    }, []);
+
 
     return ( 
         <>
@@ -516,7 +560,40 @@ export const Food = () => {
                     <p className='val_card'>{total.carbs} г</p>
                     </div>
                 </div>
-            
+
+                <div className='calculCalories'>
+                    <h2 className='calculCaloriesh2'>Потрібна кількість споживання калорій для вас</h2>
+                    <div className="spacebetween_cardsfood">
+                    <p>Калорії для низької активності:</p>
+                    <p className='val_card'>{lowActivityCalories} cal</p>
+                    </div>
+
+                    <div className="spacebetween_cardsfood">
+                    <p>Калорії для помірної активності:</p>
+                    <p className='val_card'>{moderateActivityCalories} cal</p>
+                    </div>
+
+                    <div className="spacebetween_cardsfood">
+                    <p>Калорії для високої активності:</p>
+                    <p className='val_card'>{highActivityCalories} cal</p>
+                    </div>
+                </div>
+
+                <div className='calculCalories2'>
+                    <h3>Формула Міффліна - Сан Жеора</h3>
+                    <ul>
+                        <li><strong>Для чоловіків:</strong>  BMR = 10 × вага(кг) + 6.25 × зріст(см) − 5 × вік(роки) + 5</li>
+                        <li><strong>Для жінок:</strong> BMR = 10 × вага(кг) + 6.25 × зріст(см) − 5 × вік(роки) − 161</li>
+                    </ul>
+                    <p>Ці формули дають вам базовий обмін речовин (BMR), який відображає кількість калорій, які ви спалюєте в стані спокою. Щоб отримати загальне споживання калорій, ви маєте помножити BMR на коефіцієнт активності, який відображає ваш рівень фізичної активності.</p>
+                    <h3>Коефіцієнти активності:</h3>
+                    <ul>
+                        <li><strong>Низька активність:</strong> BMR x 1.2</li>
+                        <li><strong>Помірна активність:</strong> BMR x 1.55</li>
+                        <li><strong>Висока активність:</strong> BMR x 1.9</li>
+                    </ul>
+                </div>
+
             </div>
                 <div className="half_office">
                     

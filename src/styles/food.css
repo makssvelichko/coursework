@@ -172,8 +172,63 @@
 .box_cardsfood_all{
     max-width: 300px;
     margin-left: 500px;
-    margin-bottom: 100px;
+    margin-bottom: 60px;
 }
+
+.calculCalories{
+    max-width: 490px;
+    margin-left: 420px;
+    margin-bottom: 60px;
+}
+
+
+.calculCalories2{
+    max-width: 700px;
+    margin-left: 310px;
+    margin-bottom: 60px;
+}
+
+.calculCaloriesh2{
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    font-family: 'Montserrat';
+}
+
+.calculCalories2 {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    font-family: 'Montserrat';
+}
+
+.calculCalories2 h3 {
+    font-size: 1.35em;
+    font-weight: 700;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-family: 'Montserrat';
+}
+
+.calculCalories2 ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.calculCalories2 ul li {
+    margin-bottom: 10px;
+    padding: 15px;
+}
+
+.calculCalories2 p {
+    color: #666;
+    font-size: 1em;
+    line-height: 1.6;
+    text-align: justify;
+    margin-bottom: 20px;
+}
+
 
 
 @media (max-width: 1350px) {
@@ -205,6 +260,46 @@
         overflow-y: auto;
         flex: none;
         height: auto;
+    }
+    .box_cardsfood_all{
+        max-width: 220px;
+        margin-left: 100px;
+        margin-bottom: 80px;
+        font-size: 14px;
+    }
+    .t_food {
+        font-size: 18px;
+    }
+    .calculCalories{
+        max-width: 320px;
+        margin-left: 100px;
+        margin-bottom: 60px;
+        font-size: 14px;
+    }
+    .calculCaloriesh2{
+        font-size: 16px;
+    }
+
+    .calculCalories2{
+        max-width: 300px;
+        margin-left: 30px;
+    }
+    
+    .calculCaloriesh2{
+        font-size: 10px;
+    }
+    
+    .calculCalories2 h3 {
+        font-size: 12px;
+        font-weight: 700;
+    }
+    
+    .calculCalories2 p {
+        color: #666;
+        font-size: 10px;
+    }
+    .calculCalories2 ul li {
+        font-size: 10px;
     }
 }
 
@@ -239,6 +334,37 @@
     .t_food {
         font-size: 23px;
     }
+    .calculCalories{
+        max-width: 280px;
+        margin-left: 20px;
+        margin-bottom: 60px;
+        font-size: 12px;
+    }
+    .calculCaloriesh2{
+        font-size: 13px;
+    }
+
+    .calculCalories2{
+        max-width: 260px;
+        margin-left: 15px;
+    }
+    
+    .calculCaloriesh2{
+        font-size: 9px;
+    }
+    
+    .calculCalories2 h3 {
+        font-size: 11px;
+        font-weight: 700;
+    }
+    
+    .calculCalories2 p {
+        color: #666;
+        font-size: 9px;
+    }
+    .calculCalories2 ul li {
+        font-size: 10px;
+    }
 }
 
 @media (max-width: 450px) {
@@ -270,5 +396,37 @@
     }
     .t_food {
         font-size: 21px;
+    }
+    .calculCalories{
+        max-width: 240px;
+        margin-left: 10px;
+        margin-bottom: 60px;
+        font-size: 10px;
+    }
+    .calculCaloriesh2{
+        font-size: 10px;
+    }
+
+
+    .calculCalories2{
+        max-width: 240px;
+        margin-left: 10px;
+    }
+    
+    .calculCaloriesh2{
+        font-size: 8px;
+    }
+    
+    .calculCalories2 h3 {
+        font-size: 10px;
+        font-weight: 700;
+    }
+    
+    .calculCalories2 p {
+        color: #666;
+        font-size: 8px;
+    }
+    .calculCalories2 ul li {
+        font-size: 9px;
     }
 }
