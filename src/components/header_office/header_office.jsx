@@ -19,16 +19,15 @@ function HeaderOffice() {
     const fetchData = async () => {
       try {
         const userData = await load();
-        console.log(userData);
         if (userData) {
           setUserName(userData.username);
           setUserPhoto(process.env.REACT_APP_API_URL + userData.profilePhoto); // Формування URL фото
         }
       } catch (error) {
-        console.error("Помилка завантаження даних користувача:", error);
+        console.error("Помилка завантаження даних користувача: ", error);
       }
     };
-
+  
     fetchData();
   }, []);
 

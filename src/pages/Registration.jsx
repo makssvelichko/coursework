@@ -14,7 +14,7 @@ import FooterLogin from "../components/footer_login/footer_login";
 import HeaderLogin from "../components/header_login/header_login";
 import defimage from "./../img/photo/def.jpg";
 
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { MdPhotoCamera } from "react-icons/md";
 
 import React, { useContext, useState } from "react";
@@ -144,6 +144,8 @@ const Registration = () => {
       handleErrors(error);
     }
   };
+
+  const navigate = useNavigate();
 
   return (
     <GoogleOAuthProvider clientId="899348282415-rhce4qf0726geh0t9316g296sksn3u1c.apps.googleusercontent.com">
@@ -375,19 +377,23 @@ const Registration = () => {
                       onChange={() => setIsChecked(!isChecked)}
                     />
                     <label htmlFor="remember-me" className="remember-me">
-                      Я прочитав(ла) Правила користування та даю згоду на
+                      Я прочитав(ла) <NavLink to={OFFICE_ROUTE} className='l_registration'>Правила користування</NavLink> та даю згоду на
                       обробку особистих даних
                     </label>
                   </form>
                   <div className="btns_log">
-                    <NavLink
-                      to={OFFICE_ROUTE}
-                      className={isChecked ? "active" : "disabled"}
-                    >
-                      <div className="next" onClick={signIn}>
-                        <p className="t_enter">РЕЄСТРАЦІЯ</p>
-                      </div>
-                    </NavLink>
+                  <NavLink
+                    className={isChecked ? "active" : "disabled"}>
+                    <div className="next" onClick={(event) => {
+                      event.preventDefault();
+                      signIn();
+                      setTimeout(() => {
+                        navigate(OFFICE_ROUTE);
+                      }, 2000);
+                    }}>
+                      <p className="t_enter">РЕЄСТРАЦІЯ</p>
+                    </div>
+                  </NavLink>
                     {/* <NavLink to={REGISTRATION_ROUTE} className='l_registration'> */}
                     <div className="back" onClick={showPreviousStep}>
                       <p className="t_registration">ПОВЕРНУТИСЯ</p>

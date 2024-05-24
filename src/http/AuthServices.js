@@ -41,10 +41,19 @@ export const login = async (email, password) => {
   }
 };
 
+// export const logout = async () => {
+//   try {
+//     console.log("Logging out");
+//     await $authHost.post("api/user/logout", {}, { withCredentials: true });
+//     removeTokens();
+//   } catch (error) {
+//     handleErrors(error);
+//   }
+// };
+
 export const logout = async () => {
   try {
-    console.log("Logging out");
-    await $authHost.post("api/user/logout", {}, { withCredentials: true });
+    localStorage.removeItem('token');
     removeTokens();
   } catch (error) {
     handleErrors(error);

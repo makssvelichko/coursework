@@ -6,7 +6,7 @@ import './../styles/blockplans.css'
 
 import Header from '../components/header/header'
 
-import first from './../img/photo/Section0.png'
+import first1 from './../img/photo/Section0.png'
 import second from './../img/photo/workouts-library-36a4ef01f5bc38a1bf26ab7d6d246bc85fc7e0f4cb6b59c2eba30d24d6924e2f.jpg.png'
 import pprograms1 from './../img/photo/Link1.1.png'
 import pprograms2 from './../img/photo/Link1.2.png'
@@ -55,9 +55,9 @@ const Home = () => {
         <Header/>
         <section id='header' className="promo">
         <div className="conteiner">
-            <div className="content">
+            <div className="content1">
                 <div className="img">
-                    <img src={first} alt="first" />
+                    <img src={first1} alt="first1" />
                     <div className="text">
                         <p className='toptext'>Почни зміни вже зараз</p>
                         <p className='bottomtext'>Побудуй форму своєї мрії</p>

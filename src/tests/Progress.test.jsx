@@ -16,5 +16,4 @@ describe('Progress component', () => {
     expect(getByText('Графік втрати ваги')).toBeInTheDocument();
   });
 
-  // Інші тести для компонента Progress
 });

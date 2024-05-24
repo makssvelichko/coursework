@@ -80,7 +80,6 @@ export const PersonInformation = () => {
       const photoURL = URL.createObjectURL(file);
       setProfilePhotoURL(photoURL);
       handleFieldChange("profilePhoto", file);
-      console.log("Profile photo URL set to:", photoURL);
     }
   };
 
@@ -96,12 +95,10 @@ export const PersonInformation = () => {
 
     try {
       const updatedUser = await update(fieldsToUpdate);
-      console.log("Profile updated successfully", updatedUser);
       setInitialFields(updatedUser);
       if (updatedUser.profilePhoto) {
         const photoPath = `./server/static/${updatedUser.profilePhoto}`;
         setProfilePhotoURL(photoPath);
-        console.log("Profile photo URL updated to:", photoPath);
       }
     } catch (error) {
       console.error("Error updating profile:", error);
@@ -127,9 +124,7 @@ export const PersonInformation = () => {
     fetchData();
   }, []);
 
-  console.log(profilePhoto);
-
-  const [userName, setUserName] = useState("");
+  const [userName] = useState("");
 
   return (
     <>

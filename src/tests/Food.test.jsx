@@ -30,7 +30,7 @@ describe('Food component', () => {
     );
     
     fireEvent.click(getByText(/ПРОГРАМИ ТРЕНУВАНЬ/i));
-    fireEvent.click(getAllByText(/ХАРЧУВАННЯ/i)[0]); // виберіть перший елемент з масиву
+    fireEvent.click(getAllByText(/ХАРЧУВАННЯ/i)[0]);
     fireEvent.click(getByText(/ПРОГРЕС/i));
   });
 });

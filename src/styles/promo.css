@@ -50,13 +50,13 @@
     }
 
     .toptext{
-        font-size: 25px; /* Зменшуємо розмір шрифту */
-        padding: 2px; /* Зменшуємо відступи */
+        font-size: 25px; 
+        padding: 2px;
     }
 
     .bottomtext{
-        font-size: 16px; /* Зменшуємо розмір шрифту */
-        padding: 2px; /* Зменшуємо відступи */
+        font-size: 16px;
+        padding: 2px;
     }
     .text{
         top: 35%;
@@ -70,13 +70,13 @@
     }
 
     .toptext{
-        font-size: 18px; /* Зменшуємо розмір шрифту */
-        padding: 2px; /* Зменшуємо відступи */
+        font-size: 18px; 
+        padding: 2px; 
     }
 
     .bottomtext{
-        font-size: 12px; /* Зменшуємо розмір шрифту */
-        padding: 2px; /* Зменшуємо відступи */
+        font-size: 12px;
+        padding: 2px; 
     }
     .text{
         top: 28%;
@@ -90,13 +90,13 @@
     }
 
     .toptext{
-        font-size: 15px; /* Зменшуємо розмір шрифту */
-        padding: 2px; /* Зменшуємо відступи */
+        font-size: 15px; 
+        padding: 2px;
     }
 
     .bottomtext{
-        font-size: 10px; /* Зменшуємо розмір шрифту */
-        padding: 2px; /* Зменшуємо відступи */
+        font-size: 10px; 
+        padding: 2px; 
     }
     .text{
         top: 25%;
@@ -110,13 +110,13 @@
     }
 
     .toptext{
-        font-size: 14px; /* Зменшуємо розмір шрифту */
-        padding: 2px; /* Зменшуємо відступи */
+        font-size: 14px;
+        padding: 2px;
     }
 
     .bottomtext{
-        font-size: 9px; /* Зменшуємо розмір шрифту */
-        padding: 2px; /* Зменшуємо відступи */
+        font-size: 9px; 
+        padding: 2px; 
     }
     .text{
         top: 24%;
