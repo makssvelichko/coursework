@@ -30,20 +30,16 @@ import { update } from "./../http/AuthServices";
 import { load } from "./../http/AuthServices";
 // import { handleErrors } from "../errors/handleErrors";
 
-import { useUser } from './../components/UserContext';
 
-export const Card = ({ title, initialValue, onSelect, min, max, field }) => {
-  const [value, setValue] = useState(initialValue);
 
+const Card = ({ title, value, onSelect, min, max, field }) => {
   const decreaseValue = () => {
     const newValue = Math.max(min, value - 1);
-    setValue(newValue);
     onSelect(field, newValue);
   };
 
   const increaseValue = () => {
     const newValue = Math.min(max, value + 1);
-    setValue(newValue);
     onSelect(field, newValue);
   };
 
@@ -60,8 +56,8 @@ export const Card = ({ title, initialValue, onSelect, min, max, field }) => {
 };
 
 export const PersonInformation = () => {
-  const { user, setUser } = useUser();
-  const [changedFields, setChangedFields] = useState(user);
+  const [changedFields, setChangedFields] = useState({});
+  const [initialFields, setInitialFields] = useState({});
   const [profilePhoto, setProfilePhoto] = useState(null);
   const [profilePhotoURL, setProfilePhotoURL] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
@@ -69,11 +65,11 @@ export const PersonInformation = () => {
   const navigate = useNavigate();
 
   const handleFieldChange = (field, value) => {
-    setChangedFields((prev) => ({ ...prev, [field]: value }));
-    if (field === "sex") {
-      setActive(value);
-    }
-  };
+      setChangedFields((prev) => ({ ...prev, [field]: value }));
+      if (field === "sex") {
+        setActive(value);
+      }
+    };
 
   const handleProfilePhotoChange = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -89,7 +85,7 @@ export const PersonInformation = () => {
   const updateData = async () => {
     const fieldsToUpdate = Object.keys(changedFields).reduce((acc, key) => {
       if (changedFields[key] !== undefined && changedFields[key] !== null) {
-        if (user[key] !== changedFields[key]) {
+        if (initialFields[key] !== changedFields[key]) {
           acc[key] = changedFields[key];
         }
       }
@@ -99,7 +95,7 @@ export const PersonInformation = () => {
     try {
       const updatedUser = await update(fieldsToUpdate);
       console.log("Profile updated successfully", updatedUser);
-      setUser(updatedUser);
+      setInitialFields(updatedUser);
       if (updatedUser.profilePhoto) {
         const photoPath = `./server/static/${updatedUser.profilePhoto}`;
         setProfilePhotoURL(photoPath);
@@ -111,34 +107,37 @@ export const PersonInformation = () => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await load();
-        setUser(data);
-        setChangedFields(data);
-        if (data.profilePhoto) {
-          const photoPath = `./server/static/${data.profilePhoto}`;
-          setProfilePhotoURL(photoPath);
-          console.log("Profile photo URL loaded from server:", photoPath);
+      const fetchData = async () => {
+        try {
+          const data = await load();
+          setInitialFields(data);
+          setChangedFields(data);
+          if (data.profilePhoto) {
+            const photoPath = `./server/static/${data.profilePhoto}`;
+            setProfilePhotoURL(photoPath);
+            console.log("Profile photo URL loaded from server:", photoPath);
+          }
+          // Встановлюємо початковий статус статі
+          setActive(data.sex || "man");
+        } catch (error) {
+          console.error("Error loading profile data:", error);
         }
-        // Встановлюємо початковий статус статі
-        setActive(data.sex || "man");
-      } catch (error) {
-        console.error("Error loading profile data:", error);
-      }
-    };
+      };
+  
+      fetchData();
+    }, []);
 
-    fetchData();
-  }, [setUser]);
+  console.log(profilePhoto)
 
-  console.log(profilePhoto);
+  const [userName, setUserName] = useState('');
 
   return (
     <>
+      <HeaderOffice userName={userName} />
       <div className="office">
         <div className="container_office">
           <ModalContext.Provider value={setModalVisible}>
-            <HeaderOffice />
+            <HeaderOffice userName={userName} />
             {modalVisible && (
               <div className="modal" onClick={() => setModalVisible(false)}>
                 <div
@@ -181,9 +180,7 @@ export const PersonInformation = () => {
                   className="profile-photo-p"
                   src={profilePhotoURL || defimage}
                   alt="ProfilePhoto"
-                  onError={(e) => {
-                    e.target.src = defimage;
-                  }}
+                  onError={(e) => { e.target.src = defimage; }}
                 />
                 <label className="profile-image-label-p">
                   <input
@@ -214,25 +211,25 @@ export const PersonInformation = () => {
 
             <div className="sex">
               <div className="switch">
-                <div
-                  className={`option ${active === "man" ? "active" : ""}`}
-                  onClick={() => {
-                    setActive("man");
-                    handleFieldChange("sex", "man");
-                  }}
-                >
+                  <div
+                      className={`option ${active === "man" ? "active" : ""}`}
+                      onClick={() => {
+                      setActive("man");
+                      handleFieldChange("sex", "man");
+                      }}
+                  >
                   <div className="icon">
                     <IoManOutline />
                   </div>
                   <div className="t_switch">Чоловік</div>
                 </div>
-                <div
-                  className={`option ${active === "woman" ? "active" : ""}`}
-                  onClick={() => {
-                    setActive("woman");
-                    handleFieldChange("sex", "woman");
-                  }}
-                >
+                  <div
+                      className={`option ${active === "woman" ? "active" : ""}`}
+                      onClick={() => {
+                      setActive("woman");
+                      handleFieldChange("sex", "woman");
+                      }}
+                  >
                   <div className="icon">
                     <IoWomanOutline />
                   </div>
@@ -244,7 +241,7 @@ export const PersonInformation = () => {
             <div className="card-personal">
               <Card
                 title="Вік"
-                initialValue={changedFields.age}
+                value={changedFields.age}
                 onSelect={handleFieldChange}
                 min={1}
                 max={100}
@@ -252,7 +249,7 @@ export const PersonInformation = () => {
               />
               <Card
                 title="Вага"
-                initialValue={changedFields.weight}
+                value={changedFields.weight}
                 onSelect={handleFieldChange}
                 min={1}
                 max={500}
@@ -260,7 +257,7 @@ export const PersonInformation = () => {
               />
               <Card
                 title="Зріст"
-                initialValue={changedFields.height}
+                value={changedFields.height}
                 onSelect={handleFieldChange}
                 min={1}
                 max={250}

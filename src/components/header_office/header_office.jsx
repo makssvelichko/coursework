@@ -1,32 +1,38 @@
-import './header_office.css'
-import logo from './../../img/logo/logo.png'
+import './header_office.css';
+import logo from './../../img/logo/logo.png';
 import { NavLink } from 'react-router-dom';
 import AnchorLink from '../AnchorLink';
-import React, { useState, createContext, useContext } from 'react';
+import React, { useState, createContext, useContext, useEffect } from 'react';
 import { FaRegUserCircle } from "react-icons/fa";
 import { OFFICE_ROUTE } from '../../utils/consts';
-
-import { useUser } from './../UserContext'; // Імпортуйте хук для доступу до контексту
-
-import { UserProvider } from './../../components/UserContext';
+import { load } from "./../../http/AuthServices";
 
 export const ModalContext = createContext();
 
 function HeaderOffice() {
-
-    const { user } = useUser();
-    const username = user ? user.username : '';
-
-    // const [image, setImage] = useState('');
-    const [image] = useState('');
     const setModalVisible = useContext(ModalContext);
 
-    // const handleImageChange = (e) => {
-    //     setImage(URL.createObjectURL(e.target.files[0]));
-    // }
+    const [userName, setUserName] = useState('');
+    const [userPhoto, setUserPhoto] = useState('');
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const userData = await load();
+                console.log(userData);
+                if (userData) {
+                    setUserName(userData.username);
+                    setUserPhoto(`./../../../server/static/${userData.profilePhoto}`); // Формування URL фото
+                }
+            } catch (error) {
+                console.error('Помилка завантаження даних користувача:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     return (
-        <UserProvider>
         <header className='header_office'>
             <div className="container">
                 <div className="header_row">
@@ -35,20 +41,24 @@ function HeaderOffice() {
                     </div>
                     <nav className="header_nav_office">
                         <ul>
-                            <li><AnchorLink id="#!">
-                                <div className='header_user_name'>{username || 'Користувач'}</div>
+                            <li>
+                                <AnchorLink id="#!">
+                                    <div className='header_user_name'>
+                                        {userName || 'user'}
+                                    </div>
                                 </AnchorLink>
                             </li>
-                            <li><AnchorLink id="#!">
-                                <div className='header_user'>
-                                    <div className="profile-container2" onClick={() => setModalVisible(true)}>
-                                        {image ? (
-                                            <img className="profile-image2" src={image} alt="Profile" />
+                            <li>
+                                <AnchorLink id="#!">
+                                    <div className='header_user'>
+                                        <div className="profile-container2" onClick={() => setModalVisible(true)}>
+                                            {userPhoto ? (
+                                                <img className="profile-image2" src={userPhoto} alt="Profile" />
                                             ) : (
-                                            <FaRegUserCircle className="profile-image2" />
-                                        )}
+                                                <FaRegUserCircle className="profile-image2" />
+                                            )}
+                                        </div>
                                     </div>
-                                </div>
                                 </AnchorLink>
                             </li>
                         </ul>
@@ -56,7 +66,6 @@ function HeaderOffice() {
                 </div>
             </div>
         </header>
-        </UserProvider>
     );
 }
 
